@@ -8,8 +8,152 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      .ProyScroll{
+        height:280px; overflow-y: scroll;
+      }
+      .ProyBox{
+        border: 1px solid lightgray; border-radius: 10px
+      }
+    </style>
+
   </head>
   <body>
+    <!--NavBar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Simulador de horarios</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse p-0" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <span class="navbar-text p-0">
+          <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal"><i
+              class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+        </span>
+      </div>
+    </nav>
+    <!--Pagina-->
+
+    <div class="container">
+      <h1 class = "display-2 mt-2 mb-3">Registro de carrera</h1>
+      <div class="row ">
+        <!--Columna izquierda-->
+        <div class="col-4 ProyBox">
+          <h2 class = "display-5">Selecciona tu carrera</h2>
+          <br>
+          <form>
+            <div class="form-group">
+              <select class="form-control" id="carreraSelect">
+                <option value = "ISC">Ingeniería en Sistemas Computacionales</option>
+                <option value = "IC">Ingeniería Civil</option>
+                <option value = "IF">Ingeniería Financiera</option>
+              </select>
+            </div>
+          </form>
+          <p><b>Materias Totales:</b> 54</p>
+          <p><b>Creditos Totales:</b> 422</p>
+          <br>
+          <p><b>Materias Cursadas:</b> 20</p>
+          <p><b>Creditos Cursados:</b> 200</p>
+          
+
+        </div>
+        <!--Columna derecha-->
+        <div class="col-8 " style="border: 1px solid lightgray; border-radius: 10px; ">
+          <h2>Selecciona tus materias</h2>
+          <!--Lista de materias-->
+          <div>
+            <div class="accordion ProyScroll" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                      aria-expanded="true" aria-controls="collapseOne" style="color: #155724;">
+                      <b>Programación Orientada a Objetos</b> 
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMicros"
+                      aria-expanded="true" aria-controls="collapseMicros">
+                      Fundamentos de microprocesadores y microcontroladores
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseMicros" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+    
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWeb"
+                      aria-expanded="true" aria-controls="collapseWeb">
+                      Desarrollo de aplicaciones web
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseWeb" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWeb"
+                      aria-expanded="true" aria-controls="collapseWeb">
+                      Manejo de Información y Datos Numericos
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseWeb" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                      aria-expanded="true" aria-controls="collapseOne" style="color: #155724;">
+                      <b>Conocimiento y Cultura</b> 
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWeb"
+                      aria-expanded="true" aria-controls="collapseWeb">
+                      Comunicación Oral y Escrita
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseWeb" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                </div>
+              </div>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" style="width:200px">
+          Continuar
+        </button>
+      </div>
+    </div>
+
+
+    
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
