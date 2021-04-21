@@ -1,0 +1,18 @@
+@host = http://localhost:3000
+
+
+###
+POST {{host}}/api/alumnos
+Content-Type: application/json
+
+{
+    "nombre":"Mike",
+    "apellido":"Pedro",
+    "correo":"migu@ange.l",
+    "matricula":"edrftguyhij",
+    "password":"Qwe123",
+    "confPassword":"Qwe123"
+}
+
+###
+
