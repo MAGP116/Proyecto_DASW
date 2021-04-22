@@ -1,4 +1,5 @@
 'use strict'
+const bcrypt = require("bcryptjs");
 
  function validarToken(req,res, next){
      //VERIFICAR QUE EL TOKEN ES VALIDO
@@ -28,13 +29,27 @@
      next();
  }
 
+ //Verifica que la password sea la misma que en el backend
  function validarPassword(req,res,next){
-     //HACER VALIDCACION DE QUE LA CONTRASENIA SEA LA QUE EXISTE EN EL BACKEND
-     next();
+     
+     bcrypt.compare(req.body.password, hash).then((res) => {
+        if(res){
+            next();
+        }
+        else{
+            res.status(404).send("El usuario o contraseña no coinciden");
+            return;
+        }
+
+   }).catch((err)=>console.log("error",err));
+     
  }
 
+
+ //Realiza la encriptación de la contraseña 
  function encriptarPassword(req,res,next){
-     //Hacer encriptamiento de la contrASEÑA PARA EL BACKEND
+     let hash = bcrypt.hashSync(req.body.password,8);
+     req.body.password = hash;
      next();
  }
 
