@@ -26,11 +26,11 @@ let alumnoSchema = mongoose.Schema({
     },
     carrera:{ 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Carrera' 
+        ref: 'carrera' 
     },
     materia:[{
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Materia' 
+        ref: 'materia' 
     }]
 });
 
