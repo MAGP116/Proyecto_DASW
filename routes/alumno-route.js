@@ -12,11 +12,14 @@ router.post('/',Val.validarAtributosUsuario,Val.confirmarPassword,Val.encriptarP
         return;
     }
     res.status(400).send("Correo ya registrado");
-    
-
 }
 )
 
+//Falta meter lo del auth
+router.get('/:email', async (req,res)=>{
+    let doc = await Alumno.getAlumno(req.params.email)
+    res.send(doc)
+})
 
 
 
