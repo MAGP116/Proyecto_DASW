@@ -4,7 +4,7 @@ const alumnoRouter = require('./routes/alumno-route');
 const app = express();
 
 //Borrar lo sigiente tras las PRUEBAS
-const port = 3000;
+const port =  process.env.PORT || 3000;
 app.listen(port, ()=>console.log("Ejecutando en puerto "+port));
 
 
