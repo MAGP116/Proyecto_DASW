@@ -9,6 +9,7 @@ const bcrypt = require("bcryptjs");
  function validarAtributosUsuario(req,res,next){
      let {nombre,apellido,correo,matricula,password} = req.body;
      let usuario = {nombre,apellido,correo,matricula,password};
+     //Verifica que si existan los campos
      let faltantes = "";
      for(let key in usuario){
          if(!usuario[key])faltantes+="key ";
