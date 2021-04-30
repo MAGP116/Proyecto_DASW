@@ -46,6 +46,12 @@ alumnoSchema.statics.saveAlumno = async function(user){
     return doc;
 }
 
+alumnoSchema.statics.getAlumno = async correo => {
+    let doc = await Alumno.findOne({correo})
+    //let doc = await Alumno.findById(id)
+    return doc;
+}
+
 let Alumno = mongoose.model('alumno', alumnoSchema);
 
 module.exports = Alumno;
