@@ -13,12 +13,12 @@ let carreraSchema = mongoose.Schema({
     },
     seriasion:[{
         materiaReq:{
-          type: mongoose.Schema.Types.ObjectId, 
-          ref: 'materia' 
+          type:String,
+          required:true
         },
         materiaSer:{
-          type: mongoose.Schema.Types.ObjectId, 
-          ref: 'materia' 
+          type:String,
+          required:true
         }
     }]
 });
@@ -33,6 +33,14 @@ carreraSchema.statics.saveCarrera = async function(user){
          doc = undefined;
     }
     return doc;
+}
+
+carreraSchema.statics.getCarrera = async (filtro)=>{
+    return await Carrera.findOne(filtro);
+}
+
+carreraSchema.statics.getCarreraById = async(id)=>{
+    return await Carrera.findById(id);
 }
 
 let Carrera = mongoose.model('carrera', carreraSchema);

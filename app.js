@@ -1,6 +1,7 @@
 'use strict'
 const express = require("express");
 const alumnoRouter = require('./routes/alumno-route');
+const loginRouter = require('./routes/login-route');
 const app = express();
 
 //Borrar lo sigiente tras las PRUEBAS
@@ -13,6 +14,7 @@ app.use(express.json())
 
 //relocalizaciones API
 app.use('/api/alumnos', alumnoRouter)
+app.use('/api/login', loginRouter)
 
 
 

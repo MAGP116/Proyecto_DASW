@@ -29,6 +29,14 @@ materiaSchema.statics.saveMateria = async function(subject){
     return doc;
 }
 
+materiaSchema.statics.getMateria = async(filtro) =>{
+    return await Materia.findOne(filtro);
+}
+
+materiaSchema.statics.getMateriaById = async(id)=>{
+    return await Materia.findById(id);
+}
+
 let Materia = mongoose.model('materia', materiaSchema);
 
 module.exports = Materia;
