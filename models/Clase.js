@@ -7,13 +7,11 @@ let claseSchema = mongoose.Schema({
         required:true
     }],
     profesor:{ 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Profesor',
+        type:String,
         required:true 
     },
     materia:{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Materia' ,
+        type:String,
         required:true 
     }
 });
@@ -28,6 +26,14 @@ claseSchema.statics.saveClase = async function(subjectClass){
          doc = undefined;
     }
     return doc;
+}
+
+claseSchema.statics.getClase = async(filtro) =>{
+    return await Clase.findOne(filtro);
+}
+
+claseSchema.statics.getClaseById = async(id)=>{
+    return await Clase.findById(id);
 }
 
 let Clase = mongoose.model('clase', claseSchema);

@@ -8,11 +8,28 @@ Content-Type: application/json
 {
     "nombre":"Mike",
     "apellido":"Pedro",
-    "correo":"migu@ange.l",
-    "matricula":"edrftguyhij",
+    "correo":"miguuuuuu@ange.l",
+    "matricula":"edrftggfghuyhij",
     "password":"Qwe123",
     "confPassword":"Qwe123"
 }
 
 ###
 
+@id = 608c4f678f87114f98c265a0
+
+###
+post {{host}}/api/login
+Content-Type:  application/json
+
+{
+    "correo":"migu@ange.l",
+    "password":"Qwe123"
+}
+
+####
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYxOTgxMDkyMX0.piHamfJj8tPg94gILYyiWWr-KwYD4CUaEj4W4TBPJqk
+
+
+####

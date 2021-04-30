@@ -1,60 +1,40 @@
 'use strict'
 const bcrypt = require("bcryptjs");
+const sign = "AloHom0r4 y abre te sesamo"
 
  function validarToken(req,res, next){
      //VERIFICAR QUE EL TOKEN ES VALIDO
-     next();
+     let token =  req.get('x-auth')
+     if(token){
+         jwt.verify(token, 'DASWP21', (err, decoded)=>{
+             if(err){
+                 console.log(err.name);
+                 res.status(401).send({error: "Token no válido"})   
+             }else{
+                 console.log(decoded);
+                 req.correo = decoded.correo;
+                 next();
+             }
+         })
+     }else{
+         res.status(401).send({error: "falta token"})
+     }
  }
 
- function validarAtributosUsuario(req,res,next){
-     let {nombre,apellido,correo,matricula,password} = req.body;
-     let usuario = {nombre,apellido,correo,matricula,password};
-     //Verifica que si existan los campos
-     let faltantes = "";
-     for(let key in usuario){
-         if(!usuario[key])faltantes+="key ";
-     }
-     if(faltantes.length != 0){
-         res.status(400).send(`Hace falta: ${faltantes}`);
-         return;
-     }
-     next();
- }
-
- function confirmarPassword(req,res,next){
-     let{password,confPassword} = req.body;
-     if(password !== confPassword){
-        res.status(400).send("Las contraseñas no coinciden");
+function validarCamposLogin(req,res,next){
+    let {password,correo} = req.body;
+    let error = "Hace falta: ";
+    if(!password){
+        error += "contraseña "
+    }
+    if(!correo){
+        error += "correo "
+    }
+    if(!correo || !password){
+        res.status(400).send(error);
         return;
-     }
-     next();
- }
+    }
+    next();
+}   
 
- //Verifica que la password sea la misma que en el backend
- function validarPassword(req,res,next){
-     
-     bcrypt.compare(req.body.password, hash).then((res) => {
-        if(res){
-            next();
-        }
-        else{
-            res.status(404).send("El usuario o contraseña no coinciden");
-            return;
-        }
-
-   }).catch((err)=>console.log("error",err));
-     
- }
-
-
- //Realiza la encriptación de la contraseña 
- function encriptarPassword(req,res,next){
-     let hash = bcrypt.hashSync(req.body.password,8);
-     req.body.password = hash;
-     next();
- }
-
-
-
-
- module.exports = {validarToken,validarAtributosUsuario,validarPassword,encriptarPassword,confirmarPassword};
+ module.exports = {validarToken,sign,validarCamposLogin};

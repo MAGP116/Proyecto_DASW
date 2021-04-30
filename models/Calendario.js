@@ -11,8 +11,7 @@ let calendarioSchema = mongoose.Schema({
         required:true
     },
     clase:[{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'clase' 
+        type:String
     }]
 });
 
@@ -26,6 +25,15 @@ calendarioSchema.statics.saveCalendario = async function(calendar){
          doc = undefined;
     }
     return doc;
+}
+
+calendarioSchema.statics.getCalendario = async function (filtro) {
+    let doc = await Calendario.findOne(filtro);
+    return doc;
+}
+
+calendarioSchema.statics.getCalendarioById = async function(id){
+    return await Calendario.findById(id);
 }
 
 let Calendario = mongoose.model('calendario', calendarioSchema);

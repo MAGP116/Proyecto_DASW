@@ -24,6 +24,14 @@ profesorSchema.statics.saveProfesor = async function(teacher){
     return doc;
 }
 
+profesorSchema.statics.getProfesor = async(filtro) =>{
+    return await Profesor.findOne(filtro);
+}
+
+profesorSchema.statics.getProfesorById = async(id)=>{
+    return await Profesor.findById(id);
+}
+
 let Profesor = mongoose.model('profesor', profesorSchema);
 
 module.exports = Profesor;
