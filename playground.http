@@ -94,17 +94,26 @@ Content-Type:  application/json
 
 ###
 
+
+###
 post {{host}}/api/admin/materias
 x-auth: {{adminToken}}
 Content-Type:  application/json
 
 {
-    "nombre":"Programación Orientada a Objetos",
-    "descripcion": "Este curso atiende a la necesidad de la industria de desarrollo de software de aplicacion, de generar la mayor cantidad de productos de software en el menor tiempo posible, aprovechando las tecnologías de información y comunicación que permitan a equipos de trabajo geograficamente dispersos colaborar en un mismo proyecto de desarrollo. Para ello propone una metodología de programación denominada Programación Orientada a Objetos que permite reducir los tiempos de codificación a través de la descomposición del programa en componentes de software que sean fáciles de comprender, integrar, reutilizar y modificar/extender su funcionalidad.",
-    "creditos":8
+    "nombre":"Interconexión de Redes",
+    "descripcion":"En esta materia estudiarás por qué la mayoría de las empresas y organizaciones dependen del uso de redes para poder llevar a cabo su actividad productiva y cómo se logra la interconexión a través de la construcción y mantenimiento de las mismas. En este curso aprenderás cuáles son las diferentes tecnologías y protocolos que existen para interconectar redes y qué es necesario para configurar y poner en marcha dichas comunicaciones. Para cursar esta materia es necesario que conozcas el impacto de la tecnología en la vida diaria y los conceptos sobre redes de computadoras que se imparten en la materia de Introducción a redes.",
+     "creditos":8
 }
 
+####
+post {{host}}/api/admin/carreras
+x-auth: {{adminToken}}
+Content-Type:  application/json
 
+{
+    "nombre":""
+}
 
 
 
