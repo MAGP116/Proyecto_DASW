@@ -20,6 +20,15 @@ const sign = "AloHom0r4 y abre te sesamo"
      }
  }
 
+function validarAdmin(req,res,next){
+    if(req.correo && req.correo == 'admin@admin.admin'){
+        next();
+        return;
+    }
+    res.status(403).send('Pemisos no otorgados');
+
+}
+
 function validarCamposLogin(req,res,next){
     let {password,correo} = req.body;
     let error = "Hace falta: ";
@@ -36,4 +45,17 @@ function validarCamposLogin(req,res,next){
     next();
 }   
 
- module.exports = {validarToken,sign,validarCamposLogin};
+function validarCamposMaterias(req,res,next){
+    let {nombre, descripcion,creditos} = req.body;
+    let materia = {nombre,descripcion,creditos};
+    let falta = "";
+    for(let key in materia)if(!materia[key])falta += key+' ';
+    if(falta.length != 0){
+        res.status(400).send('Falta ingresar: '+falta);
+        return;
+    }
+    next();
+    
+}
+
+ module.exports = {validarToken,sign,validarCamposLogin,validarAdmin,validarCamposMaterias};

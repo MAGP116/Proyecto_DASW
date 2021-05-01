@@ -6,10 +6,10 @@ POST {{host}}/api/alumnos
 Content-Type: application/json
 
 {
-    "nombre":"Mike",
-    "apellido":"Pedro",
-    "correo":"miguess@ange.l",
-    "matricula":"asdfghjk",
+    "nombre":"ad",
+    "apellido":"min",
+    "correo":"admin@admin.admin",
+    "matricula":"adm1n",
     "password":"Qwe123",
     "confPassword":"Qwe123"
 }
@@ -78,10 +78,31 @@ x-auth: {{token}}
 GET {{host}}/api/materias
 x-auth: {{token}}
 
+###
+//ADMIN------------------------------------
+###
+post {{host}}/api/login
+Content-Type:  application/json
 
+{
+    "correo":"admin@admin.admin",
+    "password":"Qwe123"
+}
 
+###
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJhZG1pbkBhZG1pbi5hZG1pbiIsImlhdCI6MTYxOTg4NzMwNX0.VnaUReXa5GALmwfbatJ6weY_jii9pwLSD1ifT_BYnZs
 
+###
 
+post {{host}}/api/admin/materias
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "nombre":"Programación Orientada a Objetos",
+    "descripcion": "Este curso atiende a la necesidad de la industria de desarrollo de software de aplicacion, de generar la mayor cantidad de productos de software en el menor tiempo posible, aprovechando las tecnologías de información y comunicación que permitan a equipos de trabajo geograficamente dispersos colaborar en un mismo proyecto de desarrollo. Para ello propone una metodología de programación denominada Programación Orientada a Objetos que permite reducir los tiempos de codificación a través de la descomposición del programa en componentes de software que sean fáciles de comprender, integrar, reutilizar y modificar/extender su funcionalidad.",
+    "creditos":8
+}
 
 
 

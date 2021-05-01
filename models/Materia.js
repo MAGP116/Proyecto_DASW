@@ -11,7 +11,7 @@ let materiaSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    credito:{
+    creditos:{
         type:Number,
         required:true,
     }
