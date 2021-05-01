@@ -9,7 +9,7 @@ const Alumno = require('../models/Alumno')
     //Verifica que si existan los campos
     let faltantes = "";
     for(let key in usuario){
-        if(!usuario[key])faltantes+="key ";
+        if(!usuario[key])faltantes+=`${key} `;
     }
     if(faltantes.length != 0){
         res.status(400).send(`Hace falta: ${faltantes}`);
@@ -34,12 +34,12 @@ function confirmarPassword(req,res,next){
 }
 
 
-
-
 //Realiza la encriptación de la contraseña 
 function encriptarPassword(req,res,next){
-    let hash = bcrypt.hashSync(req.body.password,8);
-    req.body.password = hash;
+    if(req.body.password){
+        let hash = bcrypt.hashSync(req.body.password,8);
+        req.body.password = hash;
+    }
     next();
 }
 

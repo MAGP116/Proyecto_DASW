@@ -1,17 +1,16 @@
 'use strict'
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 const sign = "AloHom0r4 y abre te sesamo"
 
  function validarToken(req,res, next){
-     //VERIFICAR QUE EL TOKEN ES VALIDO
      let token =  req.get('x-auth')
      if(token){
-         jwt.verify(token, 'DASWP21', (err, decoded)=>{
+         jwt.verify(token, sign, (err, decoded)=>{
              if(err){
                  console.log(err.name);
                  res.status(401).send({error: "Token no válido"})   
              }else{
-                 console.log(decoded);
                  req.correo = decoded.correo;
                  next();
              }
