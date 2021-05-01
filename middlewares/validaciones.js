@@ -73,7 +73,7 @@ function validarCamposCarrera(req,res,next){
     for(let i = 0; i< seriacion.length;i++){
         seriado = seriacion[i];
         if(!seriado){
-            falta+=`i:${i} es undefined \n`;
+            falta+=`i: ${i} es undefined \n`;
             continue;
         }
         if(!seriado.materiaSer || seriado.materiaSer && seriado.materiaSer == '')falta+=`i:${i} falta materia a cursar \n`;
@@ -94,4 +94,30 @@ function validarCamposCarrera(req,res,next){
 
 }
 
- module.exports = {validarToken,sign,validarCamposLogin,validarAdmin,validarCamposMaterias,validarCamposCarrera};
+function validarCamposClases(req,res,next){
+    let {sesion, profesor,materia} = req.body;
+    let clase = {sesion, profesor,materia};
+    let falta = "";
+    for(let key in clase)if(!clase[key])falta += key+' ';
+    if(falta.length != 0){
+        res.status(400).send('Falta ingresar: '+falta);
+        return;
+    }
+    let size = sesion.length;
+    let dia;
+    let horario;
+    for(let i = 0; i<size;i++){
+        if(!sesion[i]){
+            falta+=`i: ${i} es undefined`; 
+            continue;
+        }
+        let dia = sesion[i].split('-');
+        if(dia.length != 3){
+            falta += `i: ${i} No tiene los atributos validos`
+        }
+    }
+
+    next();
+}
+
+ module.exports = {validarToken,sign,validarCamposLogin,validarAdmin,validarCamposMaterias,validarCamposCarrera,validarCamposClases};

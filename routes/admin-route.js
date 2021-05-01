@@ -29,7 +29,7 @@ router.post('/carreras',Val.validarCamposCarrera,async (req,res)=>{
 
 })
 
-router.post('/clases',Val.validarCamposMaterias, async (req,res)=>{
+router.post('/clases',Val.validarCamposClases, async (req,res)=>{
     let {sesion, profesor,materia} = req.body;
     let doc = await Clase.saveClase({sesion, profesor,materia});
     if(doc){
