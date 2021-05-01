@@ -58,4 +58,40 @@ function validarCamposMaterias(req,res,next){
     
 }
 
- module.exports = {validarToken,sign,validarCamposLogin,validarAdmin,validarCamposMaterias};
+function validarCamposCarrera(req,res,next){
+    let {nombre,descripcion,seriacion} = req.body;
+    let falta = '';
+    if(!nombre || nombre && nombre == '')falta += 'nombre ';
+    if(!descripcion || descripcion && descripcion == '')falta += 'descripcion ';
+    if(!seriacion || seriacion.length === 0)falta+= 'seriacion ';
+    if(falta.length != 0){
+        res.status(400).send('Falta valores de: '+falta);
+        return;
+    }
+    let seriado;
+    let seriacionfilatrado = [];
+    for(let i = 0; i< seriacion.length;i++){
+        seriado = seriacion[i];
+        if(!seriado){
+            falta+=`i:${i} es undefined \n`;
+            continue;
+        }
+        if(!seriado.materiaSer || seriado.materiaSer && seriado.materiaSer == '')falta+=`i:${i} falta materia a cursar \n`;
+        else{
+            seriacionfilatrado.push({
+                materiaReq: (seriado.materiaReq || ''),
+                materiaSer:seriado.materiaSer
+            })
+        }
+
+    }   
+    if(falta.length != 0){
+        res.status(400).send('Falta en materias: \n'+falta);
+        return;
+    }
+    req.body.seriacion = seriacionfilatrado; 
+    next();
+
+}
+
+ module.exports = {validarToken,sign,validarCamposLogin,validarAdmin,validarCamposMaterias,validarCamposCarrera};
