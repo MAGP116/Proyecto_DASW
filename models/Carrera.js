@@ -11,10 +11,9 @@ let carreraSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    seriasion:[{
+    seriacion:[{
         materiaReq:{
           type:String,
-          required:true
         },
         materiaSer:{
           type:String,
@@ -23,9 +22,9 @@ let carreraSchema = mongoose.Schema({
     }]
 });
 
-carreraSchema.statics.saveCarrera = async function(user){
+carreraSchema.statics.saveCarrera = async function(obj){
     //Suponemos que para este puento el carrera ya fue verificado y cuenta con los atributos necesarios
-    let carrera = new Carrera(user);
+    let carrera = new Carrera(obj);
     let doc;
     try{
          doc = await carrera.save();
