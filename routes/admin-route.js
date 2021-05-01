@@ -3,7 +3,8 @@ const router = require("express").Router();
 const Val = require("../middlewares/validaciones.js");
 const Materia = require("../models/Materia");
 const Carrera = require("../models/Carrera");
-const Profesor = require("../models/Profesor.js");
+const Profesor = require("../models/Profesor");
+const Clase = require("../models/Clase");
 
 router.use(Val.validarToken, Val.validarAdmin);
 
@@ -35,6 +36,16 @@ router.post("/profesor", Val.validarCamposProfesor, async (req, res) => {
 		return;
 	}
 	res.status.apply(400).send("No se pudo registrar el profesor");
+});
+
+router.post("/clases", Val.validarCamposMaterias, async (req, res) => {
+	let { sesion, profesor, materia } = req.body;
+	let doc = await Clase.saveClase({ sesion, profesor, materia });
+	if (doc) {
+		res.status(201).send(doc);
+		return;
+	}
+	res.status(400).send("No se pudo registrar la clase");
 });
 
 module.exports = router;

@@ -4,6 +4,7 @@ const alumnoRouter = require("./routes/alumno-route");
 const loginRouter = require("./routes/login-route");
 const materiaRouter = require("./routes/materia-route");
 const carreraRouter = require("./routes/carrera-route");
+const calendarioRouter = require("./routes/calendario-route");
 const adminRouter = require("./routes/admin-route");
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/api/alumnos", alumnoRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/materias", materiaRouter);
 app.use("/api/carreras", carreraRouter);
+app.use("/api/calendarios", calendarioRouter);
 
 //Cosas de admin:
 app.use("/api/admin", adminRouter);
