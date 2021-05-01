@@ -39,6 +39,8 @@ router.put('/',Val.validarToken,ValAlumnos.encriptarPassword, async (req,res)=>{
             return;
         }
         let doc = await Alumno.getAlumnobyEmail(req.correo);
+        
+        //verificar la carrear vacia
         if(!doc.carrera){
             doc = await Alumno.updateAlumno({correo:req.correo},{carrera})
             if(doc){
@@ -54,6 +56,8 @@ router.put('/',Val.validarToken,ValAlumnos.encriptarPassword, async (req,res)=>{
         }
     }
     let a = {};
+        
+    //verificar atributos
     if(nombre && nombre != ''){
         a.nombre = nombre;
     }
@@ -76,9 +80,7 @@ router.put('/',Val.validarToken,ValAlumnos.encriptarPassword, async (req,res)=>{
     res.status(404).send('No se encontró el usuario para el update');
     return;
 
-    
-    //verificar atributos
-    //verificar la carrear vacia
+
 })
 
 
