@@ -1,5 +1,5 @@
-'use strict'
-const mongoose = require('../db/mongodb_connect')
+"use strict";
+const mongoose = require("../db/mongodb_connect");
 
 let carreraSchema = mongoose.Schema({
     nombre:{
@@ -34,14 +34,19 @@ carreraSchema.statics.saveCarrera = async function(obj){
     return doc;
 }
 
-carreraSchema.statics.getCarrera = async (filtro)=>{
-    return await Carrera.findOne(filtro);
-}
 
-carreraSchema.statics.getCarreraById = async(id)=>{
-    return await Carrera.findById(id);
-}
+carreraSchema.statics.getCarreras = async (filtro) => {
+	return await Carrera.find(filtro);
+};
 
-let Carrera = mongoose.model('carrera', carreraSchema);
+carreraSchema.statics.getCarrera = async (filtro) => {
+	return await Carrera.findOne(filtro);
+};
+
+carreraSchema.statics.getCarreraById = async (id) => {
+	return await Carrera.findById(id);
+};
+
+let Carrera = mongoose.model("carrera", carreraSchema);
 
 module.exports = Carrera;
