@@ -3,8 +3,18 @@ const mongoose = require('../db/mongodb_connect')
 //Revisar lo de sesion, el arreglo
 let claseSchema = mongoose.Schema({
     sesion:[{
-        type:String,
-        required:true
+        dia:{
+          type:String,
+          required:true
+        },
+        horaInicio:{
+          type:Number,
+          required:true
+        },
+        horafinal:{
+          type:Number,
+          required:true
+        }
     }],
     profesor:{ 
         type:String,

@@ -79,6 +79,21 @@ GET {{host}}/api/materias
 x-auth: {{token}}
 
 ###
+GET {{host}}/api/carreras
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
 //ADMIN------------------------------------
 ###
 post {{host}}/api/login
@@ -107,12 +122,43 @@ Content-Type:  application/json
 }
 
 ####
+
+###
+
+###
 post {{host}}/api/admin/carreras
 x-auth: {{adminToken}}
 Content-Type:  application/json
 
 {
-    "nombre":""
+    "nombre":"Ingeniería en Sistemas Computacionales",
+    "descripcion":"En Ingeniería en Sistemas Computacionales aprendes a diseñar soluciones innovadoras con el apoyo de la tecnología. Desarrollas habilidades para implementar, operar y administrar proyectos de sistemas de información y plataformas tecnológicas. Adquieres conocimientos en dos líneas fundamentales: Ciencias Computacionales e Ingeniería de Software, las cuales a su vez incluyen el diseño y desarrollo de bases de datos, interfaces hombre-máquina, componentes de software, arquitectura de redes e interfaces con hardware.",
+    "seriacion":[
+        {
+            "materiaReq":"",
+            "materiaSer":"Algoritmos y Programación"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Cálculo Diferencial"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Introducción a Redes de Computadoras"
+        },
+        {
+            "materiaReq":"Cálculo Diferencial",
+            "materiaSer":"Cálculo Integral"
+        },
+        {
+            "materiaReq":"Algoritmos y Programación",
+            "materiaSer":"Programación Estructurada"
+        },
+        {
+            "materiaReq":"Introducción a Redes de Computadoras",
+            "materiaSer":"Interconexión de Redes"
+        }
+    ]
 }
 
 

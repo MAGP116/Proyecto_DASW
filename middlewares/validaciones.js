@@ -44,6 +44,7 @@ function validarCamposLogin(req, res, next) {
 	next();
 }
 
+
 function validarCamposMaterias(req, res, next) {
 	let { nombre, descripcion, creditos } = req.body;
 	let materia = { nombre, descripcion, creditos };
@@ -102,6 +103,32 @@ function validarCamposProfesor(req, res, next) {
 		return;
 	}
 	next();
+}
+
+function validarCamposClases(req,res,next){
+    let {sesion, profesor,materia} = req.body;
+    let clase = {sesion, profesor,materia};
+    let falta = "";
+    for(let key in clase)if(!clase[key])falta += key+' ';
+    if(falta.length != 0){
+        res.status(400).send('Falta ingresar: '+falta);
+        return;
+    }
+    let size = sesion.length;
+    let dia;
+    let horario;
+    for(let i = 0; i<size;i++){
+        if(!sesion[i]){
+            falta+=`i: ${i} es undefined`; 
+            continue;
+        }
+        let dia = sesion[i].split('-');
+        if(dia.length != 3){
+            falta += `i: ${i} No tiene los atributos validos`
+        }
+    }
+
+    next();
 }
 
 module.exports = {
