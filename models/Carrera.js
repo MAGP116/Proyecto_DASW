@@ -35,8 +35,8 @@ carreraSchema.statics.saveCarrera = async function(obj){
 }
 
 
-carreraSchema.statics.getCarreras = async (filtro) => {
-	return await Carrera.find(filtro);
+carreraSchema.statics.getCarreras = async () => {
+	return await Carrera.find({},{_id:0,nombre:1,descripcion:1});
 };
 
 carreraSchema.statics.getCarrera = async (filtro) => {
