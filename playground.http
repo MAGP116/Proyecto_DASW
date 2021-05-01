@@ -8,8 +8,8 @@ Content-Type: application/json
 {
     "nombre":"Mike",
     "apellido":"Pedro",
-    "correo":"miguuuuuu@ange.l",
-    "matricula":"edrftggfghuyhij",
+    "correo":"miguess@ange.l",
+    "matricula":"asdfghjk",
     "password":"Qwe123",
     "confPassword":"Qwe123"
 }
@@ -29,7 +29,78 @@ Content-Type:  application/json
 
 ####
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYxOTgxMDkyMX0.piHamfJj8tPg94gILYyiWWr-KwYD4CUaEj4W4TBPJqk
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYxOTgxOTY1M30.yxhBoKH_lX6I8sRPbmdD5SX9Udnx5LV7be3uMKKOnvc
 
 ####
+get {{host}}/api/alumnos/migu@ange.l
+x-auth: {{token}}
+
+
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "carrera":"IFFE"
+}
+
+
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Mikatinathor",
+    "apellido":"PhiEtho",
+    "password":"ManTequilla"
+}
+
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"",
+    "apellido":"",
+    "password":""
+}
+
+###
+post {{host}}/api/materias
+x-auth: {{token}}
+
+
+
+###
+GET {{host}}/api/materias
+x-auth: {{token}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

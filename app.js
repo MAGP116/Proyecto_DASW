@@ -2,6 +2,7 @@
 const express = require("express");
 const alumnoRouter = require('./routes/alumno-route');
 const loginRouter = require('./routes/login-route');
+const materiaRouter = require('./routes/materia-route');
 const app = express();
 
 //Borrar lo sigiente tras las PRUEBAS
@@ -15,6 +16,11 @@ app.use(express.json())
 //relocalizaciones API
 app.use('/api/alumnos', alumnoRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/materias',materiaRouter)
+
+
+//Cosas de admin:
+app.use('/api/admin/', adminRouter);
 
 
 
