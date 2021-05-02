@@ -1,91 +1,59 @@
 @host = http://localhost:3000
 
 
+//Registro Inicial de nuevo alumno
 ###
 POST {{host}}/api/alumnos
 Content-Type: application/json
 
 {
-    "nombre":"Test",
-    "apellido":"prueba",
-    "correo":"test@test.test",
-    "matricula":"test",
+    "nombre":"Miguel Ángel",
+    "apellido":"González Partida",
+    "correo":"is723359@iteso.mx",
+    "matricula":"IS723359",
     "password":"Qwe123",
     "confPassword":"Qwe123"
 }
 
-###
 
-@id = 608c4f678f87114f98c265a0
-
+//El login de un usuario
 ###
 post {{host}}/api/login
 Content-Type:  application/json
 
 {
-    "correo":"test@test.test",
+    "correo":"is723359@iteso.mx",
     "password":"Qwe123"
 }
 
 ####
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYxOTgxOTY1M30.yxhBoKH_lX6I8sRPbmdD5SX9Udnx5LV7be3uMKKOnvc
 
-####
-get {{host}}/api/alumnos/migu@ange.l
-x-auth: {{token}}
-
-
-###
-put {{host}}/api/alumnos
-x-auth: {{token}}
-Content-Type:  application/json
-
-{
-    "carrera":"IFFE"
-}
+//Guardar mi Token
+//                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OUBpdGVzby5teCIsImlhdCI6MTYxOTk5Njg3N30.Zjhs7ZLnDs-KgRmEj1n2CfdmDlq0tq_MYnIYKLXpMp8
 
 
-###
-put {{host}}/api/alumnos
-x-auth: {{token}}
-Content-Type:  application/json
-
-{
-    "nombre":"Mikatinathor",
-    "apellido":"PhiEtho",
-    "password":"ManTequilla"
-}
-
-###
-put {{host}}/api/alumnos
-x-auth: {{token}}
-Content-Type:  application/json
-
-{
-    "nombre":"",
-    "apellido":"",
-    "password":""
-}
-
-
-
-###
-GET {{host}}/api/materias
-x-auth: {{token}}
-
+//El usuario revisa las carreras existentes
 ###
 GET {{host}}/api/carreras
 
+//El usuario selecciona su carrera
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "carrera":"Ingeniería en Sistemas Computacionales"
+}
+
+//El usuario puede observar las materias ofrecidas por la carrera
 ###
 GET {{host}}/api/materias/Ingeniería en Sistemas Computacionales
 
 
-
-###
-GET {{host}}/api/clases/Programación Orientada a Objetos
-
-
+//El usuario selecciona las materias ya cursadas
 ###
 put {{host}}/api/materias
 x-auth: {{token}}
@@ -100,21 +68,59 @@ Content-Type:  application/json
 }
 
 
+//El usuario puede revisar su información personal
+####
+get {{host}}/api/alumnos/is723359@iteso.mx
+x-auth: {{token}}
+
+
+//El usuario puede editar su información personal
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Miguel",
+    "apellido":"González",
+    "password":"ManTequilla"
+}
+
+//Los campos deben de contener información para poder actualizarse
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"",
+    "apellido":"",
+    "password":""
+}
+
+
+
+//El usuario revisa sus materias cursadas, disponibles y bloqueadas
 ###
 GET {{host}}/api/materias
 x-auth: {{token}}
 
+//El usuario puede ver las clases de una materia
+###
+GET {{host}}/api/clases/Programación Orientada a Objetos
 
+
+
+//El usuario puede crear un calendario
 ###
-//Muestra los errores posibles al poner una csdfghjklñ
-###
+//Muestra los errores posibles al crear un calendario
 POST {{host}}/api/calendarios
 x-auth: {{token}}
 Content-Type:  application/json
 
 {
     "nombre":"Mi primer calendario",
-    "alumno":"migu@ange.l",
+    "alumno":"is723359@iteso.mx",
     "clases":[
         "608efa80516bdb47e02011e7",
         "608efb71516bdb47e02011ed",
@@ -123,6 +129,7 @@ Content-Type:  application/json
     ]
 }
 
+//Con este el usuario si registra un calendario
 ###
 POST {{host}}/api/calendarios
 x-auth: {{token}}
@@ -130,24 +137,77 @@ Content-Type:  application/json
 
 {
     "nombre":"Mi primer calendario",
-    "alumno":"migu@ange.l",
+    "alumno":"is723359@iteso.mx",
     "clases":[
         "608efa80516bdb47e02011e7",
         "608efb83516bdb47e02011f0"
     ]
 }
+
+//El usuario puede ver sus calendario
 ###
 GET {{host}}/api/calendarios
 x-auth: {{token}}
-###
-GET {{host}}/api/calendarios/608f1c3b3f6ae22f7c837a03
-x-auth: {{token}}
-###
 
 ###
-DELETE {{host}}/api/calendarios/608f1c3b3f6ae22f7c837a03
+//                                                  RECUERDA CAMBIAR EL ID DEL CALENDARIO DURANTE EL VDEO
+@calendario = 608f319b1604993e142e3b0e
+//El usuario puede ver el detalle de su calendario
+###
+GET {{host}}/api/calendarios/{{calendario}}
 x-auth: {{token}}
 
+###
+@token2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYxOTgxOTY1M30.yxhBoKH_lX6I8sRPbmdD5SX9Udnx5LV7be3uMKKOnvc
+
+
+//tambien sirve para compartir con otro usuario
+###
+GET {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token2}}
+
+
+//El usuario dueño puede editar su calendario
+###
+PUT {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Mi primer edici+on",
+    "clases":[
+        "608efa80516bdb47e02011e7",
+        "608efb83516bdb47e02011f0",
+        "608f243662b91e4b3c96da8c"
+    ]
+    
+}
+
+//Un usuario no dueño no puede editar un calendario no propio
+###
+PUT {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token2}}
+Content-Type:  application/json
+
+{
+    "nombre":"MI PRIMERA EDICIÓN NO PROPIA JAUJAUJAUAS",
+    "clases":[
+        "608efa80516bdb47e02011e7",
+        "608efb83516bdb47e02011f0",
+        "608f243662b91e4b3c96da8c"
+    ]
+    
+}
+
+//Un usuario no dueño no puede borrar un calendario no propio
+###
+DELETE {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token2}}
+
+
+###
+DELETE {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token}}
 
 
 //ADMIN------------------------------------
@@ -305,17 +365,17 @@ Content-Type:  application/json
 
 {
     "profesor":"608de13900296c1d2c158123",
-    "materia":"Fundamentos de Ciencias Computacionales",
+    "materia":"Comunicación Oral y Escrita",
     "sesion":[
         {
-            "dia":"LUN",
-            "horaInicio":11,
-            "horaFinal":13
+            "dia":"JUE",
+            "horaInicio":18,
+            "horaFinal":20
         },
         {
-            "dia":"JUE",
-            "horaInicio":7,
-            "horaFinal":9
+            "dia":"VIE",
+            "horaInicio":18,
+            "horaFinal":20
         }
     ]
 }
