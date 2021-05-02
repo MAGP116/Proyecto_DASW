@@ -154,6 +154,16 @@ async function validarCamposClases(req,res,next){
     next();
 }
 
+
+async function convertirProfesores(doc){
+	let size = doc.length;
+	for(let i = 0; i<size; i++){
+		let{nombre,apellido} = await Profesor.getProfesorById(doc[i].profesor);
+		doc[i].profesor =(nombre+' '+apellido);
+	}
+	return doc;
+}
+
 module.exports = {
 	validarToken,
 	sign,
@@ -162,5 +172,6 @@ module.exports = {
 	validarCamposMaterias,
     validarCamposCarrera,
     validarCamposProfesor,
-    validarCamposClases
+    validarCamposClases,
+	convertirProfesores
 };

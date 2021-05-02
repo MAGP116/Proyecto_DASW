@@ -81,12 +81,13 @@ x-auth: {{token}}
 ###
 GET {{host}}/api/carreras
 
+###
+GET {{host}}/api/materias/Ingeniería en Sistemas Computacionales
 
 
 
-
-
-
+###
+GET {{host}}/api/clases/Programación Orientada a Objetos
 
 
 
@@ -217,6 +218,28 @@ Content-Type:  application/json
 }
 
 
+
+###
+post {{host}}/api/admin/clases
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "profesor":"608dea3d939f652c3c872530",
+    "materia":"Programación Orientada a Objetos",
+    "sesion":[
+        {
+            "dia":"MAR",
+            "horaInicio":11,
+            "horaFinal":13
+        },
+        {
+            "dia":"VIE",
+            "horaInicio":11,
+            "horaFinal":13
+        }
+    ]
+}
 
 
 
