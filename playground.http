@@ -122,8 +122,39 @@ Content-Type:  application/json
 }
 
 ####
+post {{host}}/api/admin/profesores
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "nombre":"Che",
+    "apellido":"Vito"
+}
+
+####
+post {{host}}/api/admin/profesores
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "nombre":"",
+    "apellido":""
+}
+###
+get {{host}}/api/admin/profesores
+x-auth: {{adminToken}}
+
 
 ###
+
+get {{host}}/api/admin/profesores/608de13900296c1d2c158123
+x-auth: {{adminToken}}
+
+###
+
+get {{host}}/api/admin/profesores/0
+x-auth: {{adminToken}}
+
 
 ###
 post {{host}}/api/admin/carreras
@@ -163,8 +194,27 @@ Content-Type:  application/json
 
 
 
+###
+post {{host}}/api/admin/clases
+x-auth: {{adminToken}}
+Content-Type:  application/json
 
-
+{
+    "profesor":"608de13900296c1d2c158123",
+    "materia":"Programación Orientada a Objetos",
+    "sesion":[
+        {
+            "dia":"LUN",
+            "horaInicio":7,
+            "horaFinal":9
+        },
+        {
+            "dia":"JUE",
+            "horaInicio":7,
+            "horaFinal":9
+        }
+    ]
+}
 
 
 

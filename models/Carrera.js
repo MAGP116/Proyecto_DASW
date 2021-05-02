@@ -39,8 +39,9 @@ carreraSchema.statics.getCarreras = async () => {
 	return await Carrera.find({},{_id:0,nombre:1,descripcion:1});
 };
 
-carreraSchema.statics.getCarrera = async (filtro) => {
-	return await Carrera.findOne(filtro);
+carreraSchema.statics.getCarrera = async (filtro,atributos) => {
+    atributos = atributos || {};
+	return await Carrera.findOne(filtro,atributos);
 };
 
 carreraSchema.statics.getCarreraById = async (id) => {

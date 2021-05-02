@@ -1,6 +1,7 @@
 "use strict";
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Profesor = require("../models/Profesor");
 const sign = "AloHom0r4 y abre te sesamo";
 
 function validarToken(req, res, next) {
@@ -105,7 +106,7 @@ function validarCamposProfesor(req, res, next) {
 	next();
 }
 
-function validarCamposClases(req,res,next){
+async function validarCamposClases(req,res,next){
     let {sesion, profesor,materia} = req.body;
     let clase = {sesion, profesor,materia};
     let falta = "";
@@ -114,18 +115,40 @@ function validarCamposClases(req,res,next){
         res.status(400).send('Falta ingresar: '+falta);
         return;
     }
+	let b = false;
+	 (await Profesor.getProfesores({},{_id:1})).forEach(p=>{if(p._id == profesor)b = true});
+	
+	if(!b){
+		res.status(400).send('El profesor es invalido');
+        return;
+	}
     let size = sesion.length;
     let dia;
-    let horario;
+    let falta2;
     for(let i = 0; i<size;i++){
         if(!sesion[i]){
-            falta+=`i: ${i} es undefined`; 
+            falta+=`i: ${i} es undefined\n`; 
             continue;
         }
-        let dia = sesion[i].split('-');
-        if(dia.length != 3){
-            falta += `i: ${i} No tiene los atributos validos`
+        let falta2 = '';
+        let dia = sesion[i];
+        if(!dia.dia|| dia.dia && dia.dia == ''){
+            falta2 += 'falta dia '
         }
+        if(!dia.horaInicio|| dia.horaInicio && (dia.horaInicio  > 22 || dia.horaInicio  < 7)){
+            falta2 += !dia.horaInicio?'falta hora de inicio ':' hora de inicio no valida';
+        }
+        if(!dia.horaFinal|| dia.horaFinal && (dia.horaFinal  > 22 || dia.horaFinal  < 7)){
+            falta2 += !dia.horaFinal?'falta hora final ':' hora de final no valida';
+        }
+        if(dia.horaInicio && dia.horaFinal &&  typeof dia.horaInicio === Number && typeof dia.horaFinal === Number && dia.horaInicio >= dia.horaFinal){
+            falta2 += 'La clase no puede empezar despues de terminar.'
+        }
+        if(falta2.length != 0)falta += `i: ${i} ${falta2}`;
+    }
+    if(falta.length != 0){
+        res.status(400).send(falta);
+        return;
     }
 
     next();
@@ -138,5 +161,6 @@ module.exports = {
 	validarAdmin,
 	validarCamposMaterias,
     validarCamposCarrera,
-    validarCamposProfesor
+    validarCamposProfesor,
+    validarCamposClases
 };

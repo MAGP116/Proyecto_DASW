@@ -5,13 +5,14 @@ let claseSchema = mongoose.Schema({
     sesion:[{
         dia:{
           type:String,
+          enum:['LUN','MAR','MIE','JUE','VIE','SAB'],
           required:true
         },
         horaInicio:{
           type:Number,
           required:true
         },
-        horafinal:{
+        horaFinal:{
           type:Number,
           required:true
         }
