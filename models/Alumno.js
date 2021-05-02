@@ -49,8 +49,9 @@ alumnoSchema.statics.getAlumnobyEmail =  async (correo) => {
    return doc;
 }
 //filtro: {nombre:juan,apellido:tlaquepaque}
-alumnoSchema.statics.getAlumno = async (filtro) => {
-    let doc = await Alumno.findOne(filtro,{_id:1, nombre:1, apellido:1, correo:1, matricula:1, password:1,carrera:1,materia:1})
+alumnoSchema.statics.getAlumno = async (filtro,atributos) => {
+    atributos = atributos || {};
+    let doc = await Alumno.findOne(filtro,atributos)
     return doc;
 }
 

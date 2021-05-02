@@ -2,6 +2,9 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Profesor = require("../models/Profesor");
+const Alumno = require('../models/Alumno.js');
+const  Carrera =  require('../models/Carrera.js')
+const  Clase =  require('../models/Clase.js')
 const sign = "AloHom0r4 y abre te sesamo";
 
 function validarToken(req, res, next) {
@@ -164,6 +167,99 @@ async function convertirProfesores(doc){
 	return doc;
 }
 
+async function obtenerMaterias(req,res,next){
+	let cursadas = await Alumno.getAlumno({correo:req.correo},{_id:0,materia:1,carrera:1})
+    let carrera = cursadas.carrera;
+    cursadas = cursadas.materia;
+    let setCur = new Set(cursadas);
+    let matCarrera = await Carrera.getCarrera({nombre:carrera},{_id:0,seriacion:1});
+    matCarrera = matCarrera.seriacion;
+    let setCarrera  = new Set(matCarrera.map(m=>m.materiaSer));
+    let setBloquedas = new Set();
+    matCarrera.forEach(m=>{
+        if(!(setCur.has(m.materiaReq) || (m.materiaReq == ''))){
+            setCarrera.delete(m.materiaSer)
+            setBloquedas.add(m.materiaSer);
+        }
+        if(setCur.has(m.materiaSer)){
+            setCarrera.delete(m.materiaSer);
+        }
+    })
+    let materias = {
+        cursadas:(Array.from(setCur)),
+        disponibles: Array.from(setCarrera),
+        bloqueadas: Array.from(setBloquedas)
+
+    }
+	req.body.materias = materias;
+	next();
+}
+
+async function validarCamposCalendario(req,res,next){
+	let {nombre,clases,materias} = req.body;
+	let falta = '';
+	if(!nombre || nombre && nombre == '')falta += 'nombre '
+	if(!clases)falta+= 'clases';
+	if(falta.length != 0){
+		res.status(400).send('Falta: '+falta);
+		return;
+	}
+	let clase;
+	let setClases = new Set();
+	let disponibles = new Set(materias.disponibles);
+	let horarios = {
+		LUN:[],MAR:[],MIE:[],JUE:[],VIE:[],SAB:[]
+	}
+	let size =clases.length
+	for(let i = 0; i<size; i++){
+		if(!clases[i]){
+			falta += `${i} Falta el ID\n`;
+		}
+		else{
+			//Verifica la existencia de cada clase y se asegura de que sea una clase valida
+			clase = await Clase.getClaseById(clases[i]);
+			//console.log("CLASE",clase);
+			if(!clase)falta += `${i} Clase no Encontrada\n`
+			else if(!disponibles.has(clase.materia)) falta += `${i} Materia no Disponible\n`
+			else if(setClases.has(clase))falta += `${i} La clase es repetida\n`
+			else {
+				let colision = false;
+				//Revisa que no haya colisiones
+				clase.sesion.forEach(s=>{
+					horarios[s.dia].forEach(d=>{
+						//Se busca por cada horario si hay alguna colisión
+						if(!(s.horaFinal <= d.horaInicio || s.horaInicio >= d.horaFinal)){
+							falta += `${i} La clase colisiona\n`;
+							//console.log("s: inicio: ",s.horaInicio,": ",s.horaFinal,"| d: ",d.horaInicio,": ",d.horaFinal);
+							colision = true;
+						}
+				
+					})
+				}) 
+				//Si llega aqui es una clase valida, se añade a las clases aceptadas y se ponen sus horarios
+				if(!colision){
+					setClases.add(clase);
+					clase.sesion.forEach(s=>{
+						horarios[s.dia].push({
+							horaInicio:s.horaInicio,
+							horaFinal:s.horaFinal
+						})
+					})
+
+				}
+			}
+		}
+		
+	}
+	//console.log("falta: ",falta,"\nhorarios",horarios,"\nClses",setClases);
+	if(falta != ''){
+		res.status(400).send('Falta:\n'+falta);
+		return;
+	}
+	next();
+}
+
+
 module.exports = {
 	validarToken,
 	sign,
@@ -173,5 +269,7 @@ module.exports = {
     validarCamposCarrera,
     validarCamposProfesor,
     validarCamposClases,
-	convertirProfesores
+	convertirProfesores,
+	obtenerMaterias,
+	validarCamposCalendario
 };
