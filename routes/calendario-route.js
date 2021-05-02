@@ -9,15 +9,11 @@ router.get('/', Val.validarToken, async (req,res)=>{
 })
 
 router.get('/:calendario', Val.validarToken, async (req,res)=>{
-  let email = req.correo;
   let nombre = req.params.calendario
-  if (!nombre){
-    res.status(400).send('Falta nombre del calendario')
-  }
-  let filter = {email, nombre}
-  let doc = await Calendario.getDetalleCalendario(filter);
+  let doc = await Calendario.getCalendarioById(nombre);
   if (!doc){
     res.status(404).send('Calendario no encontrado')
+    return;
   }
   res.status(200).send(doc)
 })
@@ -45,12 +41,22 @@ router.delete('/:calendario', Val.validarToken, async (req,res)=>{
   }
   let doc = await Calendario.deleteCalendarioById(req.params.calendario);
   if(doc){
-    
+    res.status(200).send(doc)
     return;
   }
   res.status(500).send('No se borró el calendario')
 
 })
 
+router.put('/:calendario',Val.validarToken,Val.ajustarEdicionCalendario,Val.obtenerMaterias,Val.validarCamposCalendario, async (req,res)=>{
+  let {nombre,clases} = req.body;
+  let calendario = await Calendario.updateCalendario(req.params.calendario,{nombre,clase:clases})
+  if(calendario){
+    res.status(200).send(calendario);
+    return;
+  }
+  res.status(404).send('No se encontró el calendario para el update');
+  return;
+})
 
 module.exports = router;

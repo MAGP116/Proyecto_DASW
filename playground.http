@@ -104,6 +104,9 @@ Content-Type:  application/json
 GET {{host}}/api/materias
 x-auth: {{token}}
 
+
+###
+//Muestra los errores posibles al poner una csdfghjklñ
 ###
 POST {{host}}/api/calendarios
 x-auth: {{token}}
@@ -121,6 +124,32 @@ Content-Type:  application/json
 }
 
 ###
+POST {{host}}/api/calendarios
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Mi primer calendario",
+    "alumno":"migu@ange.l",
+    "clases":[
+        "608efa80516bdb47e02011e7",
+        "608efb83516bdb47e02011f0"
+    ]
+}
+###
+GET {{host}}/api/calendarios
+x-auth: {{token}}
+###
+GET {{host}}/api/calendarios/608f1c3b3f6ae22f7c837a03
+x-auth: {{token}}
+###
+
+###
+DELETE {{host}}/api/calendarios/608f1c3b3f6ae22f7c837a03
+x-auth: {{token}}
+
+
+
 //ADMIN------------------------------------
 ###
 post {{host}}/api/login
