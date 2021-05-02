@@ -50,7 +50,11 @@ claseSchema.statics.getClases = async(filtro,atributos) =>{
 }
 
 claseSchema.statics.getClaseById = async(id)=>{
-    return await Clase.findById(id);
+    try{
+        return await Clase.findById(id);
+    }catch(err){
+        return undefined;
+    }
 }
 
 let Clase = mongoose.model('clase', claseSchema);

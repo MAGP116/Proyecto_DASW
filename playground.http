@@ -6,10 +6,10 @@ POST {{host}}/api/alumnos
 Content-Type: application/json
 
 {
-    "nombre":"ad",
-    "apellido":"min",
-    "correo":"admin@admin.admin",
-    "matricula":"adm1n",
+    "nombre":"Test",
+    "apellido":"prueba",
+    "correo":"test@test.test",
+    "matricula":"test",
     "password":"Qwe123",
     "confPassword":"Qwe123"
 }
@@ -23,7 +23,7 @@ post {{host}}/api/login
 Content-Type:  application/json
 
 {
-    "correo":"migu@ange.l",
+    "correo":"test@test.test",
     "password":"Qwe123"
 }
 
@@ -68,10 +68,6 @@ Content-Type:  application/json
     "password":""
 }
 
-###
-post {{host}}/api/materias
-x-auth: {{token}}
-
 
 
 ###
@@ -104,7 +100,25 @@ Content-Type:  application/json
 }
 
 
+###
+GET {{host}}/api/materias
+x-auth: {{token}}
 
+###
+POST {{host}}/api/calendarios
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Mi primer calendario",
+    "alumno":"migu@ange.l",
+    "clases":[
+        "608efa80516bdb47e02011e7",
+        "608efb71516bdb47e02011ed",
+        "608f01ca7c44e74b787defa5",
+        "AWAWAW"
+    ]
+}
 
 ###
 //ADMIN------------------------------------
@@ -129,9 +143,9 @@ x-auth: {{adminToken}}
 Content-Type:  application/json
 
 {
-    "nombre":"Interconexión de Redes",
-    "descripcion":"En esta materia estudiarás por qué la mayoría de las empresas y organizaciones dependen del uso de redes para poder llevar a cabo su actividad productiva y cómo se logra la interconexión a través de la construcción y mantenimiento de las mismas. En este curso aprenderás cuáles son las diferentes tecnologías y protocolos que existen para interconectar redes y qué es necesario para configurar y poner en marcha dichas comunicaciones. Para cursar esta materia es necesario que conozcas el impacto de la tecnología en la vida diaria y los conceptos sobre redes de computadoras que se imparten en la materia de Introducción a redes.",
-     "creditos":8
+    "nombre":"Programación con Memoria",
+    "descripcion":"Este curso pretende que los alumnos tomen conciencia, durante su trabajo de programación, que la memoria de una computadora tiene límites y sigue una organización. Manejar adecuadamente la memoria disponible, en lugar de abusar de ella, es uno de los ingredientes para diseñar estructuras de datos dinámicas y algoritmos eficientes en tiempo y espacio. Aprenderás a implementar aplicaciones de software en lenguaje C, que hagan uso eficiente de la memoria, para manipular conjuntos de datos secuenciales de tamaño dinámico, generados por el programa, obtenidos de uno o más archivos y/o que definan una política específica de acceso.",
+    "creditos":8
 }
 
 ####
@@ -188,11 +202,31 @@ Content-Type:  application/json
         },
         {
             "materiaReq":"",
+            "materiaSer":"Comunicación Oral y Escrita"
+        },
+        {
+            "materiaReq":"",
             "materiaSer":"Introducción a Redes de Computadoras"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Manejo de Información y Datos Numéricos"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Algebra Lineal"
         },
         {
             "materiaReq":"Cálculo Diferencial",
             "materiaSer":"Cálculo Integral"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Contexto Historico Social"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Fundamentos de Ciencias Computacionales"
         },
         {
             "materiaReq":"Algoritmos y Programación",
@@ -201,6 +235,34 @@ Content-Type:  application/json
         {
             "materiaReq":"Introducción a Redes de Computadoras",
             "materiaSer":"Interconexión de Redes"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Analisis y Diseño de Procesos"
+        },
+        {
+            "materiaReq":"Calculo Integral",
+            "materiaSer":"Calculo Multivariable"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Conocimiento y Cultura"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Ética, Identidad y Profesión"
+        },
+        {
+            "materiaReq":"Calculo Integral",
+            "materiaSer":"Mecánica Analítica"
+        },
+        {
+            "materiaReq":"Fundamentos de Cienciass Computacionales",
+            "materiaSer":"Programación con Memoria Dinámica"
+        },
+        {
+            "materiaReq":"Programación Estructurada",
+            "materiaSer":"Programación con Memoria Dinámica"
         }
     ]
 }
@@ -214,12 +276,12 @@ Content-Type:  application/json
 
 {
     "profesor":"608de13900296c1d2c158123",
-    "materia":"Programación Orientada a Objetos",
+    "materia":"Fundamentos de Ciencias Computacionales",
     "sesion":[
         {
             "dia":"LUN",
-            "horaInicio":7,
-            "horaFinal":9
+            "horaInicio":11,
+            "horaFinal":13
         },
         {
             "dia":"JUE",
@@ -238,17 +300,23 @@ Content-Type:  application/json
 
 {
     "profesor":"608dea3d939f652c3c872530",
-    "materia":"Programación Orientada a Objetos",
+    "materia":"Calculo Multivariable",
     "sesion":[
         {
             "dia":"MAR",
-            "horaInicio":11,
-            "horaFinal":13
+            "horaInicio":16,
+            "horaFinal":18
         },
         {
-            "dia":"VIE",
-            "horaInicio":11,
-            "horaFinal":13
+            "dia":"JUE",
+            "horaInicio":16,
+            "horaFinal":18
+        }
+        ,
+        {
+            "dia":"JUE",
+            "horaInicio":16,
+            "horaFinal":18
         }
     ]
 }

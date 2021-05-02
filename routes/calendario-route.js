@@ -22,9 +22,14 @@ router.get('/:calendario', Val.validarToken, async (req,res)=>{
   res.status(200).send(doc)
 })
 
-router.post('/', Val.validarToken, async (req,res)=>{
-  //por acer
-  return;
+router.post('/', Val.validarToken,Val.obtenerMaterias,Val.validarCamposCalendario, async (req,res)=>{
+  let {clases,nombre} = req.body;
+    let doc = await Calendario.saveCalendario({clase:clases,nombre,alumno:req.correo})
+    if(doc){
+      res.status(201).send(doc);
+      return;
+    }
+    res.status(400).send('No se consiguio registrar el calendario');
 })
 
 

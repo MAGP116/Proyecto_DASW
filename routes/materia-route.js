@@ -3,14 +3,17 @@ const  Materia =  require('../models/Materia.js')
 const  Carrera =  require('../models/Carrera.js')
 const Val = require("../middlewares/validaciones.js");
 const Alumno = require('../models/Alumno.js');
+const { set } = require('mongoose');
 
 
 router.post('/',Val.validarToken,async (req,res)=>{
     console.log("AQUI");
 })
 
-router.get('/',Val.validarToken,async (req,res)=>{
-    console.log("AQUIDELGET");
+router.get('/',Val.validarToken,Val.obtenerMaterias,async (req,res)=>{
+    
+    res.status(200).send(req.body.materias);
+
 })
 
 router.get('/:carrera',async (req,res)=>{
