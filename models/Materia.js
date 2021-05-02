@@ -29,8 +29,14 @@ materiaSchema.statics.saveMateria = async function(subject){
     return doc;
 }
 
-materiaSchema.statics.getMateria = async(filtro) =>{
-    return await Materia.findOne(filtro);
+materiaSchema.statics.getMateria = async(filtro,atributos) =>{
+    atributos = atributos ||{}
+    return await Materia.findOne(filtro,atributos);
+}
+
+materiaSchema.statics.getMaterias = async(filtro,atributos) =>{
+    atributos = atributos ||{};
+    return await Materia.find(filtro,atributos);
 }
 
 materiaSchema.statics.getMateriaById = async(id)=>{

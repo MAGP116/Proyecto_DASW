@@ -90,6 +90,18 @@ GET {{host}}/api/materias/Ingeniería en Sistemas Computacionales
 GET {{host}}/api/clases/Programación Orientada a Objetos
 
 
+###
+put {{host}}/api/materias
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "materias":[
+        "Algoritmos y Programación",
+        "Cálculo Diferencial",
+        "Introducción a Redes de Computadoras"
+    ]
+}
 
 
 
