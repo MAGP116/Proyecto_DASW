@@ -28,17 +28,36 @@ router.post("/carreras", Val.validarCamposCarrera, async (req, res) => {
 	res.status(400).send("No se pudo registrar la carrera");
 });
 
-router.post("/profesor", Val.validarCamposProfesor, async (req, res) => {
+router.post("/profesores", Val.validarCamposProfesor, async (req, res) => {
 	let { nombre, apellido } = req.body;
 	let doc = await Profesor.saveProfesor({ nombre, apellido });
 	if (doc) {
 		res.status(201).send(doc);
 		return;
 	}
-	res.status.apply(400).send("No se pudo registrar el profesor");
+	res.status(400).send("No se pudo registrar el profesor");
 });
 
-router.post("/clases", Val.validarCamposMaterias, async (req, res) => {
+router.get("/profesores", async (req,res)=>{
+	let doc = await Profesor.getProfesores({});
+	if (doc) {
+		res.status(200).send(doc);
+		return;
+	}
+	res.status(400).send("No se pudo obtener los profesores");
+})
+
+router.get("/profesores/:id", async (req,res)=>{
+	let id = req.params.id;
+	let doc = await Profesor.getProfesorById(id);
+	if (doc) {
+		res.status(200).send(doc);
+		return;
+	}
+	res.status(400).send("No se pudo encontrar el profesor");
+})
+
+router.post("/clases", Val.validarCamposClases, async (req, res) => {
 	let { sesion, profesor, materia } = req.body;
 	let doc = await Clase.saveClase({ sesion, profesor, materia });
 	if (doc) {

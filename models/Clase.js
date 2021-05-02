@@ -5,13 +5,14 @@ let claseSchema = mongoose.Schema({
     sesion:[{
         dia:{
           type:String,
+          enum:['LUN','MAR','MIE','JUE','VIE','SAB'],
           required:true
         },
         horaInicio:{
           type:Number,
           required:true
         },
-        horafinal:{
+        horaFinal:{
           type:Number,
           required:true
         }
@@ -38,8 +39,14 @@ claseSchema.statics.saveClase = async function(subjectClass){
     return doc;
 }
 
-claseSchema.statics.getClase = async(filtro) =>{
-    return await Clase.findOne(filtro);
+claseSchema.statics.getClase = async(filtro,atributos) =>{
+    atributos = atributos || {};
+    return await Clase.findOne(filtro,atributos);
+}
+
+claseSchema.statics.getClases = async(filtro,atributos) =>{
+    atributos = atributos || {};
+    return await Clase.find(filtro,atributos);
 }
 
 claseSchema.statics.getClaseById = async(id)=>{
