@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 const Profesor = require("../models/Profesor");
 const Alumno = require('../models/Alumno.js');
 const  Carrera =  require('../models/Carrera.js')
-const  Clase =  require('../models/Clase.js')
+const  Clase =  require('../models/Clase.js');
+const Calendario = require("../models/Calendario");
 const sign = "AloHom0r4 y abre te sesamo";
 
 function validarToken(req, res, next) {
@@ -157,7 +158,6 @@ async function validarCamposClases(req,res,next){
     next();
 }
 
-
 async function convertirProfesores(doc){
 	let size = doc.length;
 	for(let i = 0; i<size; i++){
@@ -259,6 +259,21 @@ async function validarCamposCalendario(req,res,next){
 	next();
 }
 
+async function ajustarEdicionCalendario(req,res,next){
+	let calendario = await Calendario.getCalendarioById(req.params.calendario);
+	if(calendario.alumno != req.correo){
+		res.status(403).send('No tiene autorización')
+		return;
+	}
+	if(!req.body.nombre || req.body.nombre && req.body.nombre == ''){
+		if(!calendario){
+			res.status(404).send('Calendario no encontrado');
+			return;
+		}
+		req.body.nombre = calendario.nombre;
+	}
+	next();
+}
 
 module.exports = {
 	validarToken,
@@ -271,5 +286,6 @@ module.exports = {
     validarCamposClases,
 	convertirProfesores,
 	obtenerMaterias,
-	validarCamposCalendario
+	validarCamposCalendario,
+	ajustarEdicionCalendario
 };

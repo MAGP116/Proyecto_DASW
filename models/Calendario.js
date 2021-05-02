@@ -36,7 +36,7 @@ calendarioSchema.statics.getDetalleCalendario = async (filter) => {
 calendarioSchema.statics.getCalendarios = async (correo) => {
 	return await Calendario.find(
 		{ alumno: correo },
-		{ _id: 0, nombre: 1, alumno: 1 }
+		{ _id: 1, nombre: 1, alumno: 1 }
 	);
 };
 
@@ -51,6 +51,11 @@ calendarioSchema.statics.getCalendarioById = async function (id) {
 };
 calendarioSchema.statics.deleteCalendarioById = async(id)=>{
 	return await Calendario.findByIdAndDelete(id);
+}
+
+calendarioSchema.statics.updateCalendario = async function (id,calendar){
+	let doc = await Calendario.findByIdAndUpdate(id,calendar,{new: true});
+	return doc;
 }
 
 let Calendario = mongoose.model("calendario", calendarioSchema);
