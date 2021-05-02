@@ -40,14 +40,18 @@ calendarioSchema.statics.getCalendarios = async (correo) => {
 	);
 };
 
-calendarioSchema.statics.getCalendario = async function (filtro) {
-	let doc = await Calendario.findOne(filtro);
+calendarioSchema.statics.getCalendario = async function (filtro, atributos) {
+	atributos = atributos || {};
+	let doc = await Calendario.findOne(filtro,atributos);
 	return doc;
 };
 
 calendarioSchema.statics.getCalendarioById = async function (id) {
 	return await Calendario.findById(id);
 };
+calendarioSchema.statics.deleteCalendarioById = async(id)=>{
+	return await Calendario.findByIdAndDelete(id);
+}
 
 let Calendario = mongoose.model("calendario", calendarioSchema);
 
