@@ -73,106 +73,79 @@
 		<div class="row align-items-center mr-2">
 			<div class="col m-5 text-center">
 				<h3>Planifica tus horarios de manera sencilla</h3>
-				<!-- <img src="" alt="imgIndex"> -->
-				<h4>img</h4>
+				<img src="./img/Banner Index.png" alt="Index Banner" width="60%" />
 			</div>
 
 			<div class="col-4 m-5">
-				<h1 class="mb-3">Registrarte</h1>
-				<form action="">
-					<div class="row mb-3">
-						<div class="col">
-							<input
-								type="text"
-								name="name"
-								id="Nombre"
-								class="form-control"
-								placeholder="Nombre"
-								required
-							/>
+				<div class="row">
+					<h1 class="mb-3">Registrarte</h1>
+					<form action="">
+						<div class="row mb-3">
+							<div class="col">
+								<input
+									type="text"
+									name="name"
+									id="registerNombre"
+									class="form-control"
+									placeholder="Nombre"
+									required
+								/>
+							</div>
+							<div class="col">
+								<input
+									type="text"
+									name="lastname"
+									id="registerApellido"
+									class="form-control"
+									placeholder="Apellidos"
+									required
+								/>
+							</div>
 						</div>
-						<div class="col">
-							<input
-								type="text"
-								name="lastname"
-								id="Apellidos"
-								class="form-control"
-								placeholder="Apellidos"
-								required
-							/>
-						</div>
-					</div>
 
-					<input
-						type="email"
-						name="mail"
-						id="Email"
-						class="form-control mb-3"
-						placeholder="Correo electrónico"
-						required
-					/>
-					<input
-						type="password"
-						name="pass1"
-						id="Password1"
-						class="form-control mb-3"
-						placeholder="Contraseña"
-						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}"
-						required
-					/>
-					<input
-						type="password"
-						name="pass2"
-						id="Password2"
-						class="form-control mb-3"
-						placeholder="Confirmar contraseña"
-						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}"
-						required
-					/>
-					<label for="FechaNacimiento">Fecha de nacimiento</label>
-					<input
-						type="date"
-						name="date"
-						id="FechaNacimiento"
-						class="form-control mb-3"
-						max="2021-02-18"
-						required
-					/>
-
-					<div class="mb-2">
 						<input
-							class="ml-3"
-							type="radio"
-							id="mujer"
-							name="sexo"
-							value="Mujer"
+							type="text"
+							name="expediente"
+							id="registerExpediente"
+							class="form-control mb-3"
+							placeholder="Expediente"
 							required
 						/>
-						<label for="male">Mujer</label>
 						<input
-							class="ml-3"
-							type="radio"
-							id="hombre"
-							name="sexo"
-							value="Hombre"
+							type="email"
+							name="mail"
+							id="registerEmail"
+							class="form-control mb-3"
+							placeholder="Correo electrónico"
 							required
 						/>
-						<label for="female">Hombre</label>
-					</div>
-
-					<input
-						type="url"
-						name="profileimage"
-						id="ImagenPerfil"
-						class="form-control mb-3"
-						placeholder="Url de imagen de perfil"
-						required
-					/>
-
-					<button type="submit" class="btn btn-primary float-right">
-						Registrarse
-					</button>
-				</form>
+						<input
+							type="password"
+							name="pass1"
+							id="registerPassword1"
+							class="form-control mb-3"
+							placeholder="Contraseña"
+							required
+						/>
+						<input
+							type="password"
+							name="pass2"
+							id="registerPassword2"
+							class="form-control mb-3"
+							placeholder="Confirmar contraseña"
+							required
+						/>
+						<button
+							type="submit"
+							id="registerSubmit"
+							class="btn btn-primary float-right"
+						>
+							Registrarse
+						</button>
+					</form>
+				</div>
+				<div id="registerAlerts" class="row m-0 mt-3">
+				</div>
 			</div>
 		</div>
 
