@@ -1,14 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Detalle de Calendario</title>
+    <title>Detalle Calendario</title>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <style>
       .modal.left .modal-dialog {
         position: fixed;
@@ -22,16 +26,16 @@
         -o-transform: translate3d(0%, 0, 0);
         transform: translate3d(0%, 0, 0);
       }
-  
+
       .modal.left .modal-content {
         height: 100%;
         overflow-y: auto;
       }
-  
+
       .modal.right .modal-body {
         padding: 15px 15px 80px;
       }
-  
+
       .modal.right.fade .modal-dialog {
         left: -320px;
         -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
@@ -39,22 +43,22 @@
         -o-transition: opacity 0.3s linear, left 0.3s ease-out;
         transition: opacity 0.3s linear, left 0.3s ease-out;
       }
-  
+
       .modal.right.fade.show .modal-dialog {
         right: 0;
       }
-  
+
       /* ----- MODAL STYLE ----- */
       .modal-content {
         border-radius: 0;
         border: none;
       }
-  
+
       .modal-header {
         border-bottom-color: #eeeeee;
         background-color: #fafafa;
       }
-  
+
       #userModal .modal-dialog {
         position: fixed;
         right: 0;
@@ -66,13 +70,31 @@
         -ms-transform: translate3d(0%, 0, 0);
         -o-transform: translate3d(0%, 0, 0);
         transform: translate3d(0%, 0, 0);
+
+        
+      }
+      /**/
+      .card-body{
+        padding: 0%;
+      }
+      .activo{
+        background-color:#d4edda; color: #155724;
+      }
+      .ProyScroll{
+        height:60vh; overflow-y: scroll;
+      }
+      td small{
+          font-size: 60%;
       }
 
+      body {
 
-
+        overflow-x: hidden; /* Hide horizontal scrollbar */
+    }
     </style>
   </head>
   <body>
+    <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<a class="navbar-brand" href="#">Simulador de horarios</a>
 			<button
@@ -88,13 +110,13 @@
 			</button>
 			<div class="collapse navbar-collapse p-0" id="navbarText">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
+					<li class="nav-item ">
 						<a class="nav-link" href="./home.html"
-							>Página principal </a
+							>Página principal</a
 						>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="detalleUsuario.html">Mis materias</a>
+						<a class="nav-link" href="./detalleUsuario.html">Mis materias</a>
 					</li>
 				</ul>
 				<span class="navbar-text p-0">
@@ -109,212 +131,187 @@
 				</span>
 			</div>
 		</nav>
-    
-    
-      <div class="row mt-2">
-        <div class="col-3" style="justify-content: center; align-content: center; display: flex;">
-          <h1>Clases</h1>
-        </div>
-        <div class="col-7" style="justify-content: center; align-content: center; display: flex;">
-          <h1 style="justify-content: center; display:inline-block;">Calendario</h1>
-        </div>
-        <div class="col-2"style="justify-content: center; align-content: center; display: flex;">
-          <h1>Detalle</h1>
-        </div>
+
+    <!--VentanaEncabezadosBody-->
+    <div class="row mt-2">
+        <!--Clases-->
+      <div class="col-3" style="justify-content: center; align-content: center; display: flex">
+        <h1>Clases</h1>
       </div>
-      <div class="row mt-4">
-        <div class="col-3" style="justify-content: center; align-content: center; display: flex;">
-          <table class="table table-bordered" style="width: 100%;">
-            <tbody>
-              <tr>
-                <td>
-                  <h5>Desarrollo de aplicaciones y servicios web </h5>
+      <div class="col-7" style="justify-content: center; align-content: center; display: flex">
+        <h1 style="justify-content: center; display: inline-block">
+          Calendario
+        </h1>
+      </div>
+      <div class="col-2" style="justify-content: center; align-content: center; display: flex">
+        <h1>Detalle</h1>
+      </div>
+    </div>
+    <!--VentanaBody-->
+    <div class="row mt-4">
+      <!--Materias-->
+      <div class="col-3 " style="justify-content: center; align-content: center; display: flex">
+        <div class="container ">    
+		      <div class="accordion ProyScroll" id="accordionClases">
+		      	<div class="card">
+				      <div class="card-header" id="headingOne">
+				      	<h5 class="mb-0">
+                  <button class="btn btn-link selected" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Desarrollo de aplicaciones y servicios web
+                  </button>
+					      </h5>
+				      </div>
+			      	<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+				      	<div class="card-body">
                   <table class="table-borderless">
                     <tr>
-                      <td style="padding-left: 0%; padding-top: 0%; padding-bottom: 0%;"><p>Lunes-Miercoles</p></td>
-                      <td style="padding-right: 0%; padding-top: 0%; padding-bottom: 0%; align-self: end; width: auto;"><p>11:00-13:00</p></td>
+                      <td ><p>Lunes-Miercoles</p></td>
+                      <td>        </td>
+                      <td><p style="margin-left: 50px;">11:00-13:00</p></td>
                     </tr>
                   </table>
                   <p>Luis Fernando  Gutierrez Preciado</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>Gestión de bases de datos</h5>
-                  <table class="table-borderless">
-                    <tr>
-                      <td style="padding-left: 0%; padding-top: 0%; padding-bottom: 0%;"><p>Lunes-Jueves</p></td>
-                      <td style="padding-right: 0%; padding-top: 0%; padding-bottom: 0%; align-self: end; width: auto;"><p>13:00-15:00</p></td>
-                    </tr>
-                  </table>
-                  <p>Rodolfo Luthe Ríos</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>Especificación de requerimientos de información</h5>
-                  <table class="table-borderless">
-                    <tr>
-                      <td style="padding-left: 0%; padding-top: 0%; padding-bottom: 0%;"><p>Martes-Viernes</p></td>
-                      <td style="padding-right: 0%; padding-top: 0%; padding-bottom: 0%; align-self: end; width: auto;"><p>7:00-9:00</p></td>
-                    </tr>
-                  </table>
-                  <p>Raymundo Torres Bernal</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>Innovación y emprendimiento</h5>
-                  <table class="table-borderless">
-                    <tr>
-                      <td style="padding-left: 0%; padding-top: 0%; padding-bottom: 0%;"><p>Martes-Jueves</p></td>
-                      <td style="padding-right: 0%; padding-top: 0%; padding-bottom: 0%; align-self: end; width: auto;"><p>9:00-11:00</p></td>
-                    </tr>
-                  </table>
-                  <p>Jose Miguel Colin Ceballos</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>Fundamentos de microprocesadores y microcontroladores</h5>
-                  <table class="table-borderless">
-                    <tr>
-                      <td style="padding-left: 0%; padding-top: 0%; padding-bottom: 0%;"><p>Martes-Jueves</p></td>
-                      <td style="padding-right: 0%; padding-top: 0%; padding-bottom: 0%; align-self: end; width: auto;"><p>11:00-13:00</p></td>
-                    </tr>
-                  </table>
-                  <p>Martín Alonso Sinsel Duarte</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-7" style="justify-content: center; align-content: center; display: flex;">
-          <table id="calendar" class="table table-bordered">
-            <thead class="thead-dark">
-              <tr>
-                <th style="width: 6%;" scope="col">Hora</th>
-                <th style="width: 15%;"scope="col">Lunes</th>
-                <th style="width: 15%;"scope="col">Martes</th>
-                <th style="width: 15%;"scope="col">Miercoles</th>
-                <th style="width: 15%;"scope="col">Jueves</th>
-                <th style="width: 15%;"scope="col">Viernes</th>
-                <th style="width: 15%;"scope="col">Sábado</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">7:00 7:30 8:00 8:30</th>
-                <td></td>
-                <td>Especificación de requerimientos de información</td>
-                <td></td>
-                <td></td>
-                <td>Especificación de requerimientos de información</td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">9:00 9:30 10:00 10:30</th>
-                <td></td>
-                <td>Innovación y emprendimiento</td>
-                <td></td>
-                <td>Innovación y emprendimiento</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">11:00 11:30 12:00 12:30</th>
-                <td>Desarrollo de aplicaciones y servicios web</td>
-                <td>Fundamentos de microprocesadores y microcontroladores</td>
-                <td>Desarrollo de aplicaciones y servicios web</td>
-                <td>Fundamentos de microprocesadores y microcontroladores</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">13:00 13:30 14:00 14:30</th>
-                <td>Gestión de bases de datos</td>
-                <td></td>
-                <td></td>
-                <td>Gestión de bases de datos</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">16:00 16:30 17:00 17:30</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">18:00 18:30 19:00 19:30</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">20:00 20:30 21:00 21:30</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-2"style="justify-content: center; align-content: center; display: flex;">
-          <table class="" style="width: 100%;">
-            <tr>
-              <td>
-                <div class="form-group" style="width: 1;">
-                  <label for="nameInput"><b>Nombre:</b></label>
-                  <input type="text" class="form-control" name="nameInput" id="calendarNameInput" aria-describedby="helpId" placeholder="">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p style="display: inline;"><b>URL:</b></p>
-                <a style="margin-left: 30px;" href="http://example.com/this_was_made_at236am">link para compartir</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p style="display: inline;"><b style="margin-right: 35px;">Créditos:</b>40</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <a type="submit" href=""><h4>Editar</h4></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <br>
-                <br>
-                <a type="submit" style="color: red;" href=""><h4>Borrar</h4></a></td>
-            </tr>
-          </table>
-        </div>
+				      	</div>
+				      </div>
+			      </div>
+		      </div>
+	      </div>
       </div>
 
-
-    	<!-- Modales del usuario -->
-      <div id="modalesUsuario">
-
+      <!--Calendario-->
+      <div class="col-7" style="justify-content: center; align-content: center; display: flex">
+        <table id="calendar" class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th style="width: 6%" scope="col">Hora</th>
+              <th style="width: 15%" scope="col">Lunes</th>
+              <th style="width: 15%" scope="col">Martes</th>
+              <th style="width: 15%" scope="col">Miercoles</th>
+              <th style="width: 15%" scope="col">Jueves</th>
+              <th style="width: 15%" scope="col">Viernes</th>
+              <th style="width: 15%" scope="col">Sábado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th id="7" scope="row">7:00 8:50</th>
+              <td class="LUN"></td>
+              <td class="MAR"></td>
+              <td class="MIE activo"><small>Programación Orientada a Objetos</small></td>
+              <td class="JUE"></td>
+              <td class="VIE"></td>
+              <td class="SAB"></td>
+            </tr>
+            <tr>
+              <th id="9" scope="row">9:00 10:50</th>
+              <td class="LUN"></td>
+              <td class="MAR"></td>
+              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="JUE"></td>
+              <td class="VIE"></td>
+              <td class="SAB"></td>
+            </tr>
+            <tr>
+              <th id="11" scope="row">11:00 12:50</th>
+              <td class="LUN"></td>
+              <td class="MAR"></td>
+              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="JUE"></td>
+              <td class="VIE"></td>
+              <td class="SAB"></td>
+            </tr>
+            <tr>
+              <th id="13" scope="row">13:00 14:50</th>
+              <td class="LUN"></td>
+              <td class="MAR"></td>
+              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="JUE"></td>
+              <td class="VIE"></td>
+              <td class="SAB"></td>
+            <tr>
+              <th id="16" scope="row">16:00  17:50</th>
+              <td class="LUN"></td>
+              <td class="MAR"></td>
+              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="JUE"></td>
+              <td class="VIE"></td>
+              <td class="SAB"></td>
+            </tr>
+            <tr>
+              <th id="18" scope="row">18:00  19:50</th>
+              <td class="LUN"></td>
+              <td class="MAR"></td>
+              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="JUE"></td>
+              <td class="VIE"></td>
+              <td class="SAB"></td>
+            </tr>
+            <tr>
+              <th id="20" scope="row">20:00 21:50</th>
+              <td class="LUN"></td>
+              <td class="MAR"></td>
+              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="JUE"></td>
+              <td class="VIE"></td>
+              <td class="SAB"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
+      <!--Detalles-->
+      <div class="col-2" style="justify-content: center; align-content: center">
+        <table class="" style="width: 100%">
+          <tr>
+            <td>
+              <div class="form-group" style="width: 1;">
+                <label for="nameInput"><b>Nombre:</b></label>
+                <input type="text" class="form-control" name="nameInput" id="calendarNameInput" aria-describedby="helpId" disabled placeholder="">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="display: inline">
+                <b style="margin-right: 35px">Créditos:</b>16
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="display: inline">
+                <b style="margin-right: 35px">Materias:</b>2
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="mt-5">
+              <a href="crearCalendario.html"><button  type="button" class="btn btn-primary">Editar</button></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="mt-5">
+              <a ><button  id="buttonCompartir" type="button" class="btn btn-primary">Compartir</button></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="mt-5">
+              <a href=""><button id="buttonBorrar" type="button" class="btn btn-outline-danger">Borrar</button></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="modalBorrar">
+
+    </div>
+
+    <!-- Modales del usuario -->
+    <div id="modalesUsuario">
+
+    </div>
+
     <!-- Optional JavaScript -->
     <script src="detalleCalendario.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

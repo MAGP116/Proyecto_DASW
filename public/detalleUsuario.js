@@ -121,8 +121,9 @@ async function verifyPUT() {
 		modalUserInfo();
 	}
 }
-//----------------------------------------------------------------------------
 document.getElementById("userbtn").addEventListener("click", modalUserInfo);
+//----------------------------------------------------------------------------
+
 window.onload = async function () {
 	let response = await fetch(`${dir}/api/materias/`, {
 		method: "GET",
@@ -131,20 +132,30 @@ window.onload = async function () {
 		},
 	});
 	let materias = await response.json();
-	console.log(materias);
   materiasCursadasArrayToHTML(materias.cursadas)
   materiasDisponiblesArrayToHTML(materias.disponibles);
   materiasBloqueadasArrayToHTML(materias.bloqueadas);
 };
 
 let t = 1
-function materiasCursadasArrayToHTML(cursadas){
-  let materiasCursadasHTML = cursadas.map((materia) => materiaCursadaToHTML(materia));
+async function materiasCursadasArrayToHTML(cursadas){
+  let materiasCursadasHTML = [];
+  for(let i = 0; i < cursadas.length; i++){
+    let string = await materiaCursadaToHTML(cursadas[i])
+    materiasCursadasHTML.push(string);
+  }
 	materiasCursadasHTML = materiasCursadasHTML.join("");
-	document.getElementById("clasesCursadas").innerHTML = materiasCursadasHTML;
+	document.getElementById("clasesCursadas").innerHTML = materiasCursadasHTML; 
 }
 
-function materiaCursadaToHTML(materia){
+async function materiaCursadaToHTML(materia){
+  let response = await fetch(`${dir}/api/materias/`+materia, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let materiaDetails = await response.json();
   let materiaHTML = 
   `<div class="card">
     <div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
@@ -164,9 +175,9 @@ function materiaCursadaToHTML(materia){
         </div>
         <div class="row">
           <div class="col-7">
-            ${materia}
+            ${materiaDetails.descripcion}
           </div>
-          <div class="col"><b>Créditos</b> ${materia}</div>
+          <div class="col"><b>Créditos</b> ${materiaDetails.creditos}</div>
         </div>
       </div>
     </div>
@@ -175,13 +186,24 @@ function materiaCursadaToHTML(materia){
   return materiaHTML;
 }
 
-function materiasDisponiblesArrayToHTML(disponibles){
-  let materiasDisponiblesHTML = disponibles.map((materia) => materiaDisponibleToHTML(materia));
+async function materiasDisponiblesArrayToHTML(disponibles){
+  let materiasDisponiblesHTML = [];
+  for(let i = 0; i < disponibles.length; i++){
+    let string = await materiaDisponibleToHTML(disponibles[i])
+    materiasDisponiblesHTML.push(string);
+  }
 	materiasDisponiblesHTML = materiasDisponiblesHTML.join("");
 	document.getElementById("clasesDisponibles").innerHTML = materiasDisponiblesHTML;
 }
 
-function materiaDisponibleToHTML(materia){
+async function materiaDisponibleToHTML(materia){
+  let response = await fetch(`${dir}/api/materias/`+materia, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+  let materiaDetails = await response.json();
   let materiaHTML = 
   `<div class="card">
     <div class="card-header" id="headingOne">
@@ -201,9 +223,9 @@ function materiaDisponibleToHTML(materia){
         </div>
         <div class="row">
           <div class="col-7">
-          ${materia}
+          ${materiaDetails.descripcion}
           </div>
-          <div class="col"><b>Créditos</b>  ${materia}</div>
+          <div class="col"><b>Créditos</b>  ${materiaDetails.creditos}</div>
         </div>
       </div>
     </div>
@@ -212,16 +234,24 @@ function materiaDisponibleToHTML(materia){
   return materiaHTML
 }
 
-function materiasBloqueadasArrayToHTML(bloqueadas){
-  console.log(bloqueadas);
-  let materiasBloqueadasHTML = bloqueadas.map((materia) => materiaBloqueadaToHTML(materia));
+async function materiasBloqueadasArrayToHTML(bloqueadas){
+  let materiasBloqueadasHTML = [];
+  for(let i = 0; i < bloqueadas.length; i++){
+    let string = await materiaBloqueadaToHTML(bloqueadas[i])
+    materiasBloqueadasHTML.push(string);
+  }
 	materiasBloqueadasHTML = materiasBloqueadasHTML.join("");
-  console.log(materiasBloqueadasHTML);
 	document.getElementById("clasesBloqueadas").innerHTML = materiasBloqueadasHTML;
-  console.log(document.getElementById("clasesBloqueadas"));
 }
 
-function materiaBloqueadaToHTML(materia){
+async function materiaBloqueadaToHTML(materia){
+  let response = await fetch(`${dir}/api/materias/`+materia, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+  let materiaDetails = await response.json();
   let materiaHTML = 
   `<div class="card">
     <div class="card-header" id="headingOne" style="background-color: #f5c6cb">
@@ -241,9 +271,9 @@ function materiaBloqueadaToHTML(materia){
         </div>
         <div class="row">
           <div class="col-7">
-          ${materia}
+          ${materiaDetails.descripcion}
           </div>
-          <div class="col"><b>Créditos</b>  ${materia}</div>
+          <div class="col"><b>Créditos</b>  ${materiaDetails.creditos}</div>
         </div>
       </div>
     </div>

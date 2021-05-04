@@ -1,5 +1,7 @@
 let dir = 'http://localhost:3000'
 
+let t = 0;
+
 //----------------------navegation Bar--------------------------------------
 document.getElementById('userbtn').addEventListener('click', modalUserInfo);
 
@@ -129,3 +131,76 @@ async function verifyPUT(){
   }
 }
 //----------------------------------------------------------------------------
+
+window.onload =async function () {
+	let response = await fetch(`${dir}/api/calendarios/${sessionStorage.calendar}`, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let calendar = await response.json();
+  setClases(calendar.clase);
+  document.getElementById("calendarNameInput").value = calendar.nombre;
+  document.getElementById("buttonCompartir").addEventListener("click", function(ev){
+    var aux = document.createElement("input");
+    aux.setAttribute("value", "Aquí va el link de acceso");
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand("copy");
+    document.body.removeChild(aux);
+    ev.preventDefault()
+  })
+  console.log(calendar);
+}
+
+async function setClases(claseArray){
+  let clasesHTML = [];
+  for(let i = 0; i < clasesArray.length; i++){
+    let string = await addClaseCoulma(claseArray[i])
+    clasesHTML.push(string);
+  }
+	clasesHTML = clasesHTML.join("");
+	document.getElementById("accordionClases").innerHTML = clasesHTML;
+}
+
+async function addClaseColumna(clase){
+  let objectClase = {id: clase}
+  let response = await fetch(`${dir}/api/clases/`, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+    body: JSON.stringify(objectClase),
+	});
+  let materiaDetails = await response.json();
+  let materiaHTML = 
+  `<div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${t}"
+          aria-expanded="true" aria-controls="collapse${t}">
+          <b>${materia}</b>
+        </button>
+      </h5>
+    </div>
+    <div id="collapse${t}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-7">
+            <b>Descripción</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
+          ${materiaDetails.descripcion}
+          </div>
+          <div class="col"><b>Créditos</b>  ${materiaDetails.creditos}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  t++;
+  return materiaHTML
+}
+

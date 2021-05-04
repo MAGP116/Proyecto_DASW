@@ -22,8 +22,8 @@ post {{host}}/api/login
 Content-Type:  application/json
 
 {
-    "correo":"is7233592@iteso.mx",
-    "password":"Qwe123"
+    "correo":"is723359@iteso.mx",
+    "password":"ManTequilla"
 }
 
 ####
@@ -31,7 +31,7 @@ Content-Type:  application/json
 
 //Guardar mi Token
 //                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OTJAaXRlc28ubXgiLCJpYXQiOjE2MjAxNTE3ODJ9.UftEysOfbQkK4uy7k6XVDPPE4cnRc85mV8fxKmNB5jM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OUBpdGVzby5teCIsImlhdCI6MTYyMDE2NTA4M30.nMRnBjNwOphWyls8dvGCbPUgG6_cIAaqKGkpltsPzwA
 
 //El usuario revisa las carreras existentes
 ###
@@ -68,7 +68,7 @@ Content-Type:  application/json
 
 //El usuario puede revisar su información personal
 ####
-get {{host}}/api/alumnos/is7233592@iteso.mx
+get {{host}}/api/alumnos/is723359@iteso.mx
 x-auth: {{token}}
 
 
