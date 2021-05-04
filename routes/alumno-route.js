@@ -1,8 +1,8 @@
 'use strict'
 const router = require('express').Router()
 const Alumno = require('../models/Alumno')
-const Val = require("../middlewares/validaciones.js");
-const ValAlumnos = require("../middlewares/validacionesAlumnos.js");
+const Val = require('../middlewares/validaciones.js');
+const ValAlumnos = require('../middlewares/validacionesAlumnos.js');
 
 //Ingreso de usuario nuevo
 router.post('/',ValAlumnos.validarAtributosUsuario,ValAlumnos.confirmarPassword,ValAlumnos.encriptarPassword, async (req,res)=>{
