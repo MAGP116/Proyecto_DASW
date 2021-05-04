@@ -18,6 +18,12 @@
       .ProyDesc{
         height: 160px;overflow-y: scroll;
       }
+      .proySelected .card-header{
+        background-color: #c3e6cb;
+      }
+      .proySelected button{
+        color: #155724;
+      }
     </style>
 
   </head>
@@ -50,13 +56,11 @@
           <form>
             <div class="form-group">
               <select class="form-control" id="carreraSelect">
-                <option value = "ISC">Ingeniería en Sistemas Computacionales</option>
-                <option value = "IC">Ingeniería Civil</option>
-                <option value = "IF">Ingeniería Financiera</option>
+
               </select>
             </div>
           </form>
-          <p id="selectInfo" class="ProyDesc">En Ingeniería en Sistemas Computacionales aprendes a diseñar soluciones innovadoras con el apoyo de la tecnología. Desarrollas habilidades para implementar, operar y administrar proyectos de sistemas de información y plataformas tecnológicas. Adquieres conocimientos en dos líneas fundamentales: Ciencias Computacionales e Ingeniería de Software, las cuales a su vez incluyen el diseño y desarrollo de bases de datos, interfaces hombre-máquina, componentes de software, arquitectura de redes e interfaces con hardware.</p>
+          <p id="CarreraInfo" class="ProyDesc"></p>
 
           
 
@@ -67,81 +71,15 @@
           <!--Lista de materias-->
           <div>
             <div class="accordion ProyScroll" id="accordionMaterias">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" >
-                      <b>Programación Orientada a Objetos</b> 
-                    </button>
-                  </h5>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingOne">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMicros"
-                      aria-expanded="true" aria-controls="collapseMicros">
-                      Fundamentos de microprocesadores y microcontroladoressssssssssssssssssss
-                    </button>
-                  </h5>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingOne">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWeb"
-                      aria-expanded="true" aria-controls="collapseWeb">
-                      Desarrollo de aplicaciones web
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseWeb" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingOne">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWeb"
-                      aria-expanded="true" aria-controls="collapseWeb">
-                      Manejo de Información y Datos Numericos
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseWeb" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                      aria-expanded="true" aria-controls="collapseOne" style="color: #155724;">
-                      <b>Conocimiento y Cultura</b> 
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingOne">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWeb"
-                      aria-expanded="true" aria-controls="collapseWeb">
-                      Comunicación Oral y Escrita
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseWeb" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                </div>
-              </div>
+              
         
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <a href="./home.html">
-          <button type="submit" class="btn btn-primary" data-dismiss="modal" style="width:200px">
+        <a href="#">
+          <button type="submit" id="buttonSubmit"class="btn btn-primary" data-dismiss="modal" style="width:200px">
             Continuar
           </button>
         </a>
@@ -150,7 +88,7 @@
 
 
     
-      
+    <script src="primerLogin.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
