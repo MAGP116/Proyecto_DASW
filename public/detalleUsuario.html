@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Detalle de Usuario</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+	<style>
+		.modal.left .modal-dialog {
+			position: fixed;
+			right: 0;
+			top: 62px;
+			margin: auto;
+			width: 345px;
+			height: 469px;
+			-webkit-transform: translate3d(0%, 0, 0);
+			-ms-transform: translate3d(0%, 0, 0);
+			-o-transform: translate3d(0%, 0, 0);
+			transform: translate3d(0%, 0, 0);
+		}
+
+		.modal.left .modal-content {
+			height: 100%;
+			overflow-y: auto;
+		}
+
+		.modal.right .modal-body {
+			padding: 15px 15px 80px;
+		}
+
+		.modal.right.fade .modal-dialog {
+			left: -320px;
+			-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+			-moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+			-o-transition: opacity 0.3s linear, left 0.3s ease-out;
+			transition: opacity 0.3s linear, left 0.3s ease-out;
+		}
+
+		.modal.right.fade.show .modal-dialog {
+			right: 0;
+		}
+
+		/* ----- MODAL STYLE ----- */
+		.modal-content {
+			border-radius: 0;
+			border: none;
+		}
+
+		.modal-header {
+			border-bottom-color: #eeeeee;
+			background-color: #fafafa;
+		}
+
+		#userModal .modal-dialog {
+			position: fixed;
+			right: 0;
+			top: 62px;
+			margin: auto;
+			width: 345px;
+			height: 365px;
+			-webkit-transform: translate3d(0%, 0, 0);
+			-ms-transform: translate3d(0%, 0, 0);
+			-o-transform: translate3d(0%, 0, 0);
+			transform: translate3d(0%, 0, 0);
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">Simulador de horarios</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarText"
+			aria-controls="navbarText"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse p-0" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item ">
+					<a class="nav-link" href="./home.html"
+						>Página principal </a
+					>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="detalleUsuario.html">Mis materias</a>
+				</li>
+			</ul>
+			<span class="navbar-text p-0">
+				<a
+					type="button"
+					class="btn btn-primary"
+					data-toggle="modal"
+					data-target="#userModal"
+					><i class="fa fa-user fa-2x" aria-hidden="true"></i
+				></a>
+			</span>
+		</div>
+	</nav>
+
+	<!-- Materias -->
+	<div class="container">
+		<h1 class="display-2 mt-2 mb-3">Mis materias</h1>
+		<div class="accordion" id="accordionExample">
+			<div class="card">
+				<div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
+					<h5 class="mb-0">
+						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+							aria-expanded="true" aria-controls="collapseOne" style="color: #155724;">
+							<b>Programación Orientada a Objetos</b> 
+						</button>
+					</h5>
+				</div>
+				<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+					<div class="card-body" style="background-color:#d4edda; color: #155724;">
+						<div class="row">
+							<div class="col-7">
+								<b>Descripción</b>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-7">
+								Este curso atiende a la necesidad de la industria de desarrollo de software de aplicacion, de generar la mayor cantidad de productos de software en el menor tiempo posible, aprovechando las tecnologías de información y comunicación que permitan a equipos de trabajo geograficamente dispersos colaborar en un mismo proyecto de desarrollo. Para ello propone una metodología de programación denominada Programación Orientada a Objetos que permite reducir los tiempos de codificación a través de la descomposición del programa en componentes de software que sean fáciles de comprender, integrar, reutilizar y modificar/extender su funcionalidad.
+							</div>
+							<div class="col"><b>Créditos</b> 8</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<h5 class="mb-0">
+						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMicros"
+							aria-expanded="true" aria-controls="collapseMicros">
+							Fundamentos de microprocesadores y microcontroladores
+						</button>
+					</h5>
+				</div>
+				<div id="collapseMicros" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-7">
+								<b>Descripción</b>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-7">
+								La materia tiene como finalidad conocer los principios de la
+								arquitectura, programación y desarrollo de los
+								microprocesadores; para ello se emplea, a manera de ejemplo,
+								un microcontrolador de la familia 8051 en modo
+								microprocesador. Para el desarrollo de esta materia es
+								necesario el tener presentes los conceptos de la materia de
+								fundamentos de sistemas digitales, particularmente el diseño
+								mediante el uso de bloques funcionales y el uso de sistemas
+								numéricos y su correspondiente aritmética.
+							</div>
+							<div class="col"><b>Créditos</b> 8</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<h5 class="mb-0">
+						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWeb"
+							aria-expanded="true" aria-controls="collapseWeb">
+							Desarrollo de aplicaciones web
+						</button>
+					</h5>
+				</div>
+				<div id="collapseWeb" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-7">
+								<b>Descripción</b>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-7">
+								Los usuarios de las aplicaciones web interactuan a través de
+								una interface gráfica que permite capturar y validar la
+								información a ser almacenada en el servidor o bien desplegar
+								la informacion recibida de este. El servidor es responsable de
+								procesar la de información, administrar las bases de datos,
+								administrar los repositorios de archivos, autentificar a los
+								usuarios, entre otros. El servidor debe procesar la petición
+								del cliente y enviar la respuesta solicitada. En esta
+								asignatura harás uso de tus conocimientos de programación
+								orientada a objetos y del diseño de bases de datos para crear
+								proyectos más robustos, ya que conocerás y emplearás las
+								principales herramientas y frameworks de desarrollo de
+								aplicaciones web. Podrás desarrollar tus propias aplicaciones
+								y servicios web en donde se administren los recursos del
+								servidor. Además, podrás desarrollar tus propias páginas web
+								interactivas, permitiendo que el usuario almacene, visualice y
+								modifique la información de una base de datos.
+							</div>
+							<div class="col"><b>Créditos</b> 8</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingOne" style="background-color: #f5c6cb">
+					<h5 class="mb-0">
+						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseEscritorio"
+							aria-expanded="true" aria-controls="collapseEscritorio" style="color: #721c24">
+							Programación de aplicaciones de escritorio
+						</button>
+					</h5>
+				</div>
+				<div id="collapseEscritorio" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+					<div class="card-body" style="color: #721c24; background-color: #f8d7da">
+						<div class="row">
+							<div class="col-7">
+								<b>Descripción</b>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-7">
+								Este curso pretende complementar a la materia Programación orientada a objetos al aplicar dicha metodología para construir aplicaciones de software robustas, utilizando dos lenguajes orientados a objetos y metodologías de actualidad. Dichas aplicaciones deben contar con una interfaz gráfica de usuario para que los usuarios puedan capturar, modificar y visualizar información proveniente de una base de datos local o remota, de un conjunto de archivos o de un servicio web; asimismo, la información podrá estar organizada en memoria para efectuar consultas eficientes. También se podrán crear interfaces gráficas 2D para fines de entretenimiento, enseñanza o como herramienta CAD. Las aplicaciones deberán atender a los diferentes errores de captura de los usuarios.
+							</div>
+							<div class="col"><b>Créditos</b> 8</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modales del usuario -->
+	<div class="modal left fade user" id="userModal" tabindex="" role="dialog" aria-labelledby="userModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="padding-bottom: 0;">
+          <h3>Mis datos</h3>
+        </div>
+				<div class="modal-body">
+					<div class="nav flex-sm-column flex-row">
+						<form id="form_registro">
+							<div class="row">
+								<div class="col">
+									<input id="nom" type="text" class="form-control" placeholder="Nombre o nombres" value="John" disabled
+										required />
+								</div>
+								<div class="col">
+									<input id="ape" type="text" class="form-control" placeholder="Apellidos" value="Doe" disabled
+										required />
+								</div>
+							</div>
+							<input id="matricula" class="form-control mt-3" type="text" name="matricula" value="is726666" disabled
+								required />
+							<input id="carrera" class="form-control mt-3" type="text" name="carrera"
+								value="Ingeniería en sistemas computacionales" disabled required />
+							<input id="corr" class="form-control mt-3" type="email" name="correo" value="jdoe@test.com" disabled
+								required />
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">
+									Cerrar sesión
+								</button>
+								<button id="btnEdit" type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
+									data-target="#editUserModal">
+									Editar
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal left fade" id="editUserModal" tabindex="" role="dialog" aria-labelledby="userModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="padding-bottom: 0;">
+          <h3>Mis datos</h3>
+        </div>
+				<div class="modal-body">
+					<div class="nav flex-sm-column flex-row">
+						<form id="form_registro">
+							<div class="row">
+								<div class="col">
+									<input id="nomReg" type="text" class="form-control" placeholder="Nombre o nombres" value="John"
+										required />
+								</div>
+								<div class="col">
+									<input id="apeReg" type="text" class="form-control" placeholder="Apellidos" value="Doe" required />
+								</div>
+							</div>
+							<input id="matricula" class="form-control mt-3" type="text" name="matricula" value="is726666" required />
+							<input id="carrera" class="form-control mt-3" type="text" name="carrera"
+								value="Ingeniería en sistemas computacionales" disabled required />
+							<input id="corrReg" class="form-control mt-3" type="email" name="correo" value="jdoe@test.com" required />
+							<input id="passReg" class="form-control mt-3" type="password" name="password" value="1234test"
+								id="password" placeholder="Contraseña" required />
+							<input id="confpassReg" class="form-control mt-3" type="password" name="password" value="1234test"
+								id="confirmpassword" placeholder="Confirmar contraseña" required />
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+									data-target="#userModal">
+									Volver
+								</button>
+								<button id="btnReg" type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
+									data-target="#userModal">
+									Confirmar
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
