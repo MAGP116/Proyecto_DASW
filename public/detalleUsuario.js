@@ -1,21 +1,17 @@
-let dir = 'http://localhost:3000'
+let dir = "http://localhost:3000";
 
 //----------------------navegation Bar--------------------------------------
-document.getElementById('userbtn').addEventListener('click', modalUserInfo);
 
-async function modalUserInfo(){
-  let response = await fetch(
-   `${dir}/api/alumnos/` + sessionStorage.email,
-   {
-     method: "GET",
-     headers: {
-       "x-auth": sessionStorage.token,
-     },
-   }
-  );
-  let user = await response.json();
-  let modalHTML = 
-  `<div class="modal left fade user" id="userModal" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+
+async function modalUserInfo() {
+	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let user = await response.json();
+	let modalHTML = `<div class="modal left fade user" id="userModal" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="padding-bottom: 0;">
@@ -48,24 +44,22 @@ async function modalUserInfo(){
     </div>
   </div>
   </div>`;
-  document.getElementById("modalesUsuario").innerHTML = modalHTML
-  document.getElementById('btnEditUserInfo').addEventListener('click', modalEditUserInfo);
-  await $("#userModal").modal("toggle");
+	document.getElementById("modalesUsuario").innerHTML = modalHTML;
+	document
+		.getElementById("btnEditUserInfo")
+		.addEventListener("click", modalEditUserInfo);
+	await $("#userModal").modal("toggle");
 }
 
-async function modalEditUserInfo(){
-  let response = await fetch(
-   `${dir}/api/alumnos/` + sessionStorage.email,
-   {
-     method: "GET",
-     headers: {
-       "x-auth": sessionStorage.token,
-     },
-   }
-  );
-  let user = await response.json();
-  let modalHTML = 
-  `<div class="modal left fade" id="editUserModal" tabindex="" role="dialog" aria-labelledby="userModalLabel"aria-hidden="true">
+async function modalEditUserInfo() {
+	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let user = await response.json();
+	let modalHTML = `<div class="modal left fade" id="editUserModal" tabindex="" role="dialog" aria-labelledby="userModalLabel"aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="padding-bottom: 0;">
@@ -97,35 +91,163 @@ async function modalEditUserInfo(){
       </div>
     </div>
   </div>`;
-  document.getElementById("modalesUsuario").innerHTML = modalHTML
-  document.getElementById('btnConfirmarEdicion').addEventListener('click', verifyPUT);
-  await $("#editUserModal").modal("toggle");
+	document.getElementById("modalesUsuario").innerHTML = modalHTML;
+	document
+		.getElementById("btnConfirmarEdicion")
+		.addEventListener("click", verifyPUT);
+	await $("#editUserModal").modal("toggle");
 }
 
-async function verifyPUT(){
-  let password = document.getElementById('passUpdate').value;
-  let confirmpassword = document.getElementById('confpassUpdate').value;
-  let nombre = document.getElementById('nomUpdate').value;
-  let apellido = document.getElementById('apeUpdate').value;
-  if(password != confirmpassword || password == '' ){
-    console.log('Contraseñas no válidas');
-    modalUserInfo();
-  }else{
-    let updatedUser = { nombre, apellido, password };
-    let response = await fetch(
-      `${dir}/api/alumnos/`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-          "x-auth": sessionStorage.token,
-        },
-        body: JSON.stringify(updatedUser),
-      }
-     );
-  
-     let user = await response.json();
-     modalUserInfo();
-  }
+async function verifyPUT() {
+	let password = document.getElementById("passUpdate").value;
+	let confirmpassword = document.getElementById("confpassUpdate").value;
+	let nombre = document.getElementById("nomUpdate").value;
+	let apellido = document.getElementById("apeUpdate").value;
+	if (password != confirmpassword || password == "") {
+		console.log("Contraseñas no válidas");
+		modalUserInfo();
+	} else {
+		let updatedUser = { nombre, apellido, password };
+		let response = await fetch(`${dir}/api/alumnos/`, {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json",
+				"x-auth": sessionStorage.token,
+			},
+			body: JSON.stringify(updatedUser),
+		});
+
+		let user = await response.json();
+		modalUserInfo();
+	}
 }
 //----------------------------------------------------------------------------
+document.getElementById("userbtn").addEventListener("click", modalUserInfo);
+window.onload = async function () {
+	let response = await fetch(`${dir}/api/materias/`, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let materias = await response.json();
+	console.log(materias);
+  materiasCursadasArrayToHTML(materias.cursadas)
+  materiasDisponiblesArrayToHTML(materias.disponibles);
+  materiasBloqueadasArrayToHTML(materias.bloqueadas);
+};
+
+let t = 1
+function materiasCursadasArrayToHTML(cursadas){
+  let materiasCursadasHTML = cursadas.map((materia) => materiaCursadaToHTML(materia));
+	materiasCursadasHTML = materiasCursadasHTML.join("");
+	document.getElementById("clasesCursadas").innerHTML = materiasCursadasHTML;
+}
+
+function materiaCursadaToHTML(materia){
+  let materiaHTML = 
+  `<div class="card">
+    <div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${t}"
+          aria-expanded="true" aria-controls="collapse${t}" style="color: #155724;">
+          <b>${materia}</b> 
+        </button>
+      </h5>
+    </div>
+    <div id="collapse${t}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body" style="background-color:#d4edda; color: #155724;">
+        <div class="row">
+          <div class="col-7">
+            <b>Descripción</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
+            ${materia}
+          </div>
+          <div class="col"><b>Créditos</b> ${materia}</div>
+        </div>
+      </div>
+    </div>
+  </div>`
+  t++;
+  return materiaHTML;
+}
+
+function materiasDisponiblesArrayToHTML(disponibles){
+  let materiasDisponiblesHTML = disponibles.map((materia) => materiaDisponibleToHTML(materia));
+	materiasDisponiblesHTML = materiasDisponiblesHTML.join("");
+	document.getElementById("clasesDisponibles").innerHTML = materiasDisponiblesHTML;
+}
+
+function materiaDisponibleToHTML(materia){
+  let materiaHTML = 
+  `<div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${t}"
+          aria-expanded="true" aria-controls="collapse${t}">
+          <b>${materia}</b>
+        </button>
+      </h5>
+    </div>
+    <div id="collapse${t}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-7">
+            <b>Descripción</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
+          ${materia}
+          </div>
+          <div class="col"><b>Créditos</b>  ${materia}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  t++;
+  return materiaHTML
+}
+
+function materiasBloqueadasArrayToHTML(bloqueadas){
+  console.log(bloqueadas);
+  let materiasBloqueadasHTML = bloqueadas.map((materia) => materiaBloqueadaToHTML(materia));
+	materiasBloqueadasHTML = materiasBloqueadasHTML.join("");
+  console.log(materiasBloqueadasHTML);
+	document.getElementById("clasesBloqueadas").innerHTML = materiasBloqueadasHTML;
+  console.log(document.getElementById("clasesBloqueadas"));
+}
+
+function materiaBloqueadaToHTML(materia){
+  let materiaHTML = 
+  `<div class="card">
+    <div class="card-header" id="headingOne" style="background-color: #f5c6cb">
+      <h5 class="mb-0">
+      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${t}"
+        aria-expanded="true" aria-controls="collapse${t}" style="color: #721c24;">
+          <b>${materia}</b>
+        </button>
+      </h5>
+    </div>
+    <div id="collapse${t}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body" style="color: #721c24; background-color: #f8d7da">
+        <div class="row">
+          <div class="col-7">
+            <b>Descripción</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
+          ${materia}
+          </div>
+          <div class="col"><b>Créditos</b>  ${materia}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  t++;
+  return materiaHTML
+}
