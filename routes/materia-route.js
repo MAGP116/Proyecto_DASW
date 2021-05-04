@@ -2,6 +2,7 @@ const router = require('express').Router();
 const  Materia =  require('../models/Materia.js')
 const Val = require("../middlewares/validaciones.js");
 const Alumno = require('../models/Alumno.js');
+const  Carrera =  require('../models/Carrera.js');
 
 
 router.post('/',Val.validarToken,async (req,res)=>{
@@ -30,6 +31,8 @@ router.put('/',Val.validarToken,async(req,res)=>{
         res.status(400).send('Materias no actualizadas');
         return;
     }
+    let carrera = await Carrera.getCarrera({nombre:alumno.carrera})
+    
     let {materias} = req.body
     let matServer = await Materia.getMaterias({},{_id:0,nombre:1});
     let s = new Set(matServer.map(e=>e.nombre));

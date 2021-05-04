@@ -113,11 +113,7 @@ GET {{host}}/api/clases/Programación Orientada a Objetos
 
 ###
 GET {{host}}/api/clases
-Content-Type:  application/json
-
-{
-    "claseId":"608debf6ea97b42d3c2712b2"
-}
+clase:608debf6ea97b42d3c2712b2
 
 //El usuario puede crear un calendario
 ###
