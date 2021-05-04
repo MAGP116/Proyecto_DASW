@@ -15,6 +15,9 @@
       .ProyBox{
         border: 1px solid lightgray; border-radius: 10px
       }
+      .ProyDesc{
+        height: 160px;overflow-y: scroll;
+      }
     </style>
 
   </head>
@@ -53,11 +56,8 @@
               </select>
             </div>
           </form>
-          <p><b>Materias Totales:</b> 54</p>
-          <p><b>Creditos Totales:</b> 422</p>
-          <br>
-          <p><b>Materias Cursadas:</b> 20</p>
-          <p><b>Creditos Cursados:</b> 200</p>
+          <p id="selectInfo" class="ProyDesc">En Ingeniería en Sistemas Computacionales aprendes a diseñar soluciones innovadoras con el apoyo de la tecnología. Desarrollas habilidades para implementar, operar y administrar proyectos de sistemas de información y plataformas tecnológicas. Adquieres conocimientos en dos líneas fundamentales: Ciencias Computacionales e Ingeniería de Software, las cuales a su vez incluyen el diseño y desarrollo de bases de datos, interfaces hombre-máquina, componentes de software, arquitectura de redes e interfaces con hardware.</p>
+
           
 
         </div>
@@ -66,17 +66,14 @@
           <h2>Selecciona tus materias</h2>
           <!--Lista de materias-->
           <div>
-            <div class="accordion ProyScroll" id="accordionExample">
+            <div class="accordion ProyScroll" id="accordionMaterias">
               <div class="card">
-                <div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
+                <div class="card-header">
                   <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                      aria-expanded="true" aria-controls="collapseOne" style="color: #155724;">
+                    <button class="btn btn-link" type="button" >
                       <b>Programación Orientada a Objetos</b> 
                     </button>
                   </h5>
-                </div>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 </div>
               </div>
               <div class="card">
@@ -84,12 +81,9 @@
                   <h5 class="mb-0">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMicros"
                       aria-expanded="true" aria-controls="collapseMicros">
-                      Fundamentos de microprocesadores y microcontroladores
+                      Fundamentos de microprocesadores y microcontroladoressssssssssssssssssss
                     </button>
                   </h5>
-                </div>
-                <div id="collapseMicros" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-    
                 </div>
               </div>
               <div class="card">

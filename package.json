@@ -6,9 +6,11 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "mongoose": "^5.12.5"
   },
-  "engine":{
+  "engine": {
     "node": "14.15.5"
   },
   "devDependencies": {},

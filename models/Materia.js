@@ -11,7 +11,7 @@ let materiaSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    credito:{
+    creditos:{
         type:Number,
         required:true,
     }
@@ -27,6 +27,20 @@ materiaSchema.statics.saveMateria = async function(subject){
          doc = undefined;
     }
     return doc;
+}
+
+materiaSchema.statics.getMateria = async(filtro,atributos) =>{
+    atributos = atributos ||{}
+    return await Materia.findOne(filtro,atributos);
+}
+
+materiaSchema.statics.getMaterias = async(filtro,atributos) =>{
+    atributos = atributos ||{};
+    return await Materia.find(filtro,atributos);
+}
+
+materiaSchema.statics.getMateriaById = async(id)=>{
+    return await Materia.findById(id);
 }
 
 let Materia = mongoose.model('materia', materiaSchema);

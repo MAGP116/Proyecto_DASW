@@ -3,17 +3,26 @@ const mongoose = require('../db/mongodb_connect')
 //Revisar lo de sesion, el arreglo
 let claseSchema = mongoose.Schema({
     sesion:[{
-        type:String,
-        required:true
+        dia:{
+          type:String,
+          enum:['LUN','MAR','MIE','JUE','VIE','SAB'],
+          required:true
+        },
+        horaInicio:{
+          type:Number,
+          required:true
+        },
+        horaFinal:{
+          type:Number,
+          required:true
+        }
     }],
     profesor:{ 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Profesor',
+        type:String,
         required:true 
     },
     materia:{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Materia' ,
+        type:String,
         required:true 
     }
 });
@@ -28,6 +37,24 @@ claseSchema.statics.saveClase = async function(subjectClass){
          doc = undefined;
     }
     return doc;
+}
+
+claseSchema.statics.getClase = async(filtro,atributos) =>{
+    atributos = atributos || {};
+    return await Clase.findOne(filtro,atributos);
+}
+
+claseSchema.statics.getClases = async(filtro,atributos) =>{
+    atributos = atributos || {};
+    return await Clase.find(filtro,atributos);
+}
+
+claseSchema.statics.getClaseById = async(id)=>{
+    try{
+        return await Clase.findById(id);
+    }catch(err){
+        return undefined;
+    }
 }
 
 let Clase = mongoose.model('clase', claseSchema);

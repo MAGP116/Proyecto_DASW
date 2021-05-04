@@ -1,18 +1,424 @@
 @host = http://localhost:3000
 
 
+//Registro Inicial de nuevo alumno
 ###
 POST {{host}}/api/alumnos
 Content-Type: application/json
 
 {
-    "nombre":"Mike",
-    "apellido":"Pedro",
-    "correo":"migu@ange.l",
-    "matricula":"edrftguyhij",
+    "nombre":"Miguel Ángel",
+    "apellido":"González Partida",
+    "correo":"is723359@iteso.mx",
+    "matricula":"IS723359",
     "password":"Qwe123",
     "confPassword":"Qwe123"
 }
 
+
+//El login de un usuario
 ###
+post {{host}}/api/login
+Content-Type:  application/json
+
+{
+    "correo":"is723359@iteso.mx",
+    "password":"Qwe123"
+}
+
+####
+
+
+//Guardar mi Token
+//                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OUBpdGVzby5teCIsImlhdCI6MTYxOTk5Njg3N30.Zjhs7ZLnDs-KgRmEj1n2CfdmDlq0tq_MYnIYKLXpMp8
+
+
+//El usuario revisa las carreras existentes
+###
+GET {{host}}/api/carreras
+
+//El usuario selecciona su carrera
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "carrera":"Ingeniería en Sistemas Computacionales"
+}
+
+//El usuario puede observar las materias ofrecidas por la carrera
+###
+GET {{host}}/api/materias/Ingeniería en Sistemas Computacionales
+
+
+//El usuario selecciona las materias ya cursadas
+###
+put {{host}}/api/materias
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "materias":[
+        "Algoritmos y Programación",
+        "Cálculo Diferencial",
+        "Introducción a Redes de Computadoras"
+    ]
+}
+
+
+//El usuario puede revisar su información personal
+####
+get {{host}}/api/alumnos/is723359@iteso.mx
+x-auth: {{token}}
+
+
+//El usuario puede editar su información personal
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Miguel",
+    "apellido":"González",
+    "password":"ManTequilla"
+}
+
+//Los campos deben de contener información para poder actualizarse
+###
+put {{host}}/api/alumnos
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"",
+    "apellido":"",
+    "password":""
+}
+
+
+
+//El usuario revisa sus materias cursadas, disponibles y bloqueadas
+###
+GET {{host}}/api/materias
+x-auth: {{token}}
+
+//El usuario puede ver las clases de una materia
+###
+GET {{host}}/api/clases/Programación Orientada a Objetos
+
+
+
+//El usuario puede crear un calendario
+###
+//Muestra los errores posibles al crear un calendario
+POST {{host}}/api/calendarios
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Mi primer calendario",
+    "alumno":"is723359@iteso.mx",
+    "clases":[
+        "608efa80516bdb47e02011e7",
+        "608efb71516bdb47e02011ed",
+        "608f01ca7c44e74b787defa5",
+        "AWAWAW"
+    ]
+}
+
+//Con este el usuario si registra un calendario
+###
+POST {{host}}/api/calendarios
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Mi primer calendario",
+    "alumno":"is723359@iteso.mx",
+    "clases":[
+        "608efa80516bdb47e02011e7",
+        "608efb83516bdb47e02011f0"
+    ]
+}
+
+//El usuario puede ver sus calendario
+###
+GET {{host}}/api/calendarios
+x-auth: {{token}}
+
+###
+//                                                  RECUERDA CAMBIAR EL ID DEL CALENDARIO DURANTE EL VDEO
+@calendario = 608f319b1604993e142e3b0e
+//El usuario puede ver el detalle de su calendario
+###
+GET {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token}}
+
+###
+@token2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYxOTgxOTY1M30.yxhBoKH_lX6I8sRPbmdD5SX9Udnx5LV7be3uMKKOnvc
+
+
+//tambien sirve para compartir con otro usuario
+###
+GET {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token2}}
+
+
+//El usuario dueño puede editar su calendario
+###
+PUT {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token}}
+Content-Type:  application/json
+
+{
+    "nombre":"Mi primer edici+on",
+    "clases":[
+        "608efa80516bdb47e02011e7",
+        "608efb83516bdb47e02011f0",
+        "608f243662b91e4b3c96da8c"
+    ]
+    
+}
+
+//Un usuario no dueño no puede editar un calendario no propio
+###
+PUT {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token2}}
+Content-Type:  application/json
+
+{
+    "nombre":"MI PRIMERA EDICIÓN NO PROPIA JAUJAUJAUAS",
+    "clases":[
+        "608efa80516bdb47e02011e7",
+        "608efb83516bdb47e02011f0",
+        "608f243662b91e4b3c96da8c"
+    ]
+    
+}
+
+//Un usuario no dueño no puede borrar un calendario no propio
+###
+DELETE {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token2}}
+
+
+###
+DELETE {{host}}/api/calendarios/{{calendario}}
+x-auth: {{token}}
+
+
+//ADMIN------------------------------------
+###
+post {{host}}/api/login
+Content-Type:  application/json
+
+{
+    "correo":"admin@admin.admin",
+    "password":"Qwe123"
+}
+
+###
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJhZG1pbkBhZG1pbi5hZG1pbiIsImlhdCI6MTYxOTg4NzMwNX0.VnaUReXa5GALmwfbatJ6weY_jii9pwLSD1ifT_BYnZs
+
+###
+
+
+###
+post {{host}}/api/admin/materias
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "nombre":"Programación con Memoria",
+    "descripcion":"Este curso pretende que los alumnos tomen conciencia, durante su trabajo de programación, que la memoria de una computadora tiene límites y sigue una organización. Manejar adecuadamente la memoria disponible, en lugar de abusar de ella, es uno de los ingredientes para diseñar estructuras de datos dinámicas y algoritmos eficientes en tiempo y espacio. Aprenderás a implementar aplicaciones de software en lenguaje C, que hagan uso eficiente de la memoria, para manipular conjuntos de datos secuenciales de tamaño dinámico, generados por el programa, obtenidos de uno o más archivos y/o que definan una política específica de acceso.",
+    "creditos":8
+}
+
+####
+post {{host}}/api/admin/profesores
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "nombre":"Che",
+    "apellido":"Vito"
+}
+
+####
+post {{host}}/api/admin/profesores
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "nombre":"",
+    "apellido":""
+}
+###
+get {{host}}/api/admin/profesores
+x-auth: {{adminToken}}
+
+
+###
+
+get {{host}}/api/admin/profesores/608de13900296c1d2c158123
+x-auth: {{adminToken}}
+
+###
+
+get {{host}}/api/admin/profesores/0
+x-auth: {{adminToken}}
+
+
+###
+post {{host}}/api/admin/carreras
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "nombre":"Ingeniería en Sistemas Computacionales",
+    "descripcion":"En Ingeniería en Sistemas Computacionales aprendes a diseñar soluciones innovadoras con el apoyo de la tecnología. Desarrollas habilidades para implementar, operar y administrar proyectos de sistemas de información y plataformas tecnológicas. Adquieres conocimientos en dos líneas fundamentales: Ciencias Computacionales e Ingeniería de Software, las cuales a su vez incluyen el diseño y desarrollo de bases de datos, interfaces hombre-máquina, componentes de software, arquitectura de redes e interfaces con hardware.",
+    "seriacion":[
+        {
+            "materiaReq":"",
+            "materiaSer":"Algoritmos y Programación"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Cálculo Diferencial"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Comunicación Oral y Escrita"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Introducción a Redes de Computadoras"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Manejo de Información y Datos Numéricos"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Algebra Lineal"
+        },
+        {
+            "materiaReq":"Cálculo Diferencial",
+            "materiaSer":"Cálculo Integral"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Contexto Historico Social"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Fundamentos de Ciencias Computacionales"
+        },
+        {
+            "materiaReq":"Algoritmos y Programación",
+            "materiaSer":"Programación Estructurada"
+        },
+        {
+            "materiaReq":"Introducción a Redes de Computadoras",
+            "materiaSer":"Interconexión de Redes"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Analisis y Diseño de Procesos"
+        },
+        {
+            "materiaReq":"Calculo Integral",
+            "materiaSer":"Calculo Multivariable"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Conocimiento y Cultura"
+        },
+        {
+            "materiaReq":"",
+            "materiaSer":"Ética, Identidad y Profesión"
+        },
+        {
+            "materiaReq":"Calculo Integral",
+            "materiaSer":"Mecánica Analítica"
+        },
+        {
+            "materiaReq":"Fundamentos de Cienciass Computacionales",
+            "materiaSer":"Programación con Memoria Dinámica"
+        },
+        {
+            "materiaReq":"Programación Estructurada",
+            "materiaSer":"Programación con Memoria Dinámica"
+        }
+    ]
+}
+
+
+
+###
+post {{host}}/api/admin/clases
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "profesor":"608de13900296c1d2c158123",
+    "materia":"Comunicación Oral y Escrita",
+    "sesion":[
+        {
+            "dia":"JUE",
+            "horaInicio":18,
+            "horaFinal":20
+        },
+        {
+            "dia":"VIE",
+            "horaInicio":18,
+            "horaFinal":20
+        }
+    ]
+}
+
+
+
+###
+post {{host}}/api/admin/clases
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "profesor":"608dea3d939f652c3c872530",
+    "materia":"Calculo Multivariable",
+    "sesion":[
+        {
+            "dia":"MAR",
+            "horaInicio":16,
+            "horaFinal":18
+        },
+        {
+            "dia":"JUE",
+            "horaInicio":16,
+            "horaFinal":18
+        }
+        ,
+        {
+            "dia":"JUE",
+            "horaInicio":16,
+            "horaFinal":18
+        }
+    ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -25,12 +25,10 @@ let alumnoSchema = mongoose.Schema({
         required:true
     },
     carrera:{ 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'carrera' 
+        type:String
     },
     materia:[{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'materia' 
+        type:String
     }]
 });
 
@@ -46,11 +44,32 @@ alumnoSchema.statics.saveAlumno = async function(user){
     return doc;
 }
 
-alumnoSchema.statics.getAlumno = async correo => {
-    let doc = await Alumno.findOne({correo})
-    //let doc = await Alumno.findById(id)
+alumnoSchema.statics.getAlumnobyEmail =  async (correo) => {
+   let doc = await Alumno.findOne({correo:correo},{_id:0, nombre:1, apellido:1, correo:1, matricula:1, password:1,carrera:1,materia:1})
+   return doc;
+}
+//filtro: {nombre:juan,apellido:tlaquepaque}
+alumnoSchema.statics.getAlumno = async (filtro,atributos) => {
+    atributos = atributos || {};
+    let doc = await Alumno.findOne(filtro,atributos)
     return doc;
 }
+
+alumnoSchema.statics.getAlumnoById = async(id) =>{
+    let doc = await Alumno.findById(id);
+    return doc;
+}
+
+
+alumnoSchema.statics.updateAlumno = async(filtro,update)=>{
+    let doc = await Alumno.findOneAndUpdate(filtro,update,{new: true})
+    return doc;
+}
+
+
+
+
+
 
 let Alumno = mongoose.model('alumno', alumnoSchema);
 
