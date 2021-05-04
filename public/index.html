@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Simulador de Horarios</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+	</head>
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand navbar-dark bg-primary">
+			<ul class="nav navbar-nav mr-auto">
+				<a class="navbar-brand" href="#">Simulador de horarios</a>
+			</ul>
+			<ul class="nav navbar-nav mx-auto"></ul>
+			<ul class="nav navbar-nav mr-auto">
+				<li class="nav-item">
+					<small id="emailHelpId" class="form-text text-white m-0"
+						>Correo electrónico</small
+					>
+					<input
+						type="email"
+						class="form-control mb-2"
+						name="email"
+						id="loginEmail"
+						aria-describedby="emailHelpId"
+						placeholder=""
+					/>
+				</li>
+				<li class="nav-item">
+					<small id="passwordHelpId" class="form-text text-white ml-1 m-0"
+						>Contraseña</small
+					>
+					<input
+						type="password"
+						class="form-control ml-1 mb-2"
+						name="password"
+						id="loginPassword"
+						placeholder=""
+					/>
+				</li>
+				<li class="nav-item">
+					<a href="">
+						<button
+							type="button"
+							class="btn btn-primary mt-3 ml-2"
+							id="loginSubmit"
+						>
+							Iniciar sesión
+						</button>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<div id="loginAlerts"></div>
+
+		<!-- Contenido -->
+		<div class="row align-items-center mr-2">
+			<div class="col m-5 text-center">
+				<h3>Planifica tus horarios de manera sencilla</h3>
+				<!-- <img src="" alt="imgIndex"> -->
+				<h4>img</h4>
+			</div>
+
+			<div class="col-4 m-5">
+				<h1 class="mb-3">Registrarte</h1>
+				<form action="">
+					<div class="row mb-3">
+						<div class="col">
+							<input
+								type="text"
+								name="name"
+								id="Nombre"
+								class="form-control"
+								placeholder="Nombre"
+								required
+							/>
+						</div>
+						<div class="col">
+							<input
+								type="text"
+								name="lastname"
+								id="Apellidos"
+								class="form-control"
+								placeholder="Apellidos"
+								required
+							/>
+						</div>
+					</div>
+
+					<input
+						type="email"
+						name="mail"
+						id="Email"
+						class="form-control mb-3"
+						placeholder="Correo electrónico"
+						required
+					/>
+					<input
+						type="password"
+						name="pass1"
+						id="Password1"
+						class="form-control mb-3"
+						placeholder="Contraseña"
+						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}"
+						required
+					/>
+					<input
+						type="password"
+						name="pass2"
+						id="Password2"
+						class="form-control mb-3"
+						placeholder="Confirmar contraseña"
+						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}"
+						required
+					/>
+					<label for="FechaNacimiento">Fecha de nacimiento</label>
+					<input
+						type="date"
+						name="date"
+						id="FechaNacimiento"
+						class="form-control mb-3"
+						max="2021-02-18"
+						required
+					/>
+
+					<div class="mb-2">
+						<input
+							class="ml-3"
+							type="radio"
+							id="mujer"
+							name="sexo"
+							value="Mujer"
+							required
+						/>
+						<label for="male">Mujer</label>
+						<input
+							class="ml-3"
+							type="radio"
+							id="hombre"
+							name="sexo"
+							value="Hombre"
+							required
+						/>
+						<label for="female">Hombre</label>
+					</div>
+
+					<input
+						type="url"
+						name="profileimage"
+						id="ImagenPerfil"
+						class="form-control mb-3"
+						placeholder="Url de imagen de perfil"
+						required
+					/>
+
+					<button type="submit" class="btn btn-primary float-right">
+						Registrarse
+					</button>
+				</form>
+			</div>
+		</div>
+
+		<!-- Optional JavaScript -->
+		<script src="index.js"></script>
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
