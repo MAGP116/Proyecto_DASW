@@ -19,7 +19,7 @@ document.getElementById("loginSubmit").addEventListener("click", async (ev) => {
 		console.log(userForLogin);
 
 		// Request server to login
-		let response = await fetch(dir + "/api/login", {
+		let response = await fetch(dir + "/api/login/", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -27,13 +27,13 @@ document.getElementById("loginSubmit").addEventListener("click", async (ev) => {
 			body: JSON.stringify(userForLogin),
 		});
 
-		if (response.status(200)) {
+		if (response.status == 200) {
 			let data = await response.json();
 
 			// Guardar en sessionStorage el token recibido y el email de usuario
 			sessionStorage.token = data.token;
 			sessionStorage.email = email;
-		} else if (response.status(404)) {
+		} else if (response.status == 404) {
 			document.getElementById(
 				"loginAlerts"
 			).innerHTML = `<div class="alert alert-danger" role="alert">

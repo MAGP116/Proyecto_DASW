@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Simulador de horarios</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+
+		<style>
+			/* ----- MODAL STYLE ----- */
+
+			.modal.left .modal-dialog {
+			position: fixed;
+			right: 0;
+			top: 62px;
+			margin: auto;
+			width: 345px;
+			height: 469px;
+			-webkit-transform: translate3d(0%, 0, 0);
+			-ms-transform: translate3d(0%, 0, 0);
+			-o-transform: translate3d(0%, 0, 0);
+			transform: translate3d(0%, 0, 0);
+		}
+
+		.modal.left .modal-content {
+			height: 100%;
+			overflow-y: auto;
+		}
+
+		.modal.right .modal-body {
+			padding: 15px 15px 80px;
+		}
+
+		.modal.right.fade .modal-dialog {
+			left: -320px;
+			-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+			-moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+			-o-transition: opacity 0.3s linear, left 0.3s ease-out;
+			transition: opacity 0.3s linear, left 0.3s ease-out;
+		}
+
+		.modal.right.fade.show .modal-dialog {
+			right: 0;
+		}
+
+		.modal-content {
+			border-radius: 0;
+			border: none;
+		}
+
+		.modal-header {
+			border-bottom-color: #eeeeee;
+			background-color: #fafafa;
+		}
+
+		#userModal .modal-dialog {
+			position: fixed;
+			right: 0;
+			top: 62px;
+			margin: auto;
+			width: 345px;
+			height: 365px;
+			-webkit-transform: translate3d(0%, 0, 0);
+			-ms-transform: translate3d(0%, 0, 0);
+			-o-transform: translate3d(0%, 0, 0);
+			transform: translate3d(0%, 0, 0);
+		}
+		</style>
+
+		
+	</head>
+	<body>
+		<!--Navbar-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<a class="navbar-brand" href="#">Simulador de horarios</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarText"
+				aria-controls="navbarText"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse p-0" id="navbarText">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#"
+							>Página principal <span class="sr-only">(current)</span></a
+						>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="detalleUsuario.html">Mis materias</a>
+					</li>
+				</ul>
+				<span class="navbar-text p-0">
+					<a type="button" id="userbtn" class="btn btn-primary" data-toggle="modal" data-target="l"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+				</span>
+			</div>
+		</nav>
+
+		<!-- Ventana -->
+		<div class="row m-2 mt-4">
+			<!-- Sidebar -->
+			<div class="col-2">
+				<a name="" id="" class="btn btn-primary" href="./crearCalendario.html" role="button"
+					><i class="fa fa-plus" aria-hidden="true"></i>&nbsp Nuevo
+					calendario</a
+				>
+			</div>
+			<!-- Contenido principal -->
+			<div class="col">
+				<!-- Filtros -->
+				Filtros: &nbsp
+				<div class="btn-group">
+					<a name="" id="" class="btn btn-primary" href="#" role="button"
+						>Nombre</a
+					>
+					<a name="" id="" class="btn btn-primary" href="#" role="button"
+						>Créditos</a
+					>
+					<a name="" id="" class="btn btn-primary" href="#" role="button"
+						>Días de clase</a
+					>
+				</div>
+				<!-- Calendarios -->
+				<div class="album py-5 bg-light">
+					<div class="container">
+						<div class="row">
+							<!-- Aquí empiezan las tarjetas de cada calendario -->
+							<div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="card mb-4 box-shadow">
+									<img
+										class="card-img-top"
+										data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+										alt="Thumbnail [100%x225]"
+										style="height: 225px; width: 100%; display: block"
+										src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22328%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20328%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178e6fd79bf%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178e6fd79bf%22%3E%3Crect%20width%3D%22328%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22110.0859375%22%20y%3D%22119.7%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+										data-holder-rendered="true"
+									/>
+									<div class="card-body">
+										<p class="card-text">Título de calendario</p>
+										<div
+											class="d-flex justify-content-between align-items-center"
+										>
+											<div class="btn-group">
+												<button
+													type="button"
+													
+													class="btn btn-sm btn-outline-secondary"
+												>
+													<a href="./detalleCalendario.html">ver</a>
+												</button>
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+												<a href="./crearCalendario.html">editar</a>
+												</button>
+											</div>
+											<small class="text-muted"># materias • # créditos</small>
+										</div>
+									</div>
+								</div>
+							</div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="card mb-4 box-shadow">
+									<img
+										class="card-img-top"
+										data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+										alt="Thumbnail [100%x225]"
+										style="height: 225px; width: 100%; display: block"
+										src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22328%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20328%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178e6fd79bf%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178e6fd79bf%22%3E%3Crect%20width%3D%22328%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22110.0859375%22%20y%3D%22119.7%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+										data-holder-rendered="true"
+									/>
+									<div class="card-body">
+										<p class="card-text">Título de calendario</p>
+										<div
+											class="d-flex justify-content-between align-items-center"
+										>
+											<div class="btn-group">
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Ver
+												</button>
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Editar
+												</button>
+											</div>
+											<small class="text-muted"># materias • # créditos</small>
+										</div>
+									</div>
+								</div>
+							</div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="card mb-4 box-shadow">
+									<img
+										class="card-img-top"
+										data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+										alt="Thumbnail [100%x225]"
+										style="height: 225px; width: 100%; display: block"
+										src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22328%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20328%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178e6fd79bf%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178e6fd79bf%22%3E%3Crect%20width%3D%22328%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22110.0859375%22%20y%3D%22119.7%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+										data-holder-rendered="true"
+									/>
+									<div class="card-body">
+										<p class="card-text">Título de calendario</p>
+										<div
+											class="d-flex justify-content-between align-items-center"
+										>
+											<div class="btn-group">
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Ver
+												</button>
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Editar
+												</button>
+											</div>
+											<small class="text-muted"># materias • # créditos</small>
+										</div>
+									</div>
+								</div>
+							</div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+								<div class="card mb-4 box-shadow">
+									<img
+										class="card-img-top"
+										data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+										alt="Thumbnail [100%x225]"
+										style="height: 225px; width: 100%; display: block"
+										src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22328%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20328%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178e6fd79bf%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178e6fd79bf%22%3E%3Crect%20width%3D%22328%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22110.0859375%22%20y%3D%22119.7%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+										data-holder-rendered="true"
+									/>
+									<div class="card-body">
+										<p class="card-text">Título de calendario</p>
+										<div
+											class="d-flex justify-content-between align-items-center"
+										>
+											<div class="btn-group">
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Ver
+												</button>
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Editar
+												</button>
+											</div>
+											<small class="text-muted"># materias • # créditos</small>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modales del usuario -->
+		<div id="modalesUsuario">
+
+		</div>
+		
+		
+
+		
+
+		<!-- Optional JavaScript -->
+		<script src="home.js"></script>
+
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+	</body>
+</html>
