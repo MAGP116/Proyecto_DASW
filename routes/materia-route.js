@@ -1,9 +1,7 @@
 const router = require('express').Router();
 const  Materia =  require('../models/Materia.js')
-const  Carrera =  require('../models/Carrera.js')
 const Val = require("../middlewares/validaciones.js");
 const Alumno = require('../models/Alumno.js');
-const { set } = require('mongoose');
 
 
 router.post('/',Val.validarToken,async (req,res)=>{
@@ -16,21 +14,15 @@ router.get('/',Val.validarToken,Val.obtenerMaterias,async (req,res)=>{
 
 })
 
-router.get('/:carrera',async (req,res)=>{
-
-    let carrera = await Carrera.getCarrera({nombre:req.params.carrera},{_id:0,seriacion:1})
-    if(!carrera){
-        res.status(404).send('No se encontro la carrera');
+router.get('/:materia',async (req,res)=>{
+    let materia = await Materia.getMateria({nombre:req.params.materia},{});
+    if(materia){
+        res.status(200).send(materia);
         return;
     }
-    let materias = new Set();
-    carrera.seriacion.forEach(e => {
-        materias.add(e.materiaSer);
-    });
-    materia = Array.from(materias)
-    //FLATA SORTING CHIDO, DE MOMENTO SOLO SON LAS MATERIAS |                       TODO
-    res.status(200).send(materia);
+    res.status(404).send('Materia no encontrada');
 })
+
 
 router.put('/',Val.validarToken,async(req,res)=>{
     let {materias} = req.body

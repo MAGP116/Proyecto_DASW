@@ -1,9 +1,10 @@
+'use strict'
 function createMateriaMedia(nombre){
     return `
 <div class="card">
-    <div class="card-header" id="headingOne">
+    <div class="card-header">
         <h5 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMicros"aria-expanded="true" aria-controls="collapseMicros">
+            <button class="btn btn-link" type="button">
                 ${nombre}
             </button>
         </h5>
@@ -12,13 +13,18 @@ function createMateriaMedia(nombre){
 `
 }
 
-function createCarrerMedia(nombre){
+function createCareerMedia(nombre){
 return `
 <option>${nombre}</option>
 `
 }
 
+
 //Cargar contenido
+function loadPage() {
+
+    
+}
 
 
 //Actualizá las materias en función de la carrera seleccionada

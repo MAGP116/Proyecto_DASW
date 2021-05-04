@@ -8,9 +8,9 @@ Content-Type: application/json
 
 {
     "nombre":"Miguel Ángel",
-    "apellido":"González Partida",
-    "correo":"is723359@iteso.mx",
-    "matricula":"IS723359",
+    "apellido":"González Partida2",
+    "correo":"is7233592@iteso.mx",
+    "matricula":"IS7233592",
     "password":"Qwe123",
     "confPassword":"Qwe123"
 }
@@ -22,7 +22,7 @@ post {{host}}/api/login
 Content-Type:  application/json
 
 {
-    "correo":"is723359@iteso.mx",
+    "correo":"is7233592@iteso.mx",
     "password":"Qwe123"
 }
 
@@ -31,8 +31,7 @@ Content-Type:  application/json
 
 //Guardar mi Token
 //                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OUBpdGVzby5teCIsImlhdCI6MTYxOTk5Njg3N30.Zjhs7ZLnDs-KgRmEj1n2CfdmDlq0tq_MYnIYKLXpMp8
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OTJAaXRlc28ubXgiLCJpYXQiOjE2MjAxNTE3ODJ9.UftEysOfbQkK4uy7k6XVDPPE4cnRc85mV8fxKmNB5jM
 
 //El usuario revisa las carreras existentes
 ###
@@ -50,8 +49,7 @@ Content-Type:  application/json
 
 //El usuario puede observar las materias ofrecidas por la carrera
 ###
-GET {{host}}/api/materias/Ingeniería en Sistemas Computacionales
-
+GET {{host}}/api/carreras/Ingeniería en Sistemas Computacionales
 
 //El usuario selecciona las materias ya cursadas
 ###
@@ -70,7 +68,7 @@ Content-Type:  application/json
 
 //El usuario puede revisar su información personal
 ####
-get {{host}}/api/alumnos/is723359@iteso.mx
+get {{host}}/api/alumnos/is7233592@iteso.mx
 x-auth: {{token}}
 
 
@@ -104,6 +102,10 @@ Content-Type:  application/json
 ###
 GET {{host}}/api/materias
 x-auth: {{token}}
+
+//El usuario puede revisar el detalle de una materia
+###
+GET {{host}}/api/materias/Programación Orientada a Objetos
 
 //El usuario puede ver las clases de una materia
 ###
@@ -151,7 +153,7 @@ x-auth: {{token}}
 
 ###
 //                                                  RECUERDA CAMBIAR EL ID DEL CALENDARIO DURANTE EL VDEO
-@calendario = 608f319b1604993e142e3b0e
+@calendario = 60918e6fd192024b74736f9c
 //El usuario puede ver el detalle de su calendario
 ###
 GET {{host}}/api/calendarios/{{calendario}}
