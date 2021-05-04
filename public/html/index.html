@@ -37,7 +37,7 @@
 						type="email"
 						class="form-control mb-2"
 						name="email"
-						id="emailInput"
+						id="loginEmail"
 						aria-describedby="emailHelpId"
 						placeholder=""
 					/>
@@ -50,19 +50,24 @@
 						type="password"
 						class="form-control ml-1 mb-2"
 						name="password"
-						id="passwordInput"
+						id="loginPassword"
 						placeholder=""
 					/>
 				</li>
 				<li class="nav-item">
-					<a href="./primer_login.html">
-						<button type="button" class="btn btn-primary mt-3 ml-2">
+					<a href="">
+						<button
+							type="button"
+							class="btn btn-primary mt-3 ml-2"
+							id="loginSubmit"
+						>
 							Iniciar sesión
 						</button>
 					</a>
 				</li>
 			</ul>
 		</nav>
+		<div id="loginAlerts"></div>
 
 		<!-- Contenido -->
 		<div class="row align-items-center mr-2">
@@ -172,6 +177,7 @@
 		</div>
 
 		<!-- Optional JavaScript -->
+		<script src="index.js"></script>
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script
 			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
