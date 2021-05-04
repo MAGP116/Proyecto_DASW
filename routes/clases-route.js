@@ -14,6 +14,16 @@ router.get('/:materia', async (req,res, next)=>{
     res.status(200).send(doc);
     
   })
+
+router.get('/', async (req,res)=>{
+  let {claseId} = req.body;
+  let doc = await Clase.getClases({_id:claseId},{_id:0,profesor:1,materia:1,sesion:1})
+  if(!doc){
+    res.status(404).send('No se encontró la clase');
+    return;    
+}
+res.status(200).send(doc);
+})
   
 
 

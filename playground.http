@@ -9,8 +9,8 @@ Content-Type: application/json
 {
     "nombre":"Miguel Ángel",
     "apellido":"González Partida2",
-    "correo":"is7233592@iteso.mx",
-    "matricula":"IS7233592",
+    "correo":"is723359_3@iteso.mx",
+    "matricula":"IS723359_3",
     "password":"Qwe123",
     "confPassword":"Qwe123"
 }
@@ -111,7 +111,13 @@ GET {{host}}/api/materias/Programación Orientada a Objetos
 ###
 GET {{host}}/api/clases/Programación Orientada a Objetos
 
+###
+GET {{host}}/api/clases
+Content-Type:  application/json
 
+{
+    "claseId":"608debf6ea97b42d3c2712b2"
+}
 
 //El usuario puede crear un calendario
 ###
@@ -305,7 +311,7 @@ Content-Type:  application/json
         },
         {
             "materiaReq":"",
-            "materiaSer":"Algebra Lineal"
+            "materiaSer":"Álgebra Lineal"
         },
         {
             "materiaReq":"Cálculo Diferencial",
@@ -329,11 +335,11 @@ Content-Type:  application/json
         },
         {
             "materiaReq":"",
-            "materiaSer":"Analisis y Diseño de Procesos"
+            "materiaSer":"Análisis y Diseño de Procesos"
         },
         {
-            "materiaReq":"Calculo Integral",
-            "materiaSer":"Calculo Multivariable"
+            "materiaReq":"Cálculo Integral",
+            "materiaSer":"Cálculo Multivariable"
         },
         {
             "materiaReq":"",
@@ -344,7 +350,7 @@ Content-Type:  application/json
             "materiaSer":"Ética, Identidad y Profesión"
         },
         {
-            "materiaReq":"Calculo Integral",
+            "materiaReq":"Cálculo Integral",
             "materiaSer":"Mecánica Analítica"
         },
         {

@@ -25,6 +25,11 @@ router.get('/:materia',async (req,res)=>{
 
 
 router.put('/',Val.validarToken,async(req,res)=>{
+    let alumno = await Alumno.getAlumno({correo:req.correo});
+    if(!alumno || alumno && !alumno.carrera){
+        res.status(400).send('Materias no actualizadas');
+        return;
+    }
     let {materias} = req.body
     let matServer = await Materia.getMaterias({},{_id:0,nombre:1});
     let s = new Set(matServer.map(e=>e.nombre));
