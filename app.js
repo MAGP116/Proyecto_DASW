@@ -28,5 +28,5 @@ app.use("/api/clases", clasesRouter);
 app.use("/api/admin", adminRouter);
 
 //relocacizaciones public
-app.use(express.static(__dirname + "/public/"));
+app.use(express.static(__dirname + "/public"));
 app.use("/inicio", express.static(__dirname + "/public/home.html")); //Historico :3
