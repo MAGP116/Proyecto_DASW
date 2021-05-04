@@ -23,4 +23,5 @@ router.get('/:carrera', async (req,res)=>{
 })
 
 
+
 module.exports = router;

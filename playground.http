@@ -103,7 +103,7 @@ Content-Type:  application/json
 GET {{host}}/api/materias
 x-auth: {{token}}
 
-//El usuario puede revisar el detalle de una matería.
+//El usuario puede revisar el detalle de una materia
 ###
 GET {{host}}/api/materias/Programación Orientada a Objetos
 

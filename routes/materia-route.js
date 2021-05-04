@@ -23,6 +23,7 @@ router.get('/:materia',async (req,res)=>{
     res.status(404).send('Materia no encontrada');
 })
 
+
 router.put('/',Val.validarToken,async(req,res)=>{
     let {materias} = req.body
     let matServer = await Materia.getMaterias({},{_id:0,nombre:1});
