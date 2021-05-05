@@ -35,7 +35,7 @@ async function modalUserInfo() {
             <input id="corr" class="form-control mt-3" type="email" name="correo" value="${user.correo}" disabled
             required />
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
+              <button id="logOffbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
               <button id="btnEditUserInfo" type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#editUserModal">Editar</button>
             </div>
           </form>
@@ -45,7 +45,7 @@ async function modalUserInfo() {
   </div>
   </div>`;
 	document.getElementById('modalesUsuario').innerHTML = modalHTML;
-  document.getElementById('LogOff').addEventListener('click', logOff);
+  document.getElementById('logOffbtn').addEventListener('click', logOff);
 	document.getElementById('btnEditUserInfo').addEventListener('click', modalEditUserInfo);
 	await $("#userModal").modal("toggle");
 }
@@ -53,7 +53,7 @@ async function modalUserInfo() {
 function logOff(){
   sessionStorage.removeItem('token');
   sessionStorage.removeItem('email');
-  window.location.href = "./index.html";
+  window.location.href = `${dir}`;
 }
 
 async function modalEditUserInfo() {
