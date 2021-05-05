@@ -70,8 +70,6 @@ Content-Type:  application/json
         "Manejo de Información y Datos Numéricos",
         "Introducción a Redes de Computadoras",
         "Interconexión de Redes",
-        "Comunicación Oral y Escrita",
-        "Cálculo Diferencial",
         "Cálculo Integral",
         "Mecánica Analítica",
         "Cálculo Multivariable",
@@ -84,7 +82,7 @@ Content-Type:  application/json
 
 //El usuario puede revisar su información personal
 ####
-get {{host}}/api/alumnos/is7233592@iteso.mx
+get {{host}}/api/alumnos/is723359_3@iteso.mx
 x-auth: {{token}}
 
 
