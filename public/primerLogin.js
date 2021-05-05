@@ -1,8 +1,6 @@
 'use strict'
 
 let direction = 'http://localhost:3000'
-sessionStorage.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTg0Mjg0fQ.-mrozHzoPAurSeY1Zt7Ma2DebVF1moI6Dhri1qEyveg"
-sessionStorage.email ="is723359_3@iteso.mx"
 //IDs document
 const CS = document.getElementById('carreraSelect');
 const CI = document.getElementById('CarreraInfo');
@@ -109,6 +107,7 @@ BS.onclick = async ev =>{
         return;
     }
     if(!ans.list)removeAlert();
+    window.location.href = `${direction}/inicio`;
 
 
 }
