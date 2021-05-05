@@ -174,7 +174,9 @@ async function obtenerMaterias(req,res,next){
     let setCur = new Set(cursadas);
     let matCarrera = await Carrera.getCarrera({nombre:carrera},{_id:0,seriacion:1});
     matCarrera = matCarrera.seriacion;
-    let setCarrera  = new Set(matCarrera.map(m=>m.materiaSer));
+	let setCarrera  = new Set(matCarrera.map(m=>m.materiaSer));
+	//Next line sorts the array in topologic order to make it look nicer
+	setCarrera = new Set(topologicSort(Array.from(setCarrera),matCarrera))
     let setBloquedas = new Set();
     matCarrera.forEach(m=>{
         if(!(setCur.has(m.materiaReq) || (m.materiaReq == ''))){

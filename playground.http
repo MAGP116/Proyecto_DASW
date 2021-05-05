@@ -97,11 +97,10 @@ Content-Type:  application/json
 
 //El usuario puede revisar su información personal
 ####
-<<<<<<< HEAD
 get {{host}}/api/alumnos/is723359_3@iteso.mx
-=======
+x-auth: {{token}}
+###
 get {{host}}/api/alumnos/is723359@iteso.mx
->>>>>>> 00e9436ee18ce3281d54bb7dd5b36f5a5f46fed1
 x-auth: {{token}}
 
 
