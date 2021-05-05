@@ -275,6 +275,53 @@ async function ajustarEdicionCalendario(req,res,next){
 	next();
 }
 
+//Node is a list of materias, edges is a list of dependencies
+function topologicSort(vertex,edgesList){
+	//El set contiene todas las materias
+	let set = new Set(vertex);
+	let starts = [];
+	let vertices = new Map();
+	edgesList.forEach(e =>{
+		//Si la materia no tiene requerimeintos es un inicio
+		if(e.materiaReq == ''){
+			starts.push(e.materiaSer);
+		}
+		else{
+			//Si la materia es requerida para alguna entonces se crea su objeto
+			let node = vertices.get(e.materiaReq);
+			if(!node){
+				node = {name:e.materiaReq,color:true,edges:[]}
+				set.delete(e.materiaReq);
+			}
+			node.edges.push(e.materiaSer);
+			vertices.set(e.materiaReq,node);
+		}
+	})
+	//Todas las materias que no tienen dependencias o son las más dependientes son creadas aqui
+	for(let item of set)vertices.set(item,{name:item,color:true,edges:[]})
+	let listSorted = []
+	//Funcion recursiva del rdenamiento, se declara aqui para aprovechar las variables de las fucion principal
+	let topologicSortRecursive = (node)=>{
+		node.color=false;
+		let n;
+		node.edges.forEach(w=>{
+			n = vertices.get(w)
+			if(n.color== true)topologicSortRecursive(n);
+		})
+		listSorted.unshift(node.name);
+	}
+
+	//Se realiza el ordenamieto por cada nodo inicial
+	starts.forEach(s =>{
+		let node = vertices.get(s);
+		topologicSortRecursive(node)
+	})
+	return listSorted;
+
+	
+}
+
+
 module.exports = {
 	validarToken,
 	sign,
@@ -287,5 +334,6 @@ module.exports = {
 	convertirProfesores,
 	obtenerMaterias,
 	validarCamposCalendario,
-	ajustarEdicionCalendario
+	ajustarEdicionCalendario,
+	topologicSort
 };

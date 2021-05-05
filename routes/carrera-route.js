@@ -1,5 +1,5 @@
 const router = require('express').Router()
-
+const Val = require("../middlewares/validaciones.js");
 const Carrera = require('../models/Carrera')
 
 router.get('/', async (req,res)=>{
@@ -17,9 +17,7 @@ router.get('/:carrera', async (req,res)=>{
     carrera.seriacion.forEach(e => {
         materias.add(e.materiaSer);
     });
-    materia = Array.from(materias)
-    //FLATA SORTING CHIDO, DE MOMENTO SOLO SON LAS MATERIAS |                       TODO
-    res.status(200).send(materia);
+    res.status(200).send(Val.topologicSort(materias,carrera.seriacion));
 })
 
 

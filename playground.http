@@ -44,8 +44,12 @@ Content-Type:  application/json
 
 //Guardar mi Token
 //                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
+<<<<<<< HEAD
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTgwMzI3fQ.eky2N_KkILJRAMDKl-3qjejcLZJIGBTMNu4kMkljZ7g
+=======
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYyMDE3NzM5OX0.E3BL4vIq5av_RpsMa93-svkbv6qGxV50e6-taP2dtms
 
+>>>>>>> 00e9436ee18ce3281d54bb7dd5b36f5a5f46fed1
 
 
 
@@ -75,16 +79,32 @@ Content-Type:  application/json
 
 {
     "materias":[
+        "Ética, Identidad y Profesión",
+        "Conocimiento y Cultura",
+        "Análisis y Diseño de Procesos",
+        "Fundamentos de Ciencias Computacionales",
+        "Contexto Historico Social",
+        "Álgebra Lineal",
+        "Manejo de Información y Datos Numéricos",
+        "Introducción a Redes de Computadoras",
+        "Interconexión de Redes",
+        "Cálculo Integral",
+        "Mecánica Analítica",
+        "Cálculo Multivariable",
         "Algoritmos y Programación",
-        "Cálculo Diferencial",
-        "Introducción a Redes de Computadoras"
-    ]
+        "Programación Estructurada",
+        "Programación con Memoria Dinámica"
+        ]
 }
 
 
 //El usuario puede revisar su información personal
 ####
+<<<<<<< HEAD
+get {{host}}/api/alumnos/is723359_3@iteso.mx
+=======
 get {{host}}/api/alumnos/is723359@iteso.mx
+>>>>>>> 00e9436ee18ce3281d54bb7dd5b36f5a5f46fed1
 x-auth: {{token}}
 
 
@@ -366,7 +386,7 @@ Content-Type:  application/json
             "materiaSer":"Mecánica Analítica"
         },
         {
-            "materiaReq":"Fundamentos de Cienciass Computacionales",
+            "materiaReq":"Fundamentos de Ciencias Computacionales",
             "materiaSer":"Programación con Memoria Dinámica"
         },
         {
