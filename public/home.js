@@ -1,21 +1,76 @@
-let dir = 'http://localhost:3000'
+let dir = "http://localhost:3000";
+
+// Cargar calendarios del usuario
+window.onload = async function () {
+	// Recibir todos los calendarios del usuario
+	let response = await fetch(dir + "/api/calendarios", {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let calendarios = await response.json();
+	console.log(response);
+	console.log(calendarios);
+
+	// Pedir las materias de cada calendario para contar cuántas tiene
+	let calendarInfo = [];
+	for (const calendar of calendarios) {
+		console.log(calendar);
+
+		calendarInfo.push(
+			fetch(dir + "/api/calendarios/" + calendar._id, {
+				method: "GET",
+				headers: {
+					"x-auth": sessionStorage.token,
+				},
+			})
+		);
+	}
+
+	for await (let calendar of calendarInfo) {
+		let details = await calendar.json();
+		let materias = details.clase.length;
+
+		document.getElementById("albumCalendarios").innerHTML += `
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="card mb-4 box-shadow">
+				<img class="card-img-top"
+					data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+					alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block"
+					src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22328%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20328%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_178e6fd79bf%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_178e6fd79bf%22%3E%3Crect%20width%3D%22328%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22110.0859375%22%20y%3D%22119.7%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+					data-holder-rendered="true" />
+				<div class="card-body">
+					<p class="card-text">${details.nombre}</p>
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="btn-group">
+							<button type="button" class="btn btn-sm btn-outline-secondary">
+								<a href="./detalleCalendario.html?calendarId=${details._id}">ver</a>
+							</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary">
+								<a href="./crearCalendario.html?calendarId=${details._id}">editar</a>
+							</button>
+						</div>
+						<small class="text-muted">${materias} materias</small>
+					</div>
+				</div>
+			</div>
+		</div>`;
+	}
+};
 
 //----------------------navegation Bar--------------------------------------
-document.getElementById('userbtn').addEventListener('click', modalUserInfo);
+document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 
-async function modalUserInfo(){
-  let response = await fetch(
-   `${dir}/api/alumnos/` + sessionStorage.email,
-   {
-     method: "GET",
-     headers: {
-       "x-auth": sessionStorage.token,
-     },
-   }
-  );
-  let user = await response.json();
-  let modalHTML = 
-  `<div class="modal left fade user" id="userModal" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+async function modalUserInfo() {
+	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let user = await response.json();
+	let modalHTML = `<div class="modal left fade user" id="userModal" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="padding-bottom: 0;">
@@ -48,24 +103,22 @@ async function modalUserInfo(){
     </div>
   </div>
   </div>`;
-  document.getElementById("modalesUsuario").innerHTML = modalHTML
-  document.getElementById('btnEditUserInfo').addEventListener('click', modalEditUserInfo);
-  await $("#userModal").modal("toggle");
+	document.getElementById("modalesUsuario").innerHTML = modalHTML;
+	document
+		.getElementById("btnEditUserInfo")
+		.addEventListener("click", modalEditUserInfo);
+	await $("#userModal").modal("toggle");
 }
 
-async function modalEditUserInfo(){
-  let response = await fetch(
-   `${dir}/api/alumnos/` + sessionStorage.email,
-   {
-     method: "GET",
-     headers: {
-       "x-auth": sessionStorage.token,
-     },
-   }
-  );
-  let user = await response.json();
-  let modalHTML = 
-  `<div class="modal left fade" id="editUserModal" tabindex="" role="dialog" aria-labelledby="userModalLabel"aria-hidden="true">
+async function modalEditUserInfo() {
+	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let user = await response.json();
+	let modalHTML = `<div class="modal left fade" id="editUserModal" tabindex="" role="dialog" aria-labelledby="userModalLabel"aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="padding-bottom: 0;">
@@ -97,36 +150,34 @@ async function modalEditUserInfo(){
       </div>
     </div>
   </div>`;
-  document.getElementById("modalesUsuario").innerHTML = modalHTML
-  document.getElementById('btnConfirmarEdicion').addEventListener('click', verifyPUT);
-  await $("#editUserModal").modal("toggle");
+	document.getElementById("modalesUsuario").innerHTML = modalHTML;
+	document
+		.getElementById("btnConfirmarEdicion")
+		.addEventListener("click", verifyPUT);
+	await $("#editUserModal").modal("toggle");
 }
 
-async function verifyPUT(){
-  let password = document.getElementById('passUpdate').value;
-  let confirmpassword = document.getElementById('confpassUpdate').value;
-  let nombre = document.getElementById('nomUpdate').value;
-  let apellido = document.getElementById('apeUpdate').value;
-  if(password != confirmpassword || password == '' ){
-    console.log('Contraseñas no válidas');
-    modalUserInfo();
-  }else{
-    let updatedUser = { nombre, apellido, password };
-    let response = await fetch(
-      `${dir}/api/alumnos/`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-          "x-auth": sessionStorage.token,
-        },
-        body: JSON.stringify(updatedUser),
-      }
-     );
-  
-     let user = await response.json();
-     modalUserInfo();
-  }
+async function verifyPUT() {
+	let password = document.getElementById("passUpdate").value;
+	let confirmpassword = document.getElementById("confpassUpdate").value;
+	let nombre = document.getElementById("nomUpdate").value;
+	let apellido = document.getElementById("apeUpdate").value;
+	if (password != confirmpassword || password == "") {
+		console.log("Contraseñas no válidas");
+		modalUserInfo();
+	} else {
+		let updatedUser = { nombre, apellido, password };
+		let response = await fetch(`${dir}/api/alumnos/`, {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json",
+				"x-auth": sessionStorage.token,
+			},
+			body: JSON.stringify(updatedUser),
+		});
+
+		let user = await response.json();
+		modalUserInfo();
+	}
 }
 //----------------------------------------------------------------------------
-
