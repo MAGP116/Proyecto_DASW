@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+		<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+
 		<title>Simulador de Horarios</title>
 		<!-- Required meta tags -->
 		<meta charset="utf-8" />
@@ -79,7 +82,7 @@
 			<div class="col-4 m-5">
 				<div class="row">
 					<h1 class="mb-3">Registrarte</h1>
-					<form action="">
+					<form id="registerForm" action="">
 						<div class="row mb-3">
 							<div class="col">
 								<input
@@ -136,7 +139,7 @@
 							required
 						/>
 						<button
-							type="submit"
+							type="button"
 							id="registerSubmit"
 							class="btn btn-primary float-right"
 						>
@@ -144,8 +147,7 @@
 						</button>
 					</form>
 				</div>
-				<div id="registerAlerts" class="row m-0 mt-3">
-				</div>
+				<div id="registerAlerts" class="row m-0 mt-3"></div>
 			</div>
 		</div>
 
