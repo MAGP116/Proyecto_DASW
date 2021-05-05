@@ -2,6 +2,7 @@ let dir = "http://localhost:3000";
 
 // Cargar calendarios del usuario
 window.onload = async function () {
+	createNavBar();
 	// Recibir todos los calendarios del usuario
 	let response = await fetch(dir + "/api/calendarios", {
 		method: "GET",
@@ -45,10 +46,10 @@ window.onload = async function () {
 					<div class="d-flex justify-content-between align-items-center">
 						<div class="btn-group">
 							<button type="button" class="btn btn-sm btn-outline-secondary">
-								<a href="./detalleCalendario.html?calendarId=${details._id}">ver</a>
+								<a href="${dir}/calendario?calendarId=${details._id}">ver</a>
 							</button>
 							<button type="button" class="btn btn-sm btn-outline-secondary">
-								<a href="./crearCalendario.html?calendarId=${details._id}">editar</a>
+								<a href="./crear?calendarId=${details._id}">editar</a>
 							</button>
 						</div>
 						<small class="text-muted">${materias} materias</small>
@@ -181,3 +182,15 @@ async function verifyPUT() {
 	}
 }
 //----------------------------------------------------------------------------
+
+function createNavBar(){
+	let buttons = [];
+	buttons.push(createNavBarButtonModel('Página Principal',true));
+	buttons.push(createNavBarButtonModel('Mis materias',false,`${dir}/materias`));
+	document.getElementById('navbar').innerHTML = buttons.join('');
+}
+function createNavBarButtonModel(name,current,url){
+	if(current == true)return `<li class="nav-item active"><a class="nav-link" href="#">${name}<span class="sr-only">(current)</span></a></li>`
+	return `<li class="nav-item"><a class="nav-link" href="${url||"#"}">${name}</a></li>`
+}
+

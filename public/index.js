@@ -48,9 +48,9 @@ document.getElementById("loginSubmit").addEventListener("click", async (ev) => {
 			// Redirigir en base a eso
 			// Si no tiene dato de carrera, enviar a primer registro
 			if (!alumno.carrera || alumno.carrera == "") {
-				window.location.href = "./primerLogin.html";
+				window.location.href = `${dir}/primerLogin`;
 			} else {
-				window.location.href = "./home.html";
+				window.location.href = `${dir}/inicio`;
 			}
 		} else if (response.status == 404) {
 			document.getElementById("loginAlerts").innerHTML = `
@@ -134,7 +134,7 @@ document
 					sessionStorage.token = data.token;
 					sessionStorage.email = email;
 
-					window.location.href = "./primerLogin.html";
+					window.location.href = `${dir}/primerLogin`;
 				} else {
 					document.getElementById("registerAlerts").innerHTML = `
 					<div class="alert alert-secondary" role="alert">

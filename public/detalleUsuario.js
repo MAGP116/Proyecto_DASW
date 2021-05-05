@@ -130,6 +130,7 @@ document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 //----------------------------------------------------------------------------
 
 window.onload = async function () {
+  createNavBar()
 	let response = await fetch(`${dir}/api/materias/`, {
 		method: "GET",
 		headers: {
@@ -285,4 +286,16 @@ async function materiaBloqueadaToHTML(materia){
   </div>`;
   t++;
   return materiaHTML
+}
+
+
+function createNavBar(){
+	let buttons = [];
+	buttons.push(createNavBarButtonModel('Página Principal',false,`${dir}/inicio`));
+	buttons.push(createNavBarButtonModel('Mis materias',true));
+	document.getElementById('navbar').innerHTML = buttons.join('');
+}
+function createNavBarButtonModel(name,current,url){
+	if(current == true)return `<li class="nav-item active"><a class="nav-link" href="#">${name}<span class="sr-only">(current)</span></a></li>`
+	return `<li class="nav-item"><a class="nav-link" href="${url||"#"}">${name}</a></li>`
 }

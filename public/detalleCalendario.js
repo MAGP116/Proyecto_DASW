@@ -140,6 +140,7 @@ async function verifyPUT(){
 //----------------------------------------------------------------------------
 
 window.onload =async function () {
+  createNavBar()
 	let response = await fetch(`${dir}/api/calendarios/${calendarId}`, {
 		method: "GET",
 		headers: {
@@ -288,4 +289,17 @@ async function addClaseCalendar(clase){
     element.innerHTML = htmlString;
     element.classList.add("activo");
   }
+}
+
+
+
+function createNavBar(){
+	let buttons = [];
+	buttons.push(createNavBarButtonModel('Página Principal',false,`${dir}/inicio`));
+	buttons.push(createNavBarButtonModel('Mis materias',false,`${dir}/materias`));
+	document.getElementById('navbar').innerHTML = buttons.join('');
+}
+function createNavBarButtonModel(name,current,url){
+	if(current == true)return `<li class="nav-item active"><a class="nav-link" href="#">${name}<span class="sr-only">(current)</span></a></li>`
+	return `<li class="nav-item"><a class="nav-link" href="${url||"#"}">${name}</a></li>`
 }
