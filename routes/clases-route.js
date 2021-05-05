@@ -24,8 +24,9 @@ router.get('/', async (req,res)=>{
   if(!doc){
     res.status(404).send('No se encontró la clase');
     return;    
-}
-res.status(200).send(doc);
+  }
+  doc = await Val.convertirProfesores(doc);
+  res.status(200).send(doc);
 })
   
 

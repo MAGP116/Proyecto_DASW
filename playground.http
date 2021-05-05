@@ -35,8 +35,8 @@ post {{host}}/api/login
 Content-Type:  application/json
 
 {
-    "correo":"is723359_3@iteso.mx",
-    "password":"Qwe123"
+    "correo":"is723359@iteso.mx",
+    "password":"ManTequilla"
 }
 
 ####
@@ -84,7 +84,7 @@ Content-Type:  application/json
 
 //El usuario puede revisar su información personal
 ####
-get {{host}}/api/alumnos/is7233592@iteso.mx
+get {{host}}/api/alumnos/is723359@iteso.mx
 x-auth: {{token}}
 
 
