@@ -1,7 +1,5 @@
 let dir = 'http://localhost:3000'
 
-let t = 0;
-
 //----------------------navegation Bar--------------------------------------
 document.getElementById('userbtn').addEventListener('click', modalUserInfo);
 
@@ -41,7 +39,7 @@ async function modalUserInfo(){
             <input id="corr" class="form-control mt-3" type="email" name="correo" value="${user.correo}" disabled
             required />
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
+              <button id="LogOff" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
               <button id="btnEditUserInfo" type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#editUserModal">Editar</button>
             </div>
           </form>
@@ -51,8 +49,15 @@ async function modalUserInfo(){
   </div>
   </div>`;
   document.getElementById("modalesUsuario").innerHTML = modalHTML
+  document.getElementById('LogOff').addEventListener('click', logOff);
   document.getElementById('btnEditUserInfo').addEventListener('click', modalEditUserInfo);
   await $("#userModal").modal("toggle");
+}
+
+function logOff(){
+  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('email');
+  window.location.href = "./index.html";
 }
 
 async function modalEditUserInfo(){
@@ -151,56 +156,134 @@ window.onload =async function () {
     document.body.removeChild(aux);
     ev.preventDefault()
   })
-  console.log(calendar);
+
+  document.getElementById("buttonBorrar").addEventListener("click",function(ev){
+    toggleEraseModal()
+  });
 }
 
-async function setClases(claseArray){
+function toggleEraseModal(){
+  console.log('IN');
+  document.getElementById("modalBorrar").innerHTML = 
+  `<div class="modal left fade user" id="modalBorrarrr" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-bottom: 0;">
+        <h3>Borrar Calendario</h3>
+      </div>
+      <div class="modal-body">
+        <div class="nav flex-sm-column flex-row">
+          <form id="form_registro">
+            <p>¿Seguro que deseas borrar el calendario?
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button id="btnborrarCalendar" type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#editUserModal">Borrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>`;
+  document.getElementById("btnborrarCalendar").addEventListener("click", confirmBorrar);
+  $("#modalBorrarrr").modal("toggle");
+}
+
+async function confirmBorrar(){
+  let response = await fetch(`${dir}/api/calendarios/${sessionStorage.calendar}`, {
+    method: "DELETE",
+    headers: {
+      "x-auth": sessionStorage.token,
+    },
+  });
+  let state = await response.json();
+  console.log(state);
+}
+
+async function setClases(clasesArray){
   let clasesHTML = [];
   for(let i = 0; i < clasesArray.length; i++){
-    let string = await addClaseCoulma(claseArray[i])
+    let string = await addClaseColumna(clasesArray[i])
     clasesHTML.push(string);
+    addClaseCalendar(clasesArray[i]);
   }
 	clasesHTML = clasesHTML.join("");
 	document.getElementById("accordionClases").innerHTML = clasesHTML;
 }
 
+let t = 0;
+let creditos = 0;
+let numberMaterias = 0;
 async function addClaseColumna(clase){
-  let objectClase = {id: clase}
-  let response = await fetch(`${dir}/api/clases/`, {
+  let response = await fetch(`${dir}/api/clases`, {
+		method: "GET",
+		headers: {
+      "clase": clase
+		}
+	});
+  numberMaterias ++;
+  let claseDetails = await response.json();
+  response = await fetch(`${dir}/api/materias/`+claseDetails[0].materia, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
 		},
-    body: JSON.stringify(objectClase),
 	});
-  let materiaDetails = await response.json();
+	let materiaDetails = await response.json();
+  creditos += materiaDetails.creditos
+  let tableRowString = ``
+  for (let i = 0; i < claseDetails[0].sesion.length;i++){
+    let dia = (claseDetails[0].sesion[i].dia == 'LUN')? 'Lunes':
+              (claseDetails[0].sesion[i].dia == 'MAR')? 'Martes':
+              (claseDetails[0].sesion[i].dia == 'MIE')? 'Miercoles':
+              (claseDetails[0].sesion[i].dia == 'JUE')? 'Jueves':
+              (claseDetails[0].sesion[i].dia == 'VIE')? 'Viernes':
+                                                        'Sábado';
+    tableRowString += 
+    `<tr style="margin-top: 0px;">
+      <td style="margin-bottom: 0px; padding-top:  0px;"><p style="margin-bottom: 0px; padding: 0px;"><b>${dia}</b></p></td>
+      <td style="margin-bottom: 0px; padding: 0px;"><p style="margin-left: 30px; margin-bottom: 0px; padding: 0px;">${claseDetails[0].sesion[i].horaInicio}:00 - ${claseDetails[0].sesion[i].horaFinal}:00</p></td>
+    </tr>`
+  }
   let materiaHTML = 
   `<div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${t}"
-          aria-expanded="true" aria-controls="collapse${t}">
-          <b>${materia}</b>
+      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${t}"
+      aria-expanded="true" aria-controls="collapse${t}">
+          ${claseDetails[0].materia}
         </button>
       </h5>
     </div>
-    <div id="collapse${t}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="collapse${t}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionClases">
       <div class="card-body">
-        <div class="row">
-          <div class="col-7">
-            <b>Descripción</b>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-7">
-          ${materiaDetails.descripcion}
-          </div>
-          <div class="col"><b>Créditos</b>  ${materiaDetails.creditos}</div>
-        </div>
+        <table class="table-borderless">
+          ${tableRowString}
+        </table>
+        <p style="margin-top: 15px;"><b>${claseDetails[0].profesor}</b></p>
       </div>
     </div>
   </div>`;
   t++;
-  return materiaHTML
+  document.getElementById("CreditosP").innerHTML = creditos;
+  document.getElementById("NumMateriasP").innerHTML = numberMaterias;
+  return materiaHTML;
 }
 
+async function addClaseCalendar(clase){
+  let response = await fetch(`${dir}/api/clases`, {
+		method: "GET",
+		headers: {
+      "clase": clase
+		}
+	});
+  let claseDetails = await response.json();
+  for (let i = 0; i < claseDetails[0].sesion.length;i++){
+    let htmlString = `<small>${claseDetails[0].materia}</small>`;
+    let dia = (claseDetails[0].sesion[i].dia)
+    let inicio = (claseDetails[0].sesion[i].horaInicio)
+    let element = document.getElementById(inicio).getElementsByClassName(dia)[0]
+    element.innerHTML = htmlString;
+    element.classList.add("activo");
+  }
+}

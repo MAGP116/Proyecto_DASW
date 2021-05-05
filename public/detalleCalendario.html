@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+
     <title>Detalle Calendario</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -73,6 +76,21 @@
 
         
       }
+
+      #modalBorrarrr .modal-dialog {
+        position: fixed;
+        right: 0;
+        top: 62px;
+        margin: auto;
+        width: 345px;
+        height: 200px;
+        -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
+
+        
+      }
       /**/
       .card-body{
         padding: 0%;
@@ -97,15 +115,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<a class="navbar-brand" href="#">Simulador de horarios</a>
-			<button
-				class="navbar-toggler"
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarText"
-				aria-controls="navbarText"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse p-0" id="navbarText">
@@ -120,14 +130,7 @@
 					</li>
 				</ul>
 				<span class="navbar-text p-0">
-					<a
-            id="userbtn"
-						type="button"
-						class="btn btn-primary"
-						data-toggle="modal"
-						data-target="#userModal"
-						><i class="fa fa-user fa-2x" aria-hidden="true"></i
-					></a>
+					<a id="userbtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal" ><i class="fa fa-user fa-2x" aria-hidden="true"></i></a>
 				</span>
 			</div>
 		</nav>
@@ -153,27 +156,7 @@
       <div class="col-3 " style="justify-content: center; align-content: center; display: flex">
         <div class="container ">    
 		      <div class="accordion ProyScroll" id="accordionClases">
-		      	<div class="card">
-				      <div class="card-header" id="headingOne">
-				      	<h5 class="mb-0">
-                  <button class="btn btn-link selected" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Desarrollo de aplicaciones y servicios web
-                  </button>
-					      </h5>
-				      </div>
-			      	<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-				      	<div class="card-body">
-                  <table class="table-borderless">
-                    <tr>
-                      <td ><p>Lunes-Miercoles</p></td>
-                      <td>        </td>
-                      <td><p style="margin-left: 50px;">11:00-13:00</p></td>
-                    </tr>
-                  </table>
-                  <p>Luis Fernando  Gutierrez Preciado</p>
-				      	</div>
-				      </div>
-			      </div>
+		      	
 		      </div>
 	      </div>
       </div>
@@ -193,64 +176,64 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th id="7" scope="row">7:00 8:50</th>
+            <tr id="7">
+              <th scope="row">7:00 8:50</th>
               <td class="LUN"></td>
               <td class="MAR"></td>
-              <td class="MIE activo"><small>Programación Orientada a Objetos</small></td>
+              <td class="MIE"></td>
               <td class="JUE"></td>
               <td class="VIE"></td>
               <td class="SAB"></td>
             </tr>
-            <tr>
-              <th id="9" scope="row">9:00 10:50</th>
+            <tr id="9" >
+              <th scope="row">9:00 10:50</th>
               <td class="LUN"></td>
               <td class="MAR"></td>
-              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="MIE"></td>
               <td class="JUE"></td>
               <td class="VIE"></td>
               <td class="SAB"></td>
             </tr>
-            <tr>
-              <th id="11" scope="row">11:00 12:50</th>
+            <tr id="11">
+              <th  scope="row">11:00 12:50</th>
               <td class="LUN"></td>
               <td class="MAR"></td>
-              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="MIE"></td>
               <td class="JUE"></td>
               <td class="VIE"></td>
               <td class="SAB"></td>
             </tr>
-            <tr>
-              <th id="13" scope="row">13:00 14:50</th>
+            <tr id="13">
+              <th  scope="row">13:00 14:50</th>
               <td class="LUN"></td>
               <td class="MAR"></td>
-              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="MIE"></td>
               <td class="JUE"></td>
               <td class="VIE"></td>
               <td class="SAB"></td>
-            <tr>
-              <th id="16" scope="row">16:00  17:50</th>
+            <tr id="16">
+              <th  scope="row">16:00  17:50</th>
               <td class="LUN"></td>
               <td class="MAR"></td>
-              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
-              <td class="JUE"></td>
-              <td class="VIE"></td>
-              <td class="SAB"></td>
-            </tr>
-            <tr>
-              <th id="18" scope="row">18:00  19:50</th>
-              <td class="LUN"></td>
-              <td class="MAR"></td>
-              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="MIE"></td>
               <td class="JUE"></td>
               <td class="VIE"></td>
               <td class="SAB"></td>
             </tr>
-            <tr>
-              <th id="20" scope="row">20:00 21:50</th>
+            <tr id="18">
+              <th  scope="row">18:00  19:50</th>
               <td class="LUN"></td>
               <td class="MAR"></td>
-              <td class="MIE"><small>Programación Orientada a Objetos</small></td>
+              <td class="MIE"></td>
+              <td class="JUE"></td>
+              <td class="VIE"></td>
+              <td class="SAB"></td>
+            </tr>
+            <tr id="20">
+              <th  scope="row">20:00 21:50</th>
+              <td class="LUN"></td>
+              <td class="MAR"></td>
+              <td class="MIE"></td>
               <td class="JUE"></td>
               <td class="VIE"></td>
               <td class="SAB"></td>
@@ -273,14 +256,18 @@
           <tr>
             <td>
               <p style="display: inline">
-                <b style="margin-right: 35px">Créditos:</b>16
+                <b style="margin-right: 35px">Créditos:</b><div id="CreditosP">
+
+                </div>
               </p>
             </td>
           </tr>
           <tr>
             <td>
               <p style="display: inline">
-                <b style="margin-right: 35px">Materias:</b>2
+                <b style="margin-right: 35px">Materias:</b><div id="NumMateriasP">
+
+                </div>
               </p>
             </td>
           </tr>
@@ -296,7 +283,8 @@
           </tr>
           <tr>
             <td class="mt-5">
-              <a href=""><button id="buttonBorrar" type="button" class="btn btn-outline-danger">Borrar</button></a>
+              <a><button data-toggle="modal"
+              data-target="#modalBorrarrr" id="buttonBorrar" type="button" class="btn btn-outline-danger">Borrar</button></a>
             </td>
           </tr>
         </table>

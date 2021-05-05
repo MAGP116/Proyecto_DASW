@@ -44,11 +44,16 @@ async function modalUserInfo() {
     </div>
   </div>
   </div>`;
-	document.getElementById("modalesUsuario").innerHTML = modalHTML;
-	document
-		.getElementById("btnEditUserInfo")
-		.addEventListener("click", modalEditUserInfo);
+	document.getElementById('modalesUsuario').innerHTML = modalHTML;
+  document.getElementById('LogOff').addEventListener('click', logOff);
+	document.getElementById('btnEditUserInfo').addEventListener('click', modalEditUserInfo);
 	await $("#userModal").modal("toggle");
+}
+
+function logOff(){
+  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('email');
+  window.location.href = "./index.html";
 }
 
 async function modalEditUserInfo() {
