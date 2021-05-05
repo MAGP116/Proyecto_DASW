@@ -31,8 +31,7 @@ Content-Type:  application/json
 
 //Guardar mi Token
 //                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTY4MjY3fQ.iGo9XqlzZZ2-H6U8ZpGKNIHSPJm8r6ATE18eA2GEhng
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTgwMzI3fQ.eky2N_KkILJRAMDKl-3qjejcLZJIGBTMNu4kMkljZ7g
 
 
 
@@ -62,10 +61,24 @@ Content-Type:  application/json
 
 {
     "materias":[
-        "Algoritmos y Programación",
+        "Ética, Identidad y Profesión",
+        "Conocimiento y Cultura",
+        "Análisis y Diseño de Procesos",
+        "Fundamentos de Ciencias Computacionales",
+        "Contexto Historico Social",
+        "Álgebra Lineal",
+        "Manejo de Información y Datos Numéricos",
+        "Introducción a Redes de Computadoras",
+        "Interconexión de Redes",
+        "Comunicación Oral y Escrita",
         "Cálculo Diferencial",
-        "Introducción a Redes de Computadoras"
-    ]
+        "Cálculo Integral",
+        "Mecánica Analítica",
+        "Cálculo Multivariable",
+        "Algoritmos y Programación",
+        "Programación Estructurada",
+        "Programación con Memoria Dinámica"
+        ]
 }
 
 
@@ -353,7 +366,7 @@ Content-Type:  application/json
             "materiaSer":"Mecánica Analítica"
         },
         {
-            "materiaReq":"Fundamentos de Cienciass Computacionales",
+            "materiaReq":"Fundamentos de Ciencias Computacionales",
             "materiaSer":"Programación con Memoria Dinámica"
         },
         {

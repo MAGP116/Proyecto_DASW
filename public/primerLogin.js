@@ -1,7 +1,8 @@
 'use strict'
 
 let direction = 'http://localhost:3000'
-
+sessionStorage.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTg0Mjg0fQ.-mrozHzoPAurSeY1Zt7Ma2DebVF1moI6Dhri1qEyveg"
+sessionStorage.email ="is723359_3@iteso.mx"
 //IDs document
 const CS = document.getElementById('carreraSelect');
 const CI = document.getElementById('CarreraInfo');
@@ -9,16 +10,18 @@ const AM = document.getElementById('accordionMaterias');
 const BS = document.getElementById('buttonSubmit');
 let carreras = new Map();
 let materias = [];
-let materiasSelected = new Set();
-
+let careerAsigned;
 //
-window.onload = e =>{
+window.onload = async e =>{
     loadCarreras();
+    let al = await getAlumno();
+    if(al.carrera)careerAsigned = al.carrera != '';
+        
 }
 
 
 
-
+//carga de carreras
 async function loadCarreras(){
     let cs = await getCarreras();
     carreras.clear();
@@ -33,6 +36,7 @@ async function loadCarreras(){
 
 }
 
+//Actualizacion de materias
 CS.onchange = async ev =>{
     CI.innerText = carreras.get(ev.target.value);
     if(ev.target.value == 'Selecciona tu carrera'){
@@ -40,7 +44,6 @@ CS.onchange = async ev =>{
         return;
     }
     materias = [];
-    materiasSelected.clear();
     let ms = await getMaterias(ev.target.value);
     let html = [];
     ms.forEach(e=>{
@@ -50,24 +53,28 @@ CS.onchange = async ev =>{
 }
 
 
+//Lista de materias
 AM.onclick = ev =>{
     if(ev.target.id == 'accordionMaterias')return;
     let card = ev.target;
     if(ev.target.className != 'card')card = ev.target.closest('.card');
     if(card.classList.contains('proySelected')){
         card.classList.remove('proySelected');
-        materiasSelected.delete(ev.target.innerText);
     }
     else{
         card.classList.add('proySelected');
-        materiasSelected.add(ev.target.innerText);
     }
 
 }
 
+
 BS.onclick = async ev =>{
     ev.preventDefault();
-    console.log(materiasSelected);
+    let materias = [];
+    for(let item of AM.querySelectorAll('.proySelected'))materias.push(item.innerText);
+    if(!careerAsigned){
+        console.log(CS.querySelector('option[selected=true]').innerText);
+    }
 }
 
 
@@ -99,9 +106,40 @@ async function getMaterias(carrera){
     return await resp.json();
 }
 
+//Enviar carrera
+async function setCarrera(carrera){
+    const resp = await fetch (`${direction}/api/alumnos`,{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-auth': sessionStorage.token
+        },
+        body: JSON.stringify({carrera})
+    });
+    if(resp.status != 200){
+        log(resp.status);
+        log(resp);
+        return;
+    }
+    return await resp.json();
+}
+
+async function getAlumno(){
+    const resp = await fetch (`${direction}/api/alumnos/${sessionStorage.email}`,{
+        method: 'GET',
+        headers: {
+            'x-auth': sessionStorage.token
+        }
+    });
+    if(resp.status != 200){
+        log(resp.status);
+        log(resp);
+        return;
+    }
+    return await resp.json();
+}
 
 //Generadores de html
-
 function createMateriaMedia(nombre){
     return `
 <div class="card">
@@ -120,4 +158,8 @@ function createCareerMedia(nombre){
 return `
 <option>${nombre}</option>
 `
+}
+
+function log(a){
+    console.log(a);
 }
