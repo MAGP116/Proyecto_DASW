@@ -1,4 +1,6 @@
 let dir = 'http://localhost:3000'
+const urlParams = new URLSearchParams(window.location.search);
+const calendarId = urlParams.get('calendarId')
 
 //----------------------navegation Bar--------------------------------------
 document.getElementById('userbtn').addEventListener('click', modalUserInfo);
@@ -138,7 +140,7 @@ async function verifyPUT(){
 //----------------------------------------------------------------------------
 
 window.onload =async function () {
-	let response = await fetch(`${dir}/api/calendarios/${sessionStorage.calendar}`, {
+	let response = await fetch(`${dir}/api/calendarios/${calendarId}`, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -190,7 +192,7 @@ function toggleEraseModal(){
 }
 
 async function confirmBorrar(){
-  let response = await fetch(`${dir}/api/calendarios/${sessionStorage.calendar}`, {
+  let response = await fetch(`${dir}/api/calendarios/${calendarId}`, {
     method: "DELETE",
     headers: {
       "x-auth": sessionStorage.token,
