@@ -15,6 +15,19 @@ Content-Type: application/json
     "confPassword":"Qwe123"
 }
 
+###
+POST {{host}}/api/alumnos 
+Content-Type: application/json
+
+{
+    "nombre": "Pedro",
+    "apellido": "García",
+    "correo": "is722342@iteso.mx",
+    "matricula": "is722342",
+    "password": "abc123",
+    "confPassword": "abc123"
+}
+
 
 //El login de un usuario
 ###
@@ -22,8 +35,8 @@ post {{host}}/api/login
 Content-Type:  application/json
 
 {
-    "correo":"is723359_3@iteso.mx",
-    "password":"Qwe123"
+    "correo":"is723359@iteso.mx",
+    "password":"ManTequilla"
 }
 
 ####
@@ -31,7 +44,12 @@ Content-Type:  application/json
 
 //Guardar mi Token
 //                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
+<<<<<<< HEAD
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTgwMzI3fQ.eky2N_KkILJRAMDKl-3qjejcLZJIGBTMNu4kMkljZ7g
+=======
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYyMDE3NzM5OX0.E3BL4vIq5av_RpsMa93-svkbv6qGxV50e6-taP2dtms
+
+>>>>>>> 00e9436ee18ce3281d54bb7dd5b36f5a5f46fed1
 
 
 
@@ -82,7 +100,11 @@ Content-Type:  application/json
 
 //El usuario puede revisar su información personal
 ####
+<<<<<<< HEAD
 get {{host}}/api/alumnos/is723359_3@iteso.mx
+=======
+get {{host}}/api/alumnos/is723359@iteso.mx
+>>>>>>> 00e9436ee18ce3281d54bb7dd5b36f5a5f46fed1
 x-auth: {{token}}
 
 
@@ -169,7 +191,7 @@ x-auth: {{token}}
 
 ###
 //                                                  RECUERDA CAMBIAR EL ID DEL CALENDARIO DURANTE EL VDEO
-@calendario = 60918e6fd192024b74736f9c
+@calendario = 608f2255047e930bac91e936
 //El usuario puede ver el detalle de su calendario
 ###
 GET {{host}}/api/calendarios/{{calendario}}
@@ -429,14 +451,4 @@ Content-Type:  application/json
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
+###

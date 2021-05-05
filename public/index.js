@@ -53,27 +53,30 @@ document.getElementById("loginSubmit").addEventListener("click", async (ev) => {
 				window.location.href = "./home.html";
 			}
 		} else if (response.status == 404) {
-			document.getElementById(
-				"loginAlerts"
-			).innerHTML = `<div class="alert alert-danger" role="alert">
-            				<strong>No se pudo iniciar sesión. Verifica tu correo y contraseña</strong>
-        				</div>`;
+			document.getElementById("loginAlerts").innerHTML = `
+			<div class="alert alert-danger" role="alert">
+            	<strong>No se pudo iniciar sesión. Verifica tu correo y contraseña.</strong>
+    		</div>`;
 		}
 	} else {
 		// Si no estaban llenos los campos, mostrar alert
-		document.getElementById(
-			"loginAlerts"
-		).innerHTML = `<div class="alert alert-secondary" role="alert">
-            				<strong>Ingresa tu correo y contraseña</strong>
-        				</div>`;
+		document.getElementById("loginAlerts").innerHTML = `
+		<div class="alert alert-secondary" role="alert">
+         	<strong>Ingresa tu correo y contraseña.</strong>
+		</div>`;
 		return;
 	}
 });
 
+// Para registrarse
 document
 	.getElementById("registerSubmit")
 	.addEventListener("click", async (ev) => {
 		// ev.preventDefault();
+		if (document.getElementById("registerForm").checkValidity() == false) {
+			document.getElementById("registerForm").reportValidity();
+			return;
+		}
 
 		let nombre = document.getElementById("registerNombre").value;
 		let apellido = document.getElementById("registerApellido").value;
@@ -84,11 +87,10 @@ document
 
 		// Verificar que las contraseñas coincidan
 		if (password1 != password2) {
-			document.getElementById(
-				"registerAlerts"
-			).innerHTML = `<div class="alert alert-warning" role="alert">
-							<strong>Las contraseñas no coinciden. Por favor verifiquelas.</strong>
-							</div>`;
+			document.getElementById("registerAlerts").innerHTML = `
+				<div class="alert alert-warning" role="alert">
+					<strong>Las contraseñas no coinciden. Por favor verifiquelas.</strong>
+				</div>`;
 		} else {
 			// Limpiar registerAlerts
 			document.getElementById("registerAlerts").innerHTML = ``;
@@ -96,9 +98,10 @@ document
 			let userForRegister = {
 				nombre,
 				apellido,
-				expediente,
+				matricula: expediente,
 				correo: email,
 				password: password1,
+				confPassword: password2,
 			};
 
 			// Registrar al usuario
@@ -109,6 +112,9 @@ document
 				},
 				body: JSON.stringify(userForRegister),
 			});
+
+			console.log(userForRegister);
+			console.log(responseRegister);
 
 			// Si el registro fue exitoso, hacer login y llevarlo a firstLogin
 			if (responseRegister.status == 201) {
@@ -129,13 +135,17 @@ document
 					sessionStorage.email = email;
 
 					window.location.href = "./primerLogin.html";
+				} else {
+					document.getElementById("registerAlerts").innerHTML = `
+					<div class="alert alert-secondary" role="alert">
+            			<strong>¡Oh no! No pudimos iniciar sesión automáticamente. Por favor intenta iniciar sesión manualmente.</strong>
+        			</div>`;
 				}
 			} else if (responseRegister.status == 400) {
-				document.getElementById(
-					"registerAlerts"
-				).innerHTML = `<div class="alert alert-danger" role="alert">
-            						<strong>Hubo un problema con el registro. Verifica tus datos e intenta de nuevo.</strong>
-        						</div>`;
+				document.getElementById("registerAlerts").innerHTML = `
+				<div class="alert alert-danger" role="alert">
+            		<strong>Hubo un problema con el registro. Verifica tus datos e intenta de nuevo.</strong>
+    			</div>`;
 			}
 		}
 	});
