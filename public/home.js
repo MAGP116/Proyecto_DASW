@@ -29,6 +29,12 @@ window.onload = async function () {
 		);
 	}
 
+	if (calendarInfo.length == 0) {
+		document.getElementById("mensajeCalendarios").innerHTML += `
+		<h1 class="text-center">Hola <i class="fa fa-smile-o" aria-hidden="true"></i></h1>
+		<h4 class="text-center">Aún no tienes calendarios. ¡Crea uno nuevo para empezar!</h4>`;
+	}
+
 	for await (let calendar of calendarInfo) {
 		let details = await calendar.json();
 		let materias = details.clase.length;
@@ -190,7 +196,12 @@ async function verifyPUT() {
 
 function createNavBar(){
 	let buttons = [];
-	buttons.push(createNavBarButtonModel('Página Principal',true));
+	buttons.push(
+		createNavBarButtonModel(
+			'<i class="fa fa-home" aria-hidden="true"></i> Página Principal',
+			true
+		)
+	);
 	buttons.push(createNavBarButtonModel('Mis materias',false,`${dir}/materias`));
 	document.getElementById('navbar').innerHTML = buttons.join('');
 }

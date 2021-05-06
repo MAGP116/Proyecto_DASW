@@ -291,7 +291,13 @@ async function materiaBloqueadaToHTML(materia){
 
 function createNavBar(){
 	let buttons = [];
-	buttons.push(createNavBarButtonModel('Página Principal',false,`${dir}/inicio`));
+	buttons.push(
+		createNavBarButtonModel(
+			'<i class="fa fa-home" aria-hidden="true"></i> Página Principal',
+			false,
+			`${dir}/inicio`
+		)
+	);
 	buttons.push(createNavBarButtonModel('Mis materias',true));
 	document.getElementById('navbar').innerHTML = buttons.join('');
 }

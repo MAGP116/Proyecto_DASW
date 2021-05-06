@@ -86,7 +86,13 @@ async function loadClases(materias){
 
 function createNavBar(){
 	let buttons = [];
-	buttons.push(createNavBarButtonModel('Página Principal',false,`${direction}/inicio`));
+	buttons.push(
+		createNavBarButtonModel(
+			'<i class="fa fa-home" aria-hidden="true"></i> Página Principal',
+			false,
+			`${direction}/inicio`
+		)
+	);
 	buttons.push(createNavBarButtonModel('Mis materias',false,`${direction}/materias`));
 	document.getElementById('navbar').innerHTML = buttons.join('');
 }
