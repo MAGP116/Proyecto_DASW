@@ -97,8 +97,18 @@
       .proyCompleted button:hover{
         color: #155724;
       }
-      a.bloqueado{
-        color: #4e5256; background-color: #e2e3e5;
+
+      .proySelected .card-header{
+        background-color: #e2e3e5;
+      }
+      .proySelected a.proySelected{
+        background-color: #e2e3e5;
+      }
+      .proySelected button{
+        color: #4e5256; 
+      }
+      .proySelected button:hover{
+        color: #4e5256; 
       }
 
       .proySeriado .card-header{
@@ -221,175 +231,7 @@
         </div>
         
 		<div class="accordion ProyScroll" id="accordionMaterias">
-			<div class="card">
-				<div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
-					<h5 class="mb-0">
-						<button class="btn btn-link selected" type="button" data-toggle="collapse" data-target="#collapseOne"
-							aria-expanded="true" aria-controls="collapseOne">
-							<b>Programación Orientada a Objetos</b> 
-						</button>
-					</h5>
-				</div>
-				<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMaterias">
-					<div class="card-body">
-						<div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action " > ES23U77 Profesor: Jose tacos</a>
-                            <a href="#" class="list-group-item list-group-item-action  activo">ES23U76 Profesor: Manuel Santos</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Morbi leo risus</a>
-                            <a href="#" class="list-group-item list-group-item-action bloqueado">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item list-group-item-action  " >Vestibulum at eros</a>
-                        </div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-header" id="headingOne">
-					<h5 class="mb-0">
-						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMicros"
-							aria-expanded="true" aria-controls="collapseMicros">
-							Fundamentos de microprocesadores y microcontroladores
-						</button>
-					</h5>
-				</div>
-				<div id="collapseMicros" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMaterias">
-					<div class="card-body">
-						<div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action " > Cras justo odio</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Morbi leo risus</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item list-group-item-action  bloqueado">Vestibulum at eros</a>
-                        </div>
-					</div>
-				</div>
-			</div>
-            <div class="card">
-				<div class="card-header" id="headingOne" style="background-color: #c3e6cb;">
-					<h5 class="mb-0">
-						<button class="btn btn-link selected" type="button" data-toggle="collapse" data-target="#collapseGestion"
-							aria-expanded="true" aria-controls="collapseOne">
-							Gestion de base de datos
-						</button>
-					</h5>
-				</div>
-				<div id="collapseGestion" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMaterias">
-					<div class="card-body">
-						<div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action " > ES23U77 Profesor: Jose tacos</a>
-                            <a href="#" class="list-group-item list-group-item-action  activo">ES23U76 Profesor: Manuel Santos</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Morbi leo risus</a>
-                            <a href="#" class="list-group-item list-group-item-action bloqueado">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item list-group-item-action  " >Vestibulum at eros</a>
-                        </div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-header" id="headingOne">
-					<h5 class="mb-0">
-						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWeb"
-							aria-expanded="true" aria-controls="collapseWeb">
-							Desarrollo de aplicaciones web
-						</button>
-					</h5>
-				</div>
-				<div id="collapseWeb" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMaterias">
-					<div class="card-body">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action " > Cras justo odio</a>
-                            <a href="#" class="list-group-item list-group-item-action bloqueado">Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Morbi leo risus</a>
-                            <a href="#" class="list-group-item list-group-item-action bloqueado">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item list-group-item-action  bloqueado">Vestibulum at eros</a>
-                        </div>
-				
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-header" id="headingOne" style="background-color: #f5c6cb">
-					<h5 class="mb-0">
-						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseEscritorio"
-							aria-expanded="true" style="color: #721c24">
-							Programación de aplicaciones de escritorio
-						</button>
-					</h5>
-				</div>
-				<div id="collapseEscritorio" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMaterias">
-					<div class="card-body seriado" >
-						<div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action " > Cras justo odio</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Morbi leo risus</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Vestibulum at eros</a>
-                        </div>
-					</div>
-				</div>
-			</div>
-            <div class="card">
-				<div class="card-header" id="headingOne" style="background-color: #f5c6cb">
-					<h5 class="mb-0">
-						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGrafica"
-							aria-expanded="true" aria-controls="collapseEscritorio" style="color: #721c24">
-							Programación Grafica
-						</button>
-					</h5>
-				</div>
-				<div id="collapseGrafica" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMaterias">
-					<div class="card-body seriado" >
-						<div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action " > Cras justo odio</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Morbi leo risus</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Vestibulum at eros</a>
-                        </div>
-					</div>
-				</div>
-			</div>
-            <div class="card">
-				<div class="card-header" id="headingOne" style="background-color: #f5c6cb">
-					<h5 class="mb-0">
-						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAnalisis"
-							aria-expanded="true" aria-controls="collapseEscritorio" style="color: #721c24">
-							Analisis y diseño de procesos
-						</button>
-					</h5>
-				</div>
-				<div id="collapseAnalisis" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMaterias">
-					<div class="card-body seriado" >
-						<div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action  actived" > Cras justo odio</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Morbi leo risus</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Vestibulum at eros</a>
-                        </div>
-					</div>
-				</div>
-			</div>
-            <div class="card">
-				<div class="card-header" id="headingOne" style="background-color: #f5c6cb">
-					<h5 class="mb-0">
-						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseManinfo"
-							aria-expanded="true" aria-controls="collapseEscritorio" style="color: #721c24">
-							Manejo de información y datos numericos
-						</button>
-					</h5>
-				</div>
-				<div id="collapseManinfo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMaterias">
-					<div class="card-body seriado" >
-						<div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action  actived" > Cras justo odio</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Morbi leo risus</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item list-group-item-action ">Vestibulum at eros</a>
-                        </div>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
       </div>

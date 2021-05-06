@@ -4,6 +4,10 @@ let direction = 'http://localhost:3000'
 //ID's document
 const AM = document.getElementById('accordionMaterias');
 let materias = {cursadas:[],disponibles:[],bloqueadas:[]};
+
+let TABLA = {
+    LUN:[],MAR:[],MIE:[],JUE:[],VIE:[],SAB:[]
+}
 //
 window.onload = async e =>{
     createNavBar();
@@ -11,9 +15,49 @@ window.onload = async e =>{
 }
 
 
+//a class: proySelected locked
+//card class: proySelected
+AM.onclick = ev =>{
+    let target = ev.target.closest('a')
+    if(!target)return;
+    let card = target.closest('.card');
+    let name = card.querySelector('.card-header').innerText;
+    let id = target.id;
+    let materia = materias.disponibles.find(m=>m.nombre == name);
+    let clase = materia.clases.find(c=>c._id==id).sesion;
+    if(target.classList.contains('proySelected')){
+        card.classList.remove('proySelected')
+        target.classList.remove('proySelected');
+        clase.forEach(s=>removeFromTABLE(s));
+    }
+    else if(isSelectable(clase)){
+        card.classList.add('proySelected')
+        target.classList.add('proySelected');
+        clase.forEach(s=>addToTABLE(s));
+    }
+    
 
+}
 
+function isSelectable(sesiones){
+	//Revisa que no haya colisiones
+    for(let sesion of sesiones){
+        for(let clase of TABLA[sesion.dia]){
+            if(!(sesion.horaFinal <= clase.horaInicio || sesion.horaInicio >= clase.horaFinal)){
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
+function addToTABLE(sesion) {
+    TABLA[sesion.dia].push({horaInicio:sesion.horaInicio,horaFinal:sesion.horaFinal})
+}
+
+function removeFromTABLE(sesion) {
+    TABLA[sesion.dia] = TABLA[sesion.dia].filter(s=>!(sesion.horaInicio == s.horaInicio) && (sesion.horaFinal == s.horaFinal))
+}
 
 async function loadMaterias(){
     let materiasAlumno = await getMaterias();
@@ -115,15 +159,11 @@ function createMateriaCardModel(materia, type){
     `
 }
 
-/*
-
-
-*/
 
 function createClasesItemModel(clase){
     let sesiones = clase.sesion.map(c=>createSessionItemModel(c)).join('');
     return `
-    <a href="#" class="list-group-item list-group-item-action">
+    <a href="#" class="list-group-item list-group-item-action" id="${clase._id}">
         <table class="table-borderless">
             ${sesiones}
         </table>
