@@ -1,23 +1,19 @@
-let dir = 'http://localhost:3000'
+let dir = "http://localhost:3000";
 const urlParams = new URLSearchParams(window.location.search);
-const calendarId = urlParams.get('calendarId')
+const calendarId = urlParams.get("calendarId");
 
 //----------------------navegation Bar--------------------------------------
-document.getElementById('userbtn').addEventListener('click', modalUserInfo);
+document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 
-async function modalUserInfo(){
-  let response = await fetch(
-   `${dir}/api/alumnos/` + sessionStorage.email,
-   {
-     method: "GET",
-     headers: {
-       "x-auth": sessionStorage.token,
-     },
-   }
-  );
-  let user = await response.json();
-  let modalHTML = 
-  `<div class="modal left fade user" id="userModal" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+async function modalUserInfo() {
+	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let user = await response.json();
+	let modalHTML = `<div class="modal left fade user" id="userModal" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="padding-bottom: 0;">
@@ -41,40 +37,36 @@ async function modalUserInfo(){
             <input id="corr" class="form-control mt-3" type="email" name="correo" value="${user.correo}" disabled
             required />
             <div class="modal-footer">
-              <button id="LogOff" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
+						<button id="logOffbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
               <button id="btnEditUserInfo" type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#editUserModal">Editar</button>
             </div>
           </form>
         </div>
-      </div>
+      </div>   
     </div>
   </div>
   </div>`;
-  document.getElementById("modalesUsuario").innerHTML = modalHTML
-  document.getElementById('LogOff').addEventListener('click', logOff);
-  document.getElementById('btnEditUserInfo').addEventListener('click', modalEditUserInfo);
-  await $("#userModal").modal("toggle");
+	document.getElementById("modalesUsuario").innerHTML = modalHTML;
+	document.getElementById('logOffbtn').addEventListener('click', logOff);
+	document.getElementById("btnEditUserInfo").addEventListener("click", modalEditUserInfo);
+	await $("#userModal").modal("toggle");
 }
 
-function logOff(){
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('email');
-  window.location.href = "./index.html";
+function logOff() {
+	sessionStorage.removeItem("token");
+	sessionStorage.removeItem("email");
+	window.location.href = "./index.html";
 }
 
-async function modalEditUserInfo(){
-  let response = await fetch(
-   `${dir}/api/alumnos/` + sessionStorage.email,
-   {
-     method: "GET",
-     headers: {
-       "x-auth": sessionStorage.token,
-     },
-   }
-  );
-  let user = await response.json();
-  let modalHTML = 
-  `<div class="modal left fade" id="editUserModal" tabindex="" role="dialog" aria-labelledby="userModalLabel"aria-hidden="true">
+async function modalEditUserInfo() {
+	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+		method: "GET",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let user = await response.json();
+	let modalHTML = `<div class="modal left fade" id="editUserModal" tabindex="" role="dialog" aria-labelledby="userModalLabel"aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="padding-bottom: 0;">
@@ -106,41 +98,40 @@ async function modalEditUserInfo(){
       </div>
     </div>
   </div>`;
-  document.getElementById("modalesUsuario").innerHTML = modalHTML
-  document.getElementById('btnConfirmarEdicion').addEventListener('click', verifyPUT);
-  await $("#editUserModal").modal("toggle");
+	document.getElementById("modalesUsuario").innerHTML = modalHTML;
+	document
+		.getElementById("btnConfirmarEdicion")
+		.addEventListener("click", verifyPUT);
+	await $("#editUserModal").modal("toggle");
 }
 
-async function verifyPUT(){
-  let password = document.getElementById('passUpdate').value;
-  let confirmpassword = document.getElementById('confpassUpdate').value;
-  let nombre = document.getElementById('nomUpdate').value;
-  let apellido = document.getElementById('apeUpdate').value;
-  if(password != confirmpassword || password == '' ){
-    console.log('Contraseñas no válidas');
-    modalUserInfo();
-  }else{
-    let updatedUser = { nombre, apellido, password };
-    let response = await fetch(
-      `${dir}/api/alumnos/`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-          "x-auth": sessionStorage.token,
-        },
-        body: JSON.stringify(updatedUser),
-      }
-     );
-  
-     let user = await response.json();
-     modalUserInfo();
-  }
+async function verifyPUT() {
+	let password = document.getElementById("passUpdate").value;
+	let confirmpassword = document.getElementById("confpassUpdate").value;
+	let nombre = document.getElementById("nomUpdate").value;
+	let apellido = document.getElementById("apeUpdate").value;
+	if (password != confirmpassword || password == "") {
+		console.log("Contraseñas no válidas");
+		modalUserInfo();
+	} else {
+		let updatedUser = { nombre, apellido, password };
+		let response = await fetch(`${dir}/api/alumnos/`, {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json",
+				"x-auth": sessionStorage.token,
+			},
+			body: JSON.stringify(updatedUser),
+		});
+
+		let user = await response.json();
+		modalUserInfo();
+	}
 }
 //----------------------------------------------------------------------------
 
-window.onload =async function () {
-  createNavBar()
+window.onload = async function () {
+	createNavBar();
 	let response = await fetch(`${dir}/api/calendarios/${calendarId}`, {
 		method: "GET",
 		headers: {
@@ -148,27 +139,32 @@ window.onload =async function () {
 		},
 	});
 	let calendar = await response.json();
-  setClases(calendar.clase);
-  document.getElementById("calendarNameInput").value = calendar.nombre;
-  document.getElementById("buttonCompartir").addEventListener("click", function(ev){
-    var aux = document.createElement("input");
-    aux.setAttribute("value", "Aquí va el link de acceso");
-    document.body.appendChild(aux);
-    aux.select();
-    document.execCommand("copy");
-    document.body.removeChild(aux);
-    ev.preventDefault()
-  })
+	setClases(calendar.clase);
+	document.getElementById("calendarNameInput").value = calendar.nombre;
+	document
+		.getElementById("buttonCompartir")
+		.addEventListener("click", function (ev) {
+			var aux = document.createElement("input");
+			aux.setAttribute("value", "Aquí va el link de acceso");
+			document.body.appendChild(aux);
+			aux.select();
+			document.execCommand("copy");
+			document.body.removeChild(aux);
+			ev.preventDefault();
+		});
 
-  document.getElementById("buttonBorrar").addEventListener("click",function(ev){
-    toggleEraseModal()
-  });
-}
+	document
+		.getElementById("buttonBorrar")
+		.addEventListener("click", function (ev) {
+			toggleEraseModal();
+		});
+};
 
-function toggleEraseModal(){
-  console.log('IN');
-  document.getElementById("modalBorrar").innerHTML = 
-  `<div class="modal left fade user" id="modalBorrarrr" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+function toggleEraseModal() {
+	console.log("IN");
+	document.getElementById(
+		"modalBorrar"
+	).innerHTML = `<div class="modal left fade user" id="modalBorrarrr" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="padding-bottom: 0;">
@@ -188,28 +184,30 @@ function toggleEraseModal(){
     </div>
   </div>
   </div>`;
-  document.getElementById("btnborrarCalendar").addEventListener("click", confirmBorrar);
-  $("#modalBorrarrr").modal("toggle");
+	document
+		.getElementById("btnborrarCalendar")
+		.addEventListener("click", confirmBorrar);
+	$("#modalBorrarrr").modal("toggle");
 }
 
-async function confirmBorrar(){
-  let response = await fetch(`${dir}/api/calendarios/${calendarId}`, {
-    method: "DELETE",
-    headers: {
-      "x-auth": sessionStorage.token,
-    },
-  });
-  let state = await response.json();
-  console.log(state);
+async function confirmBorrar() {
+	let response = await fetch(`${dir}/api/calendarios/${calendarId}`, {
+		method: "DELETE",
+		headers: {
+			"x-auth": sessionStorage.token,
+		},
+	});
+	let state = await response.json();
+	console.log(state);
 }
 
-async function setClases(clasesArray){
-  let clasesHTML = [];
-  for(let i = 0; i < clasesArray.length; i++){
-    let string = await addClaseColumna(clasesArray[i])
-    clasesHTML.push(string);
-    addClaseCalendar(clasesArray[i]);
-  }
+async function setClases(clasesArray) {
+	let clasesHTML = [];
+	for (let i = 0; i < clasesArray.length; i++) {
+		let string = await addClaseColumna(clasesArray[i]);
+		clasesHTML.push(string);
+		addClaseCalendar(clasesArray[i]);
+	}
 	clasesHTML = clasesHTML.join("");
 	document.getElementById("accordionClases").innerHTML = clasesHTML;
 }
@@ -217,39 +215,43 @@ async function setClases(clasesArray){
 let t = 0;
 let creditos = 0;
 let numberMaterias = 0;
-async function addClaseColumna(clase){
-  let response = await fetch(`${dir}/api/clases`, {
+async function addClaseColumna(clase) {
+	let response = await fetch(`${dir}/api/clases`, {
 		method: "GET",
 		headers: {
-      "clase": clase
-		}
+			clase: clase,
+		},
 	});
-  numberMaterias ++;
-  let claseDetails = await response.json();
-  response = await fetch(`${dir}/api/materias/`+claseDetails[0].materia, {
+	numberMaterias++;
+	let claseDetails = await response.json();
+	response = await fetch(`${dir}/api/materias/` + claseDetails[0].materia, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
 		},
 	});
 	let materiaDetails = await response.json();
-  creditos += materiaDetails.creditos
-  let tableRowString = ``
-  for (let i = 0; i < claseDetails[0].sesion.length;i++){
-    let dia = (claseDetails[0].sesion[i].dia == 'LUN')? 'Lunes':
-              (claseDetails[0].sesion[i].dia == 'MAR')? 'Martes':
-              (claseDetails[0].sesion[i].dia == 'MIE')? 'Miercoles':
-              (claseDetails[0].sesion[i].dia == 'JUE')? 'Jueves':
-              (claseDetails[0].sesion[i].dia == 'VIE')? 'Viernes':
-                                                        'Sábado';
-    tableRowString += 
-    `<tr style="margin-top: 0px;">
+	creditos += materiaDetails.creditos;
+	let tableRowString = ``;
+	for (let i = 0; i < claseDetails[0].sesion.length; i++) {
+		let dia =
+			claseDetails[0].sesion[i].dia == "LUN"
+				? "Lunes"
+				: claseDetails[0].sesion[i].dia == "MAR"
+				? "Martes"
+				: claseDetails[0].sesion[i].dia == "MIE"
+				? "Miercoles"
+				: claseDetails[0].sesion[i].dia == "JUE"
+				? "Jueves"
+				: claseDetails[0].sesion[i].dia == "VIE"
+				? "Viernes"
+				: "Sábado";
+		tableRowString += `<tr style="margin-top: 0px;">
       <td style="margin-bottom: 0px; padding-top:  0px;"><p style="margin-bottom: 0px; padding: 0px;"><b>${dia}</b></p></td>
       <td style="margin-bottom: 0px; padding: 0px;"><p style="margin-left: 30px; margin-bottom: 0px; padding: 0px;">${claseDetails[0].sesion[i].horaInicio}:00 - ${claseDetails[0].sesion[i].horaFinal}:00</p></td>
-    </tr>`
-  }
-  let materiaHTML = 
-  `<div class="card">
+    </tr>`;
+	}
+	let materiaHTML = `<div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
       <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${t}"
@@ -267,39 +269,50 @@ async function addClaseColumna(clase){
       </div>
     </div>
   </div>`;
-  t++;
-  document.getElementById("CreditosP").innerHTML = creditos;
-  document.getElementById("NumMateriasP").innerHTML = numberMaterias;
-  return materiaHTML;
+	t++;
+	document.getElementById("CreditosP").innerHTML = creditos;
+	document.getElementById("NumMateriasP").innerHTML = numberMaterias;
+	return materiaHTML;
 }
 
-async function addClaseCalendar(clase){
-  let response = await fetch(`${dir}/api/clases`, {
+async function addClaseCalendar(clase) {
+	let response = await fetch(`${dir}/api/clases`, {
 		method: "GET",
 		headers: {
-      "clase": clase
-		}
+			clase: clase,
+		},
 	});
-  let claseDetails = await response.json();
-  for (let i = 0; i < claseDetails[0].sesion.length;i++){
-    let htmlString = `<small>${claseDetails[0].materia}</small>`;
-    let dia = (claseDetails[0].sesion[i].dia)
-    let inicio = (claseDetails[0].sesion[i].horaInicio)
-    let element = document.getElementById(inicio).getElementsByClassName(dia)[0]
-    element.innerHTML = htmlString;
-    element.classList.add("activo");
-  }
+	let claseDetails = await response.json();
+	for (let i = 0; i < claseDetails[0].sesion.length; i++) {
+		let htmlString = `<small>${claseDetails[0].materia}</small>`;
+		let dia = claseDetails[0].sesion[i].dia;
+		let inicio = claseDetails[0].sesion[i].horaInicio;
+		let element = document
+			.getElementById(inicio)
+			.getElementsByClassName(dia)[0];
+		element.innerHTML = htmlString;
+		element.classList.add("activo");
+	}
 }
 
-
-
-function createNavBar(){
+function createNavBar() {
 	let buttons = [];
-	buttons.push(createNavBarButtonModel('Página Principal',false,`${dir}/inicio`));
-	buttons.push(createNavBarButtonModel('Mis materias',false,`${dir}/materias`));
-	document.getElementById('navbar').innerHTML = buttons.join('');
+	buttons.push(
+		createNavBarButtonModel(
+			'<i class="fa fa-home" aria-hidden="true"></i> Página Principal',
+			false,
+			`${dir}/inicio`
+		)
+	);
+	buttons.push(
+		createNavBarButtonModel("Mis materias", false, `${dir}/materias`)
+	);
+	document.getElementById("navbar").innerHTML = buttons.join("");
 }
-function createNavBarButtonModel(name,current,url){
-	if(current == true)return `<li class="nav-item active"><a class="nav-link" href="#">${name}<span class="sr-only">(current)</span></a></li>`
-	return `<li class="nav-item"><a class="nav-link" href="${url||"#"}">${name}</a></li>`
+function createNavBarButtonModel(name, current, url) {
+	if (current == true)
+		return `<li class="nav-item active"><a class="nav-link" href="#">${name}<span class="sr-only">(current)</span></a></li>`;
+	return `<li class="nav-item"><a class="nav-link" href="${
+		url || "#"
+	}">${name}</a></li>`;
 }
