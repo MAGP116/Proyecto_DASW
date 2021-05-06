@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
-		<link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+		<link
+			rel="icon"
+			type="image/png"
+			href="./favicon-32x32.png"
+			sizes="32x32"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			href="./favicon-16x16.png"
+			sizes="16x16"
+		/>
 
 		<title>Simulador de Horarios</title>
 		<!-- Required meta tags -->
@@ -33,40 +43,44 @@
 			<ul class="nav navbar-nav mx-auto"></ul>
 			<ul class="nav navbar-nav mr-auto">
 				<li class="nav-item">
-					<small id="emailHelpId" class="form-text text-white m-0"
-						>Correo electrónico</small
-					>
-					<input
-						type="email"
-						class="form-control mb-2"
-						name="email"
-						id="loginEmail"
-						aria-describedby="emailHelpId"
-						placeholder=""
-					/>
-				</li>
-				<li class="nav-item">
-					<small id="passwordHelpId" class="form-text text-white ml-1 m-0"
-						>Contraseña</small
-					>
-					<input
-						type="password"
-						class="form-control ml-1 mb-2"
-						name="password"
-						id="loginPassword"
-						placeholder=""
-					/>
-				</li>
-				<li class="nav-item">
-					<a href="">
-						<button
-							type="button"
-							class="btn btn-primary mt-3 ml-2"
-							id="loginSubmit"
-						>
-							Iniciar sesión
-						</button>
-					</a>
+					<form class="form-inline" action="">
+						<div>
+							<small id="emailHelpId" class="form-text text-white m-0"
+								>Correo electrónico</small
+							>
+							<input
+								type="email"
+								class="form-control mb-2"
+								name="email"
+								id="loginEmail"
+								aria-describedby="emailHelpId"
+								placeholder=""
+							/>
+						</div>
+						<div>
+							<small id="passwordHelpId" class="form-text text-white ml-1 m-0"
+								>Contraseña</small
+							>
+							<input
+								type="password"
+								class="form-control ml-1 mb-2"
+								name="password"
+								id="loginPassword"
+								placeholder=""
+							/>
+						</div>
+						<div>
+							<a href="">
+								<button
+									type="submit"
+									class="btn btn-primary ml-2"
+									id="loginSubmit"
+								>
+									Iniciar sesión
+								</button>
+							</a>
+						</div>
+					</form>
 				</li>
 			</ul>
 		</nav>
@@ -76,12 +90,14 @@
 		<div class="row align-items-center mr-2">
 			<div class="col m-5 text-center">
 				<h3>Planifica tus horarios de manera sencilla</h3>
-				<img src="./img/Banner Index.png" alt="Index Banner" width="60%" />
+				<img src="./img/Banner Index.png" alt="Index Banner" width="50%" />
 			</div>
 
 			<div class="col-4 m-5">
 				<div class="row">
 					<h1 class="mb-3">Registrarte</h1>
+				</div>
+				<div class="row">
 					<form id="registerForm" action="">
 						<div class="row mb-3">
 							<div class="col">

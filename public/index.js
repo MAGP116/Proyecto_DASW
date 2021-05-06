@@ -1,5 +1,18 @@
 let dir = "http://localhost:3000";
 
+// Borrar campos en cuanto se cargue la ventana
+window.onload = async function () {
+	document.getElementById("loginEmail").value = "";
+	document.getElementById("loginPassword").value = "";
+
+	document.getElementById("registerNombre").value = "";
+	document.getElementById("registerApellido").value = "";
+	document.getElementById("registerExpediente").value = "";
+	document.getElementById("registerEmail").value = "";
+	document.getElementById("registerPassword1").value = "";
+	document.getElementById("registerPassword2").value = "";
+};
+
 // Para hacer login
 document.getElementById("loginSubmit").addEventListener("click", async (ev) => {
 	ev.preventDefault();
