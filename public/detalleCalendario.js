@@ -145,7 +145,7 @@ window.onload = async function () {
 		.getElementById("buttonCompartir")
 		.addEventListener("click", function (ev) {
 			var aux = document.createElement("input");
-			aux.setAttribute("value", "Aquí va el link de acceso");
+			aux.setAttribute("value", `${dir}/calendario?calendarId=${calendarId}`);
 			document.body.appendChild(aux);
 			aux.select();
 			document.execCommand("copy");
@@ -198,7 +198,7 @@ async function confirmBorrar() {
 		},
 	});
 	let state = await response.json();
-	console.log(state);
+	window.location.href = `${dir}/inicio`;
 }
 
 async function setClases(clasesArray) {

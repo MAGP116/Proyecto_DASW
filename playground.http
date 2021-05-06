@@ -45,7 +45,7 @@ Content-Type:  application/json
 //Guardar mi Token
 //                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
 @token_Migue = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTgwMzI3fQ.eky2N_KkILJRAMDKl-3qjejcLZJIGBTMNu4kMkljZ7g
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYyMDE3NzM5OX0.E3BL4vIq5av_RpsMa93-svkbv6qGxV50e6-taP2dtms
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OUBpdGVzby5teCIsImlhdCI6MTYyMDI0OTg5Mn0.LRcqSRlTsKqcuoj_Fm9QoFLiKf15Xa9Xqq7gTfIkAjU
 
 
 
