@@ -15,13 +15,18 @@ const BG = document.getElementById('buttonGuardarCal');
 const CN = document.getElementById('calendarName');
 const MF = document.getElementById('modalFiltros');
 let materias = {cursadas:[],disponibles:[],bloqueadas:[]};
+
+const urlParams = new URLSearchParams(window.location.search);
+const calendarId = urlParams.get("calendarId");
+
 let TABLA = {
     LUN:[],MAR:[],MIE:[],JUE:[],VIE:[],SAB:[]
 }
 //
 window.onload = async e =>{
     createNavBar();
-    loadMaterias();
+    await loadMaterias();
+    if(calendarId)loadUserCalendar();
 }
 
 
@@ -241,12 +246,56 @@ BG.onclick = async ev =>{
     //console.log("\n",JSON.stringify(calendario));
     let ans = await setCalendario(calendario)
     if(ans){
-        console.log(ans);
-        //window.location.href = `${direction}/inicio`;
+        window.location.href = `${direction}/inicio`;
     }
     else createAlert('danger','Error en subida de calednario, intentalo más tarde')
 
 }
+
+
+
+
+
+
+
+
+
+
+async function loadUserCalendar(){
+    let calendario = await getCalendario(calendarId);
+    if(!calendario){
+        createAlert('danger','No se encontró el calendario')
+        return;
+    }
+    if(calendario.alumno != sessionStorage.email)window.location.href = `${direction}/inicio`;
+    calendario.clase.forEach(clase=>{
+        let a = AM.querySelector(`#${clase}`);
+        let card = a.closest('.card');
+        card.classList.add('proySelected')
+        a.classList.add('proySelected');
+
+        let c = undefined;
+        let name = undefined;
+        for(let materia of materias.disponibles){
+            for(let cl of materia.clases){
+                if(clase == cl._id){
+                    c = cl;
+                    name = materia.nombre;
+                    break;
+                }
+            }
+            if(c)break;
+        }
+        c.sesiones.forEach(s=>addToTABLE(s,name));
+        
+        CR.innerText = (Number(CR.innerText)+materia.creditos)
+        MT.innerText = (Number(MT.innerText)+1)
+    })
+    updateLocks();
+}
+
+
+
 
 
 
@@ -302,6 +351,21 @@ async function setCalendario(calendario){
         body: JSON.stringify(calendario)
     });
     if(resp.status != 201){
+        log(resp.status);
+        log(resp);
+        return;
+    }
+    return await resp.json();
+}
+
+async function getCalendario(id){
+    const resp = await fetch (`${direction}/api/calendarios/${id}`,{
+        method: 'GET',
+        headers: {
+            'x-auth': sessionStorage.token
+        }
+    });
+    if(resp.status != 200){
         log(resp.status);
         log(resp);
         return;
