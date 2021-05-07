@@ -239,7 +239,9 @@ x-auth: {{token}}
 
 ###
 GET {{host}}/api/clases
+clase: 608d990bf828702e2806968c
 
+###
 
 //ADMIN------------------------------------
 ###
@@ -419,27 +421,39 @@ x-auth: {{adminToken}}
 Content-Type:  application/json
 
 {
-    "profesor":"608dea3d939f652c3c872530",
-    "materia":"Calculo Multivariable",
+    "profesor":"6095b4d04b2e201f48f5b7f5",
+    "materia":"Programación con Memoria Dinámica",
     "sesion":[
         {
-            "dia":"MAR",
+            "dia":"SAB",
             "horaInicio":16,
             "horaFinal":18
         },
         {
-            "dia":"JUE",
-            "horaInicio":16,
-            "horaFinal":18
-        }
-        ,
-        {
-            "dia":"JUE",
-            "horaInicio":16,
-            "horaFinal":18
+            "dia":"SAB",
+            "horaInicio":18,
+            "horaFinal":20
         }
     ]
 }
+
+
+###
+
+//Melendrez Ramírez Luis Jorge 60959a374b2e201f48f5b7cf
+
+
+####
+post {{host}}/api/admin/profesores
+x-auth: {{adminToken}}
+Content-Type:  application/json
+
+{
+    "nombre":"Jorge Alejandro",
+    "apellido":"Caloca Hernández"
+}
+
+
 
 
 ###

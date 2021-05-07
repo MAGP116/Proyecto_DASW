@@ -1,6 +1,5 @@
 'use strict'
 
-let direction = 'http://localhost:3000'
 //IDs document
 const CS = document.getElementById('carreraSelect');
 const CI = document.getElementById('CarreraInfo');
@@ -107,7 +106,7 @@ BS.onclick = async ev =>{
         return;
     }
     if(!ans.list)removeAlert();
-    window.location.href = `${direction}/inicio`;
+    window.location.href = `./inicio`;
 
 
 }
@@ -126,7 +125,7 @@ BS.onclick = async ev =>{
 
 //Cargar carreras
 async function getCarreras() {
-    const resp = await fetch (`${direction}/api/carreras`,{
+    const resp = await fetch (`./api/carreras`,{
         method: 'GET'
     });
     if(resp.status != 200){
@@ -139,7 +138,7 @@ async function getCarreras() {
 
 //Cargar materias
 async function getMaterias(carrera){
-    const resp = await fetch (`${direction}/api/carreras/${carrera}`,{
+    const resp = await fetch (`./api/carreras/${carrera}`,{
         method: 'GET'
     });
     if(resp.status != 200){
@@ -152,7 +151,7 @@ async function getMaterias(carrera){
 
 //Enviar carrera
 async function setCarrera(carrera){
-    const resp = await fetch (`${direction}/api/alumnos`,{
+    const resp = await fetch (`./api/alumnos`,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -169,7 +168,7 @@ async function setCarrera(carrera){
 }
 
 async function getAlumno(){
-    const resp = await fetch (`${direction}/api/alumnos/${sessionStorage.email}`,{
+    const resp = await fetch (`./api/alumnos/${sessionStorage.email}`,{
         method: 'GET',
         headers: {
             'x-auth': sessionStorage.token
@@ -184,7 +183,7 @@ async function getAlumno(){
 }
 
 async function setMaterias(materias){
-    const resp = await fetch (`${direction}/api/materias`,{
+    const resp = await fetch (`./api/materias`,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
