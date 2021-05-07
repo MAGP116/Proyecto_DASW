@@ -238,18 +238,21 @@ function unlockButtonGuardar(ev){
 
 BG.onclick = async ev =>{
     let clases = Array.from(AM.querySelectorAll('a.proySelected')).map(c=>c.getAttribute('id'))
-    let calendario = {
-        nombre:(CN.value),
-        clases:(clases),
-        alumno:sessionStorage.email
+    let calendario = undefined;
+    if(!calendarId)calendario = {
+            nombre:(CN.value),
+            clases:(clases),
+            alumno:sessionStorage.email
+        }
+    else calendario = {
+            nombre:(CN.value),
+            clases:(clases),
     }
-    //console.log("\n",JSON.stringify(calendario));
-    let ans = await setCalendario(calendario)
-    if(ans){
-        window.location.href = `${direction}/inicio`;
-    }
-    else createAlert('danger','Error en subida de calednario, intentalo más tarde')
-
+    let ans;
+    if(!calendarId) ans = await setCalendario(calendario)
+    else  ans = await updateCalendario(calendario)
+    if(ans) window.location.href = `${direction}/inicio`;
+    else createAlert('danger','Error en subida de caledario, intentalo más tarde')
 }
 
 
@@ -269,28 +272,34 @@ async function loadUserCalendar(){
     }
     if(calendario.alumno != sessionStorage.email)window.location.href = `${direction}/inicio`;
     calendario.clase.forEach(clase=>{
-        let a = AM.querySelector(`#${clase}`);
+        let a = document.getElementById(clase);
         let card = a.closest('.card');
         card.classList.add('proySelected')
         a.classList.add('proySelected');
 
         let c = undefined;
         let name = undefined;
-        for(let materia of materias.disponibles){
-            for(let cl of materia.clases){
+        //This find the class
+        for(let m of materias.disponibles){
+            for(let cl of m.clases){
                 if(clase == cl._id){
                     c = cl;
-                    name = materia.nombre;
+                    name = m.nombre;
                     break;
                 }
             }
-            if(c)break;
+
+            if(c){
+                CR.innerText = (Number(CR.innerText)+m.creditos)
+                MT.innerText = (Number(MT.innerText)+1)
+                break;
+            }
         }
-        c.sesiones.forEach(s=>addToTABLE(s,name));
+        c.sesion.forEach(s=>addToTABLE(s,name));
         
-        CR.innerText = (Number(CR.innerText)+materia.creditos)
-        MT.innerText = (Number(MT.innerText)+1)
+        
     })
+    CN.value = calendario.nombre
     updateLocks();
 }
 
@@ -357,6 +366,25 @@ async function setCalendario(calendario){
     }
     return await resp.json();
 }
+
+async function updateCalendario(calendario){
+    const resp = await fetch (`${direction}/api/calendarios/${calendarId}`,{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-auth': sessionStorage.token
+        },
+        body: JSON.stringify(calendario)
+    });
+    if(resp.status != 200){
+        log(resp.status);
+        log(resp);
+        return;
+    }
+    return await resp.json();
+}
+
+
 
 async function getCalendario(id){
     const resp = await fetch (`${direction}/api/calendarios/${id}`,{

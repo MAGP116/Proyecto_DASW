@@ -1,7 +1,7 @@
 let dir = "http://localhost:3000";
 const urlParams = new URLSearchParams(window.location.search);
 const calendarId = urlParams.get("calendarId");
-
+let email;
 //----------------------navegation Bar--------------------------------------
 document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 
@@ -139,13 +139,19 @@ window.onload = async function () {
 		},
 	});
 	let calendar = await response.json();
+	if(calendar.alumno == sessionStorage.email){
+		document.getElementById('buttonEditar').removeAttribute('disabled')
+		document.getElementById('buttonCompartir').removeAttribute('disabled')
+		document.getElementById('buttonBorrar').removeAttribute('disabled')
+	}
+	email = calendar.alumno;
 	setClases(calendar.clase);
 	document.getElementById("calendarNameInput").value = calendar.nombre;
 	document
 		.getElementById("buttonCompartir")
 		.addEventListener("click", function (ev) {
 			var aux = document.createElement("input");
-			aux.setAttribute("value", "Aquí va el link de acceso");
+			aux.setAttribute("value", `${dir}/calendario?calendarId=${calendarId}`);
 			document.body.appendChild(aux);
 			aux.select();
 			document.execCommand("copy");
@@ -161,7 +167,6 @@ window.onload = async function () {
 };
 
 function toggleEraseModal() {
-	console.log("IN");
 	document.getElementById(
 		"modalBorrar"
 	).innerHTML = `<div class="modal left fade user" id="modalBorrarrr" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
@@ -197,12 +202,14 @@ async function confirmBorrar() {
 			"x-auth": sessionStorage.token,
 		},
 	});
-	let state = await response.json();
-	console.log(state);
+	//let state = await response.json();
+	//console.log(state);
+	window.location.href = `${dir}/inicio`;
 }
 
 async function setClases(clasesArray) {
 	let clasesHTML = [];
+	//console.log(clasesArray);
 	for (let i = 0; i < clasesArray.length; i++) {
 		let string = await addClaseColumna(clasesArray[i]);
 		clasesHTML.push(string);
@@ -216,12 +223,14 @@ let t = 0;
 let creditos = 0;
 let numberMaterias = 0;
 async function addClaseColumna(clase) {
+	//console.log(clase);
 	let response = await fetch(`${dir}/api/clases`, {
 		method: "GET",
 		headers: {
 			clase: clase,
 		},
 	});
+	//console.log(response);
 	numberMaterias++;
 	let claseDetails = await response.json();
 	response = await fetch(`${dir}/api/materias/` + claseDetails[0].materia, {
@@ -315,4 +324,10 @@ function createNavBarButtonModel(name, current, url) {
 	return `<li class="nav-item"><a class="nav-link" href="${
 		url || "#"
 	}">${name}</a></li>`;
+}
+
+
+
+document.getElementById('buttonEditar').onclick = ev=>{
+	window.location.href = `./crear?calendarId=${calendarId}`;
 }

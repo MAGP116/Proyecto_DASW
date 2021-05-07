@@ -21,7 +21,7 @@ router.get('/', async (req,res)=>{
     res.status(400).send('Falta la clase');
   }
   let doc = await Clase.getClases({_id:claseId},{_id:0,profesor:1,materia:1,sesion:1})
-  if(!doc){
+  if(!doc || doc && doc.length == 0){
     res.status(404).send('No se encontró la clase');
     return;    
   }

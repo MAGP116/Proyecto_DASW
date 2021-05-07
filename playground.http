@@ -45,6 +45,8 @@ Content-Type:  application/json
 //Guardar mi Token
 //                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
 @token_Migue = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTgwMzI3fQ.eky2N_KkILJRAMDKl-3qjejcLZJIGBTMNu4kMkljZ7g
+
+
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OUBpdGVzby5teCIsImlhdCI6MTYyMDQwNTI1NX0.kwKBjSIM5hu42EUhTETQnNVH1E-uYj0X9oGtLEEiAEw
 
 
@@ -233,6 +235,10 @@ x-auth: {{token2}}
 ###
 DELETE {{host}}/api/calendarios/{{calendario}}
 x-auth: {{token}}
+
+
+###
+GET {{host}}/api/clases
 
 
 //ADMIN------------------------------------
