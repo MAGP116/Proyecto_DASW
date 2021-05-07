@@ -88,6 +88,7 @@
       .card-body{
         padding: 0%;
       }
+
       .proyCompleted .card-header{
         background-color: #c3e6cb;
       }
@@ -98,11 +99,19 @@
         color: #155724;
       }
 
+
+
       .proySelected .card-header{
         background-color: #e2e3e5;
       }
+
       .proySelected a.proySelected{
         background-color: #e2e3e5;
+      }
+
+      .proySelected a.proySelected:hover{
+        background-color: #e2e3e5;
+        color: #4e5256; 
       }
       .proySelected button{
         color: #4e5256; 
@@ -110,6 +119,16 @@
       .proySelected button:hover{
         color: #4e5256; 
       }
+
+      .proySelected a:not(.proySelected){
+        color: #856404;
+        background-color: #fff3cd;
+      }
+      .proySelected a:hover:not(.proySelected){
+        color: #856404;
+        background-color: #fff3cd;
+      }
+
 
       .proySeriado .card-header{
         background-color: #f8d7da;
@@ -121,6 +140,15 @@
         color: #721c24;
       }
 
+      a.proyLocked{
+        color: #856404;
+        background-color: #fff3cd;
+      }
+      a.proyLocked:hover{
+        color: #856404;
+        background-color: #fff3cd;
+      }
+
 
 
       .ProyScroll{
@@ -128,6 +156,10 @@
       }
       td small{
           font-size: 60%;
+          line-height: 0%;
+      }
+      td.proySelected{
+        background-color:#d4edda; color: #155724;
       }
 
       body {
@@ -208,13 +240,14 @@
         <label>Buscar Materia</label>
         <div class="row mb-3">
             <div class="col-8">
-            <input type="text" class="form-control" value="Materia">
+            <input type="text" class="form-control" placeholder="Nombre de materia" id="inputNombre">
             
             </div>
             
             <div class="col-flex">
                 <!--Boton buscar-->
                 <a
+                id="buttonBuscar"
               class="btn btn-primary mr-3"
               href="#"
               role="button"
@@ -241,84 +274,83 @@
         class="col-7"
         style="justify-content: center; align-content: center; display: flex"
       >
-        <table id="calendar" class="table table-bordered">
-          <thead class="thead-dark">
-            <tr>
-              <th style="width: 6%" scope="col">Hora</th>
-              <th style="width: 15%" scope="col">Lunes</th>
-              <th style="width: 15%" scope="col">Martes</th>
-              <th style="width: 15%" scope="col">Miercoles</th>
-              <th style="width: 15%" scope="col">Jueves</th>
-              <th style="width: 15%" scope="col">Viernes</th>
-              <th style="width: 15%" scope="col">Sábado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">7:00 8:50</th>
-              <td></td>
-              <td></td>
-              <td class="activo"><small>Programación Orientada a Objetos</small></td>
-              <td></td>
-              <td class="activo"><small>Programación Orientada a Objetos</small></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">9:00 10:50</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">11:00 12:50</th>
-              <td></td>
-              <td class="activo"><small>Gestion de base de datos</small></td>
-              <td></td>
-              <td></td>
-              <td class="activo"><small>Gestion de base de datos</small></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">13:00 14:50</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">16:00  17:50</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">18:00  19:50</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">20:00 21:50</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+      <table id="calendar" class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th style="width: 6%" scope="col">Hora</th>
+            <th style="width: 15%" scope="col">Lunes</th>
+            <th style="width: 15%" scope="col">Martes</th>
+            <th style="width: 15%" scope="col">Miercoles</th>
+            <th style="width: 15%" scope="col">Jueves</th>
+            <th style="width: 15%" scope="col">Viernes</th>
+            <th style="width: 15%" scope="col">Sábado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="7">
+            <th scope="row">7:00 8:50</th>
+            <td class="LUN"></td>
+            <td class="MAR"></td>
+            <td class="MIE"></td>
+            <td class="JUE"></td>
+            <td class="VIE"></td>
+            <td class="SAB"></td>
+          </tr>
+          <tr id="9" >
+            <th scope="row">9:00 10:50</th>
+            <td class="LUN"></td>
+            <td class="MAR"></td>
+            <td class="MIE"></td>
+            <td class="JUE"></td>
+            <td class="VIE"></td>
+            <td class="SAB"></td>
+          </tr>
+          <tr id="11">
+            <th  scope="row">11:00 12:50</th>
+            <td class="LUN"></td>
+            <td class="MAR"></td>
+            <td class="MIE"></td>
+            <td class="JUE"></td>
+            <td class="VIE"></td>
+            <td class="SAB"></td>
+          </tr>
+          <tr id="13">
+            <th  scope="row">13:00 14:50</th>
+            <td class="LUN"></td>
+            <td class="MAR"></td>
+            <td class="MIE"></td>
+            <td class="JUE"></td>
+            <td class="VIE"></td>
+            <td class="SAB"></td>
+          <tr id="16">
+            <th  scope="row">16:00  17:50</th>
+            <td class="LUN"></td>
+            <td class="MAR"></td>
+            <td class="MIE"></td>
+            <td class="JUE"></td>
+            <td class="VIE"></td>
+            <td class="SAB"></td>
+          </tr>
+          <tr id="18">
+            <th  scope="row">18:00  19:50</th>
+            <td class="LUN"></td>
+            <td class="MAR"></td>
+            <td class="MIE"></td>
+            <td class="JUE"></td>
+            <td class="VIE"></td>
+            <td class="SAB"></td>
+          </tr>
+          <tr id="20">
+            <th  scope="row">20:00 21:50</th>
+            <td class="LUN"></td>
+            <td class="MAR"></td>
+            <td class="MIE"></td>
+            <td class="JUE"></td>
+            <td class="VIE"></td>
+            <td class="SAB"></td>
+          </tr>
+        </tbody>
+      </table>
       </div>
 
       <!--Detalles-->
@@ -337,15 +369,15 @@
           </tr>
           <tr>
             <td>
-              <p style="display: inline">
-                <b style="margin-right: 35px">Créditos:</b>16
+              <p style="display: inline" >
+                <b style="margin-right: 35px">Créditos:</b><div id='creditos'>0</div>
               </p>
             </td>
           </tr>
           <tr>
             <td>
-              <p style="display: inline">
-                <b style="margin-right: 35px">Materias:</b>2
+              <p style="display: inline" >
+                <b style="margin-right: 35px">Materias:</b><div id='materias'>0</div>
               </p>
             </td>
           </tr>
@@ -380,58 +412,62 @@
                 <div class="container row">
                     <div class="col-4">
                         <h5>Horas</h5>
-                        <div class="form-group">
+                        <div class="form-group"id="inputHoras">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="0" id="hora0">
+                                <input class="form-check-input" type="checkbox" value="7" id="hora0">
                                 <label class="form-check-label" for="hora0">7:00  - 8:50</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="hora1">
+                                <input class="form-check-input" type="checkbox" value="9" id="hora1">
                                 <label class="form-check-label" for="hora1">9:00  - 10:50</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="2" id="hora2">
+                                <input class="form-check-input" type="checkbox" value="11" id="hora2">
                                 <label class="form-check-label" for="hora2">11:00 - 12:50</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="3" id="hora3">
+                                <input class="form-check-input" type="checkbox" value="13" id="hora3">
                                 <label class="form-check-label" for="hora3">13:00 - 14:50</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="4" id="hora4">
-                                <label class="form-check-label" for="hora4">15:00 - 16:50</label>
+                                <input class="form-check-input" type="checkbox" value="16" id="hora4">
+                                <label class="form-check-label" for="hora4">16:00 - 17:50</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="5" id="hora5">
-                                <label class="form-check-label" for="hora5">17:00 - 18:50</label>
+                                <input class="form-check-input" type="checkbox" value="18" id="hora5">
+                                <label class="form-check-label" for="hora5">18:00 - 19:50</label>
                             </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="20" id="hora5">
+                              <label class="form-check-label" for="hora5">20:00 - 21:50</label>
+                          </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <h5>Dias</h5>
-                        <div class="form-group">
+                        <div class="form-group" id="inputDias">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="0" id="dia0">
+                                <input class="form-check-input" type="checkbox" value="LUN" id="dia0">
                                 <label class="form-check-label" for="dia0">Lunes</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="dia1">
+                                <input class="form-check-input" type="checkbox" value="MAR" id="dia1">
                                 <label class="form-check-label" for="dia1">Martes</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="2" id="dia2">
+                                <input class="form-check-input" type="checkbox" value="MIE" id="dia2">
                                 <label class="form-check-label" for="dia2">Miercoles</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="3" id="dia3">
+                                <input class="form-check-input" type="checkbox" value="JUE" id="dia3">
                                 <label class="form-check-label" for="dia3">Jueves</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="4" id="dia4">
+                                <input class="form-check-input" type="checkbox" value="VIE" id="dia4">
                                 <label class="form-check-label" for="dia4">Viernes</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="5" id="dia5">
+                                <input class="form-check-input" type="checkbox" value="SAB" id="dia5">
                                 <label class="form-check-label" for="dia5">Sabado</label>
                             </div>
                         </div>
@@ -439,7 +475,7 @@
                     <div class="col-4">
                         <p>Profesor</p>
                         <div class="form-group">
-                            <input type="text" class="form-control" value="" placeholder="Profesor">
+                            <input type="text" class="form-control" value="" placeholder="Profesor" id="inputProfesor">
                         </div>
                     </div>
                 </div>
@@ -447,7 +483,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary">Filtrar</button>
+              <button type="button" class="btn btn-primary"  id="buttonFilters" >Filtrar</button>
             </div>
           </div>
         </div>
