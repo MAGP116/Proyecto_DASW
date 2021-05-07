@@ -161,7 +161,6 @@ window.onload = async function () {
 };
 
 function toggleEraseModal() {
-	console.log("IN");
 	document.getElementById(
 		"modalBorrar"
 	).innerHTML = `<div class="modal left fade user" id="modalBorrarrr" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
