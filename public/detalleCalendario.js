@@ -145,7 +145,7 @@ window.onload = async function () {
 		.getElementById("buttonCompartir")
 		.addEventListener("click", function (ev) {
 			var aux = document.createElement("input");
-			aux.setAttribute("value", "Aquí va el link de acceso");
+			aux.setAttribute("value", `${dir}/calendario?calendarId=${calendarId}`);
 			document.body.appendChild(aux);
 			aux.select();
 			document.execCommand("copy");
@@ -161,7 +161,6 @@ window.onload = async function () {
 };
 
 function toggleEraseModal() {
-	console.log("IN");
 	document.getElementById(
 		"modalBorrar"
 	).innerHTML = `<div class="modal left fade user" id="modalBorrarrr" tabindex="" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
@@ -197,8 +196,9 @@ async function confirmBorrar() {
 			"x-auth": sessionStorage.token,
 		},
 	});
-	let state = await response.json();
-	console.log(state);
+	//let state = await response.json();
+	//console.log(state);
+	window.location.href = `${dir}/inicio`;
 }
 
 async function setClases(clasesArray) {
