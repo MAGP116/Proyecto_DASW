@@ -297,7 +297,11 @@ async function addClaseCalendar(clase) {
 function createNavBar() {
 	let buttons = [];
 	buttons.push(
-		createNavBarButtonModel("Página Principal", false, `${dir}/inicio`)
+		createNavBarButtonModel(
+			'<i class="fa fa-home" aria-hidden="true"></i> Página Principal',
+			false,
+			`${dir}/inicio`
+		)
 	);
 	buttons.push(
 		createNavBarButtonModel("Mis materias", false, `${dir}/materias`)

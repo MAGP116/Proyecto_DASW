@@ -33,4 +33,4 @@ app.use("/crear",express.static(__dirname + "/public/crearCalendario.html"))
 app.use("/calendario",express.static(__dirname + "/public/detalleCalendario.html"))
 app.use("/materias",express.static(__dirname + "/public/detalleUsuario.html"))
 app.use("/primerLogin",express.static(__dirname + "/public/primerLogin.html"))
-app.use("/inicio", express.static(__dirname + "/public/home.html")); //Historico :3
+app.use("/inicio", express.static(__dirname + "/public/home.html"));
