@@ -3,6 +3,8 @@
 //----------------------navegation Bar--------------------------------------
 
 
+document.getElementById("userbtn").addEventListener("click", modalUserInfo);
+
 async function modalUserInfo() {
 	let response = await fetch(`./api/alumnos/` + sessionStorage.email, {
 		method: "GET",
@@ -35,25 +37,25 @@ async function modalUserInfo() {
             <input id="corr" class="form-control mt-3" type="email" name="correo" value="${user.correo}" disabled
             required />
             <div class="modal-footer">
-              <button id="logOffbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
+						<button id="logOffbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
               <button id="btnEditUserInfo" type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#editUserModal">Editar</button>
             </div>
           </form>
         </div>
-      </div>
+      </div>   
     </div>
   </div>
   </div>`;
-	document.getElementById('modalesUsuario').innerHTML = modalHTML;
-  document.getElementById('logOffbtn').addEventListener('click', logOff);
-	document.getElementById('btnEditUserInfo').addEventListener('click', modalEditUserInfo);
+	document.getElementById("modalesUsuario").innerHTML = modalHTML;
+	document.getElementById('logOffbtn').addEventListener('click', logOff);
+	document.getElementById("btnEditUserInfo").addEventListener("click", modalEditUserInfo);
 	await $("#userModal").modal("toggle");
 }
 
-function logOff(){
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('email');
-  window.location.href = `.`;
+function logOff() {
+	sessionStorage.removeItem("token");
+	sessionStorage.removeItem("email");
+	window.location.href = "./index.html";
 }
 
 async function modalEditUserInfo() {
@@ -108,7 +110,7 @@ async function verifyPUT() {
 	let confirmpassword = document.getElementById("confpassUpdate").value;
 	let nombre = document.getElementById("nomUpdate").value;
 	let apellido = document.getElementById("apeUpdate").value;
-	if (password != confirmpassword || password == "") {
+	if (password && (password != confirmpassword || password == "")) {
 		console.log("Contraseñas no válidas");
 		modalUserInfo();
 	} else {
@@ -126,7 +128,6 @@ async function verifyPUT() {
 		modalUserInfo();
 	}
 }
-document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 //----------------------------------------------------------------------------
 
 window.onload = async function () {

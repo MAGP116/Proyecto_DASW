@@ -101,12 +101,12 @@ async function modalUserInfo() {
             <input id="corr" class="form-control mt-3" type="email" name="correo" value="${user.correo}" disabled
             required />
             <div class="modal-footer">
-							<button id="logOffbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
+						<button id="logOffbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
               <button id="btnEditUserInfo" type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#editUserModal">Editar</button>
             </div>
           </form>
         </div>
-      </div>
+      </div>   
     </div>
   </div>
   </div>`;
@@ -116,10 +116,10 @@ async function modalUserInfo() {
 	await $("#userModal").modal("toggle");
 }
 
-function logOff(){
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('email');
-  window.location.href = `.`;
+function logOff() {
+	sessionStorage.removeItem("token");
+	sessionStorage.removeItem("email");
+	window.location.href = "./index.html";
 }
 
 async function modalEditUserInfo() {
@@ -174,7 +174,7 @@ async function verifyPUT() {
 	let confirmpassword = document.getElementById("confpassUpdate").value;
 	let nombre = document.getElementById("nomUpdate").value;
 	let apellido = document.getElementById("apeUpdate").value;
-	if (password != confirmpassword || password == "") {
+	if (password && (password != confirmpassword || password == "")) {
 		console.log("Contraseñas no válidas");
 		modalUserInfo();
 	} else {

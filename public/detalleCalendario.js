@@ -110,7 +110,7 @@ async function verifyPUT() {
 	let confirmpassword = document.getElementById("confpassUpdate").value;
 	let nombre = document.getElementById("nomUpdate").value;
 	let apellido = document.getElementById("apeUpdate").value;
-	if (password != confirmpassword || password == "") {
+	if (password && (password != confirmpassword || password == "")) {
 		console.log("Contraseñas no válidas");
 		modalUserInfo();
 	} else {
