@@ -196,7 +196,8 @@ async function confirmBorrar() {
 			"x-auth": sessionStorage.token,
 		},
 	});
-	let state = await response.json();
+	//let state = await response.json();
+	//console.log(state);
 	window.location.href = `${dir}/inicio`;
 }
 
