@@ -45,9 +45,7 @@ Content-Type:  application/json
 //Guardar mi Token
 //                                              RECUERDA PONER EL TOKEN DURANTE EL VI-D-O
 @token_Migue = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OV8zQGl0ZXNvLm14IiwiaWF0IjoxNjIwMTgwMzI3fQ.eky2N_KkILJRAMDKl-3qjejcLZJIGBTMNu4kMkljZ7g
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJtaWd1QGFuZ2UubCIsImlhdCI6MTYyMDE3NzM5OX0.E3BL4vIq5av_RpsMa93-svkbv6qGxV50e6-taP2dtms
-
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJpczcyMzM1OUBpdGVzby5teCIsImlhdCI6MTYyMDQwNTI1NX0.kwKBjSIM5hu42EUhTETQnNVH1E-uYj0X9oGtLEEiAEw
 
 
 //El usuario revisa las carreras existentes
@@ -154,16 +152,7 @@ POST {{host}}/api/calendarios
 x-auth: {{token}}
 Content-Type:  application/json
 
-{
-    "nombre":"Mi primer calendario",
-    "alumno":"is723359@iteso.mx",
-    "clases":[
-        "608efa80516bdb47e02011e7",
-        "608efb71516bdb47e02011ed",
-        "608f01ca7c44e74b787defa5",
-        "AWAWAW"
-    ]
-}
+ {"nombre":"s","clases":["608efb83516bdb47e02011f0","608efa80516bdb47e02011e7"],"alumno":"is723359@iteso.mx"}
 
 //Con este el usuario si registra un calendario
 ###
@@ -172,7 +161,7 @@ x-auth: {{token}}
 Content-Type:  application/json
 
 {
-    "nombre":"Mi primer calendario",
+    "nombre":"Mi primer a",
     "alumno":"is723359@iteso.mx",
     "clases":[
         "608efa80516bdb47e02011e7",

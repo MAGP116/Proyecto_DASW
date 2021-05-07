@@ -11,6 +11,9 @@ const BF = document.getElementById('buttonFilters');
 const IP = document.getElementById('inputProfesor');
 const IH = document.getElementById('inputHoras');
 const ID = document.getElementById('inputDias');
+const BG = document.getElementById('buttonGuardarCal');
+const CN = document.getElementById('calendarName');
+const MF = document.getElementById('modalFiltros');
 let materias = {cursadas:[],disponibles:[],bloqueadas:[]};
 let TABLA = {
     LUN:[],MAR:[],MIE:[],JUE:[],VIE:[],SAB:[]
@@ -69,7 +72,8 @@ AM.onclick = async ev =>{
         MT.innerText = (Number(MT.innerText)+1)
     }
     updateLocks();
-    console.table(TABLA);
+    //console.table(TABLA);
+    unlockButtonGuardar();
 
 }
 
@@ -170,37 +174,79 @@ BB.onclick = ev =>{
 
 //Button Filter
 BF.onclick = ev =>{
+    $("#modalFiltros").modal("toggle");
     let profesor = IP.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
     let horas = IH.querySelectorAll('*:checked');
     let dias = ID.querySelectorAll('*:checked');
-    if(!profesor && !horas && !dias){
-        for(let card of AM.querySelectorAll('a[hidden="true"]') )card.removeAttribute('hidden');
+    if(!profesor && horas.length == 0 && dias.length == 0){
+        for(let a of AM.querySelectorAll('a[hidden="true"]') )a.removeAttribute('hidden');
+        for(let card of AM.querySelectorAll('.card[hidden="true"]') ){
+            card.removeAttribute('hidden');
+        }
+        
         return
     }
     
     let s = new Set();
-    if(profesor)s.add(profesor);
     for(let hora of horas)s.add(hora.value)
     for(let dia of dias)s.add(dia.value)
-    console.log(s);
+    //console.log(s);
 
-    for(let card of AM.querySelectorAll('.card[hidden="true"]') )card.removeAttribute('hidden');
-    for(let card of AM.querySelectorAll('a:not([hidden])') )card.setAttribute('hidden',true);
+    for(let card of AM.querySelectorAll('.card') ){
+        //console.log(card);
+        let count = false;
+        for(let a of card.querySelectorAll('a')){
+            let coincidences = new Set();
+            //console.log(a.getAttribute("data-info").split(' '));
+            for(let v of a.getAttribute("data-info").split(' ')){
+                if(s.has(v))coincidences.add(v)
+                if(profesor && v.includes(profesor))coincidences.add(v)
+            }
+            //console.log(coincidences.size,s.size+(profesor?1:0));
+            if(coincidences.size == s.size+(profesor?1:0)){
+                count = true;
+                a.removeAttribute('hidden');
+            }
+            else{
+                a.setAttribute('hidden',true)
+            }
 
-    for(let a of AM.querySelectorAll('a')){
-        let count = 0;
-        //console.log(a.getAttribute("data-info").split(' '));
-        for(let v of a.getAttribute("data-info").split(' ')){
-            if(s.has(v))count++;
         }
-        console.log(count,s.size);
-        if(count == s.size)a.removeAttribute('hidden');
-    }
-        
+        if(count){
+            card.removeAttribute('hidden')
+        }
+        else card.setAttribute('hidden',true)
+    }   
 
 }
 
+CN.oninput = unlockButtonGuardar;
 
+function unlockButtonGuardar(ev){
+    if(CN.value != '' && Number(MT.innerText) > 0){
+        BG.removeAttribute('disabled')
+    }
+    else{
+        BG.setAttribute('disabled',true);
+    }
+}
+
+BG.onclick = async ev =>{
+    let clases = Array.from(AM.querySelectorAll('a.proySelected')).map(c=>c.getAttribute('id'))
+    let calendario = {
+        nombre:(CN.value),
+        clases:(clases),
+        alumno:sessionStorage.email
+    }
+    //console.log("\n",JSON.stringify(calendario));
+    let ans = await setCalendario(calendario)
+    if(ans){
+        console.log(ans);
+        //window.location.href = `${direction}/inicio`;
+    }
+    else createAlert('danger','Error en subida de calednario, intentalo más tarde')
+
+}
 
 
 
@@ -246,7 +292,22 @@ async function getDetalleMateria(name){
     return await resp.json();
 }
 
-
+async function setCalendario(calendario){
+    const resp = await fetch (`${direction}/api/calendarios`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-auth': sessionStorage.token
+        },
+        body: JSON.stringify(calendario)
+    });
+    if(resp.status != 201){
+        log(resp.status);
+        log(resp);
+        return;
+    }
+    return await resp.json();
+}
 
 
 
@@ -320,6 +381,20 @@ function createNavBar(){
 	);
 	buttons.push(createNavBarButtonModel('Mis materias',false,`${direction}/materias`));
 	document.getElementById('navbar').innerHTML = buttons.join('');
+}
+
+function removeAlert(){
+    let alert = document.getElementById('alertID');
+    if(alert)alert.remove();
+}
+
+function createAlert(type, message){
+    removeAlert();
+    NAV.insertAdjacentHTML('afterend',`<div id="alertID" class="alert alert-${type} alert-dismissible fade show" role="alert">${message} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>`);
+
+    
 }
 
 
