@@ -1,5 +1,5 @@
-
-
+const max = 6
+const min = 0;
 // Cargar calendarios del usuario
 window.onload = async function () {
 	createNavBar();
@@ -38,14 +38,13 @@ window.onload = async function () {
 	for await (let calendar of calendarInfo) {
 		let details = await calendar.json();
 		let materias = details.clase.length;
-
 		document.getElementById("albumCalendarios").innerHTML += `
 		<div class="col-lg-4 col-md-6 col-sm-12">
 			<div class="card mb-4 box-shadow">
 				<img class="card-img-top"
 					data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
 					alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block"
-					src="./img/CalendarThumbnail.png"
+					src="./img/CalendarThumbnail${Math.floor(Math.random()*max)}.JPG"
 					data-holder-rendered="true" />
 				<div class="card-body">
 					<p class="card-text">${details.nombre}</p>
@@ -63,6 +62,7 @@ window.onload = async function () {
 				</div>
 			</div>
 		</div>`;
+
 	}
 };
 
@@ -121,7 +121,7 @@ async function modalUserInfo() {
 function logOff() {
 	sessionStorage.removeItem("token");
 	sessionStorage.removeItem("email");
-}
+
 	window.location.href = "./index.html";
 
 }
