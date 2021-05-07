@@ -1,26 +1,26 @@
-let dir = "http://localhost:3000";
+
 
 // Cargar calendarios del usuario
 window.onload = async function () {
 	createNavBar();
 	// Recibir todos los calendarios del usuario
-	let response = await fetch(dir + "/api/calendarios", {
+	let response = await fetch("./api/calendarios", {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
 		},
 	});
 	let calendarios = await response.json();
-	console.log(response);
-	console.log(calendarios);
+	//console.log(response);
+	//console.log(calendarios);
 
 	// Pedir las materias de cada calendario para contar cuántas tiene
 	let calendarInfo = [];
 	for (const calendar of calendarios) {
-		console.log(calendar);
+		//console.log(calendar);
 
 		calendarInfo.push(
-			fetch(dir + "/api/calendarios/" + calendar._id, {
+			fetch("./api/calendarios/" + calendar._id, {
 				method: "GET",
 				headers: {
 					"x-auth": sessionStorage.token,
@@ -52,7 +52,7 @@ window.onload = async function () {
 					<div class="d-flex justify-content-between align-items-center">
 						<div class="btn-group">
 							<button type="button" class="btn btn-sm btn-outline-secondary">
-								<a href="${dir}/calendario?calendarId=${details._id}">ver</a>
+								<a href="./calendario?calendarId=${details._id}">ver</a>
 							</button>
 							<button type="button" class="btn btn-sm btn-outline-secondary">
 								<a href="./crear?calendarId=${details._id}">editar</a>
@@ -70,7 +70,7 @@ window.onload = async function () {
 document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 
 async function modalUserInfo() {
-	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+	let response = await fetch(`./api/alumnos/` + sessionStorage.email, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -101,12 +101,12 @@ async function modalUserInfo() {
             <input id="corr" class="form-control mt-3" type="email" name="correo" value="${user.correo}" disabled
             required />
             <div class="modal-footer">
-							<button id="logOffbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
+						<button id="logOffbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar sesión</button>
               <button id="btnEditUserInfo" type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#editUserModal">Editar</button>
             </div>
           </form>
         </div>
-      </div>
+      </div>   
     </div>
   </div>
   </div>`;
@@ -116,14 +116,14 @@ async function modalUserInfo() {
 	await $("#userModal").modal("toggle");
 }
 
-function logOff(){
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('email');
-  window.location.href = `${dir}`;
+function logOff() {
+	sessionStorage.removeItem("token");
+	sessionStorage.removeItem("email");
+	window.location.href = "./index.html";
 }
 
 async function modalEditUserInfo() {
-	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+	let response = await fetch(`./api/alumnos/` + sessionStorage.email, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -174,12 +174,12 @@ async function verifyPUT() {
 	let confirmpassword = document.getElementById("confpassUpdate").value;
 	let nombre = document.getElementById("nomUpdate").value;
 	let apellido = document.getElementById("apeUpdate").value;
-	if (password != confirmpassword || password == "") {
+	if (password && (password != confirmpassword || password == "")) {
 		console.log("Contraseñas no válidas");
 		modalUserInfo();
 	} else {
 		let updatedUser = { nombre, apellido, password };
-		let response = await fetch(`${dir}/api/alumnos/`, {
+		let response = await fetch(`./api/alumnos/`, {
 			method: "PUT",
 			headers: {
 				"Content-type": "application/json",
@@ -202,7 +202,7 @@ function createNavBar(){
 			true
 		)
 	);
-	buttons.push(createNavBarButtonModel('Mis materias',false,`${dir}/materias`));
+	buttons.push(createNavBarButtonModel('Mis materias',false,`./materias`));
 	document.getElementById('navbar').innerHTML = buttons.join('');
 }
 function createNavBarButtonModel(name,current,url){

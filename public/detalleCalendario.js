@@ -1,4 +1,4 @@
-let dir = "http://localhost:3000";
+
 const urlParams = new URLSearchParams(window.location.search);
 const calendarId = urlParams.get("calendarId");
 let email;
@@ -6,7 +6,7 @@ let email;
 document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 
 async function modalUserInfo() {
-	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+	let response = await fetch(`./api/alumnos/` + sessionStorage.email, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -59,7 +59,7 @@ function logOff() {
 }
 
 async function modalEditUserInfo() {
-	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+	let response = await fetch(`./api/alumnos/` + sessionStorage.email, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -110,12 +110,12 @@ async function verifyPUT() {
 	let confirmpassword = document.getElementById("confpassUpdate").value;
 	let nombre = document.getElementById("nomUpdate").value;
 	let apellido = document.getElementById("apeUpdate").value;
-	if (password != confirmpassword || password == "") {
+	if (password && (password != confirmpassword || password == "")) {
 		console.log("Contraseñas no válidas");
 		modalUserInfo();
 	} else {
 		let updatedUser = { nombre, apellido, password };
-		let response = await fetch(`${dir}/api/alumnos/`, {
+		let response = await fetch(`./api/alumnos/`, {
 			method: "PUT",
 			headers: {
 				"Content-type": "application/json",
@@ -132,7 +132,7 @@ async function verifyPUT() {
 
 window.onload = async function () {
 	createNavBar();
-	let response = await fetch(`${dir}/api/calendarios/${calendarId}`, {
+	let response = await fetch(`./api/calendarios/${calendarId}`, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -151,7 +151,7 @@ window.onload = async function () {
 		.getElementById("buttonCompartir")
 		.addEventListener("click", function (ev) {
 			var aux = document.createElement("input");
-			aux.setAttribute("value", `${dir}/calendario?calendarId=${calendarId}`);
+			aux.setAttribute("value", `./calendario?calendarId=${calendarId}`);
 			document.body.appendChild(aux);
 			aux.select();
 			document.execCommand("copy");
@@ -196,7 +196,7 @@ function toggleEraseModal() {
 }
 
 async function confirmBorrar() {
-	let response = await fetch(`${dir}/api/calendarios/${calendarId}`, {
+	let response = await fetch(`./api/calendarios/${calendarId}`, {
 		method: "DELETE",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -204,7 +204,7 @@ async function confirmBorrar() {
 	});
 	//let state = await response.json();
 	//console.log(state);
-	window.location.href = `${dir}/inicio`;
+	window.location.href = `./inicio`;
 }
 
 async function setClases(clasesArray) {
@@ -224,7 +224,7 @@ let creditos = 0;
 let numberMaterias = 0;
 async function addClaseColumna(clase) {
 	//console.log(clase);
-	let response = await fetch(`${dir}/api/clases`, {
+	let response = await fetch(`./api/clases`, {
 		method: "GET",
 		headers: {
 			clase: clase,
@@ -233,7 +233,7 @@ async function addClaseColumna(clase) {
 	//console.log(response);
 	numberMaterias++;
 	let claseDetails = await response.json();
-	response = await fetch(`${dir}/api/materias/` + claseDetails[0].materia, {
+	response = await fetch(`./api/materias/` + claseDetails[0].materia, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -285,7 +285,7 @@ async function addClaseColumna(clase) {
 }
 
 async function addClaseCalendar(clase) {
-	let response = await fetch(`${dir}/api/clases`, {
+	let response = await fetch(`./api/clases`, {
 		method: "GET",
 		headers: {
 			clase: clase,
@@ -310,11 +310,11 @@ function createNavBar() {
 		createNavBarButtonModel(
 			'<i class="fa fa-home" aria-hidden="true"></i> Página Principal',
 			false,
-			`${dir}/inicio`
+			`./inicio`
 		)
 	);
 	buttons.push(
-		createNavBarButtonModel("Mis materias", false, `${dir}/materias`)
+		createNavBarButtonModel("Mis materias", false, `./materias`)
 	);
 	document.getElementById("navbar").innerHTML = buttons.join("");
 }

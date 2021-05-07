@@ -1,4 +1,3 @@
-let dir = "http://localhost:3000";
 
 // Borrar campos en cuanto se cargue la ventana
 window.onload = async function () {
@@ -30,7 +29,7 @@ document.getElementById("loginSubmit").addEventListener("click", async (ev) => {
 		console.log(userForLogin);
 
 		// Request server to login
-		let response = await fetch(dir + "/api/login", {
+		let response = await fetch("./api/login", {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -47,7 +46,7 @@ document.getElementById("loginSubmit").addEventListener("click", async (ev) => {
 
 			// Checar si ya tiene primer login
 			let responseAlumno = await fetch(
-				dir + "/api/alumnos/" + sessionStorage.email,
+				"./api/alumnos/" + sessionStorage.email,
 				{
 					method: "GET",
 					headers: {
@@ -61,9 +60,9 @@ document.getElementById("loginSubmit").addEventListener("click", async (ev) => {
 			// Redirigir en base a eso
 			// Si no tiene dato de carrera, enviar a primer registro
 			if (!alumno.carrera || alumno.carrera == "") {
-				window.location.href = `${dir}/primerLogin`;
+				window.location.href = `./primerLogin`;
 			} else {
-				window.location.href = `${dir}/inicio`;
+				window.location.href = `./inicio`;
 			}
 		} else if (response.status == 404) {
 			document.getElementById("loginAlerts").innerHTML = `
@@ -118,7 +117,7 @@ document
 			};
 
 			// Registrar al usuario
-			let responseRegister = await fetch(dir + "/api/alumnos", {
+			let responseRegister = await fetch("./api/alumnos", {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json",
@@ -132,7 +131,7 @@ document
 			// Si el registro fue exitoso, hacer login y llevarlo a firstLogin
 			if (responseRegister.status == 201) {
 				// Hacer login
-				let response = await fetch(dir + "/api/login", {
+				let response = await fetch( "./api/login", {
 					method: "POST",
 					headers: {
 						"Content-type": "application/json",
@@ -147,7 +146,7 @@ document
 					sessionStorage.token = data.token;
 					sessionStorage.email = email;
 
-					window.location.href = `${dir}/primerLogin`;
+					window.location.href = `./primerLogin`;
 				} else {
 					document.getElementById("registerAlerts").innerHTML = `
 					<div class="alert alert-secondary" role="alert">
