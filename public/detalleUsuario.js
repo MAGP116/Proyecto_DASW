@@ -1,10 +1,10 @@
-let dir = "http://localhost:3000";
+
 
 //----------------------navegation Bar--------------------------------------
 
 
 async function modalUserInfo() {
-	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+	let response = await fetch(`./api/alumnos/` + sessionStorage.email, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -53,11 +53,11 @@ async function modalUserInfo() {
 function logOff(){
   sessionStorage.removeItem('token');
   sessionStorage.removeItem('email');
-  window.location.href = `${dir}`;
+  window.location.href = `.`;
 }
 
 async function modalEditUserInfo() {
-	let response = await fetch(`${dir}/api/alumnos/` + sessionStorage.email, {
+	let response = await fetch(`./api/alumnos/` + sessionStorage.email, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -113,7 +113,7 @@ async function verifyPUT() {
 		modalUserInfo();
 	} else {
 		let updatedUser = { nombre, apellido, password };
-		let response = await fetch(`${dir}/api/alumnos/`, {
+		let response = await fetch(`./api/alumnos/`, {
 			method: "PUT",
 			headers: {
 				"Content-type": "application/json",
@@ -131,7 +131,7 @@ document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 
 window.onload = async function () {
   createNavBar()
-	let response = await fetch(`${dir}/api/materias/`, {
+	let response = await fetch(`./api/materias/`, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -155,7 +155,7 @@ async function materiasCursadasArrayToHTML(cursadas){
 }
 
 async function materiaCursadaToHTML(materia){
-  let response = await fetch(`${dir}/api/materias/`+materia, {
+  let response = await fetch(`./api/materias/`+materia, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -203,7 +203,7 @@ async function materiasDisponiblesArrayToHTML(disponibles){
 }
 
 async function materiaDisponibleToHTML(materia){
-  let response = await fetch(`${dir}/api/materias/`+materia, {
+  let response = await fetch(`./api/materias/`+materia, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -251,7 +251,7 @@ async function materiasBloqueadasArrayToHTML(bloqueadas){
 }
 
 async function materiaBloqueadaToHTML(materia){
-  let response = await fetch(`${dir}/api/materias/`+materia, {
+  let response = await fetch(`./api/materias/`+materia, {
 		method: "GET",
 		headers: {
 			"x-auth": sessionStorage.token,
@@ -295,7 +295,7 @@ function createNavBar(){
 		createNavBarButtonModel(
 			'<i class="fa fa-home" aria-hidden="true"></i> Página Principal',
 			false,
-			`${dir}/inicio`
+			`./inicio`
 		)
 	);
 	buttons.push(createNavBarButtonModel('Mis materias',true));

@@ -1,6 +1,6 @@
 'use strict'
 
-let direction = 'http://localhost:3000'
+
 //ID's document
 const AM = document.getElementById('accordionMaterias');
 const CR = document.getElementById('creditos');
@@ -251,7 +251,7 @@ BG.onclick = async ev =>{
     let ans;
     if(!calendarId) ans = await setCalendario(calendario)
     else  ans = await updateCalendario(calendario)
-    if(ans) window.location.href = `${direction}/inicio`;
+    if(ans) window.location.href = `./inicio`;
     else createAlert('danger','Error en subida de caledario, intentalo más tarde')
 }
 
@@ -270,7 +270,7 @@ async function loadUserCalendar(){
         createAlert('danger','No se encontró el calendario')
         return;
     }
-    if(calendario.alumno != sessionStorage.email)window.location.href = `${direction}/inicio`;
+    if(calendario.alumno != sessionStorage.email)window.location.href = `./inicio`;
     calendario.clase.forEach(clase=>{
         let a = document.getElementById(clase);
         let card = a.closest('.card');
@@ -312,7 +312,7 @@ async function loadUserCalendar(){
 
 //Contactos con el backend
 async function getMaterias(){
-    const resp = await fetch (`${direction}/api/materias`,{
+    const resp = await fetch (`./api/materias`,{
         method: 'GET',
         headers: {
             'x-auth': sessionStorage.token
@@ -327,7 +327,7 @@ async function getMaterias(){
 }
 
 async function getClases(name){
-    const resp = await fetch (`${direction}/api/clases/${name}`,{
+    const resp = await fetch (`./api/clases/${name}`,{
         method: 'GET'
     });
     if(resp.status != 200){
@@ -339,7 +339,7 @@ async function getClases(name){
 }
 
 async function getDetalleMateria(name){
-    const resp = await fetch (`${direction}/api/materias/${name}`,{
+    const resp = await fetch (`./api/materias/${name}`,{
         method: 'GET'
     });
     if(resp.status != 200){
@@ -351,7 +351,7 @@ async function getDetalleMateria(name){
 }
 
 async function setCalendario(calendario){
-    const resp = await fetch (`${direction}/api/calendarios`,{
+    const resp = await fetch (`./api/calendarios`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -368,7 +368,7 @@ async function setCalendario(calendario){
 }
 
 async function updateCalendario(calendario){
-    const resp = await fetch (`${direction}/api/calendarios/${calendarId}`,{
+    const resp = await fetch (`./api/calendarios/${calendarId}`,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -387,7 +387,7 @@ async function updateCalendario(calendario){
 
 
 async function getCalendario(id){
-    const resp = await fetch (`${direction}/api/calendarios/${id}`,{
+    const resp = await fetch (`./api/calendarios/${id}`,{
         method: 'GET',
         headers: {
             'x-auth': sessionStorage.token
@@ -468,10 +468,10 @@ function createNavBar(){
 		createNavBarButtonModel(
 			'<i class="fa fa-home" aria-hidden="true"></i> Página Principal',
 			false,
-			`${direction}/inicio`
+			`./inicio`
 		)
 	);
-	buttons.push(createNavBarButtonModel('Mis materias',false,`${direction}/materias`));
+	buttons.push(createNavBarButtonModel('Mis materias',false,`./materias`));
 	document.getElementById('navbar').innerHTML = buttons.join('');
 }
 
