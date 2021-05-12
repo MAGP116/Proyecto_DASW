@@ -1,5 +1,5 @@
 
-
+  if(!sessionStorage.token || sessionStorage.token && sessionStorage.token == undefined)window.location.href = `.`;
 //----------------------navegation Bar--------------------------------------
 
 
@@ -131,6 +131,7 @@ async function verifyPUT() {
 //----------------------------------------------------------------------------
 
 window.onload = async function () {
+
   createNavBar()
 	let response = await fetch(`./api/materias/`, {
 		method: "GET",

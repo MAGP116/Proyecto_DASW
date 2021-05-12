@@ -23,7 +23,7 @@ const Alumno = require('../models/Alumno')
     next();
 }
 
-//verifica que las passwords del registro sean identicas
+//verifica que las passwords del REGISTRO sean identicas
 function confirmarPassword(req,res,next){
     let{password,confPassword} = req.body;
     if(password !== confPassword){

@@ -1,3 +1,5 @@
+
+if(!sessionStorage.token || sessionStorage.token && sessionStorage.token == undefined)window.location.href = `.`;
 const max = 6
 const min = 0;
 // Cargar calendarios del usuario

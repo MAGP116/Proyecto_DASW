@@ -421,18 +421,18 @@ x-auth: {{adminToken}}
 Content-Type:  application/json
 
 {
-    "profesor":"6095b4d04b2e201f48f5b7f5",
+    "profesor":"6095b5cf4b2e201f48f5b7fd",
     "materia":"Programación con Memoria Dinámica",
     "sesion":[
         {
-            "dia":"SAB",
-            "horaInicio":16,
-            "horaFinal":18
+            "dia":"MAR",
+            "horaInicio":9,
+            "horaFinal":11
         },
         {
-            "dia":"SAB",
-            "horaInicio":18,
-            "horaFinal":20
+            "dia":"JUE",
+            "horaInicio":9,
+            "horaFinal":11
         }
     ]
 }
@@ -449,8 +449,8 @@ x-auth: {{adminToken}}
 Content-Type:  application/json
 
 {
-    "nombre":"Jorge Alejandro",
-    "apellido":"Caloca Hernández"
+    "nombre":"José Luis",
+    "apellido":"Elvira Valenzuela"
 }
 
 

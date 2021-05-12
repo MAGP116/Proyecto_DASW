@@ -12,7 +12,7 @@ router.post('/',ValAlumnos.validarAtributosUsuario,ValAlumnos.confirmarPassword,
         res.status(201).send(doc);
         return;
     }
-    res.status(400).send("Correo ya registrado");
+    res.status(400).send("Usuario ya registrado");
 }
 )
 

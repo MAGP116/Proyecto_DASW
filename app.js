@@ -7,6 +7,7 @@ const materiaRouter = require("./routes/materia-route");
 const carreraRouter = require("./routes/carrera-route");
 const calendarioRouter = require("./routes/calendario-route");
 const adminRouter = require("./routes/admin-route");
+const cors = require('cors');
 const app = express();
 
 //Borrar lo sigiente tras las PRUEBAS
@@ -14,6 +15,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Ejecutando en puerto " + port));
 
 //declaraciones de middleware
+app.use(cors());
 app.use(express.json());
 
 //relocalizaciones API

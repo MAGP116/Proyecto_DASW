@@ -148,6 +148,14 @@
         color: #856404;
         background-color: #fff3cd;
       }
+      a.proyLocked:active{
+        color: #856404;
+        background-color: #fff3cd;
+      }
+      a.proyLocked:focus{
+        color: #856404;
+        background-color: #fff3cd;
+      }
 
 
 
@@ -358,36 +366,40 @@
         class="col-2"
         style="justify-content: center; align-content: center"
       >
-        <table class="" style="width: 100%">
-          <tr>
-            <td>
-              <div class="form-group" style="width: 1;">
-                <label for="nameInput"><b>Nombre:</b></label>
-                <input type="text" class="form-control" name="nameInput" id="calendarName" aria-describedby="helpId" placeholder="">
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p style="display: inline" >
-                <b style="margin-right: 35px">Créditos:</b><div id='creditos'>0</div>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p style="display: inline" >
-                <b style="margin-right: 35px">Materias:</b><div id='materias'>0</div>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td class="mt-5">
-              
-              <a href="#"><button  type="button" class="btn btn-primary" id="buttonGuardarCal" disabled='true'>Guardar</button></a>
-            </td>
-          </tr>
-        </table>
+      <div class="row">
+        <div class="col-10">
+          <table class="" style="width: 100%">
+            <tr>
+              <td>
+                <div class="form-group" style="width: 1;">
+                  <label for="nameInput"><b>Nombre:</b></label>
+                  <input type="text" class="form-control" name="nameInput" id="calendarName" aria-describedby="helpId" placeholder="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p style="display: inline" >
+                  <b style="margin-right: 35px">Créditos:</b><div id='creditos'>0</div>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p style="display: inline" >
+                  <b style="margin-right: 35px">Materias:</b><div id='materias'>0</div>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td class="mt-5">
+                
+                <a href="#"><button  type="button" class="btn btn-primary" id="buttonGuardarCal" disabled='true'>Guardar</button></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
       </div>
     </div>
 

@@ -1,6 +1,5 @@
 'use strict'
-
-
+if(!sessionStorage.token || sessionStorage.token && sessionStorage.token == undefined)window.location.href = `.`;
 //ID's document
 const AM = document.getElementById('accordionMaterias');
 const CR = document.getElementById('creditos');
