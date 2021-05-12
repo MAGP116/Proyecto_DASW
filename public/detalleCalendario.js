@@ -1,7 +1,8 @@
-
+if(!sessionStorage.token || sessionStorage.token && sessionStorage.token == undefined)window.location.href = `.`;
 const urlParams = new URLSearchParams(window.location.search);
 const calendarId = urlParams.get("calendarId");
 let email;
+
 //----------------------navegation Bar--------------------------------------
 document.getElementById("userbtn").addEventListener("click", modalUserInfo);
 
@@ -151,7 +152,7 @@ window.onload = async function () {
 		.getElementById("buttonCompartir")
 		.addEventListener("click", function (ev) {
 			var aux = document.createElement("input");
-			aux.setAttribute("value", `./calendario?calendarId=${calendarId}`);
+			aux.setAttribute("value", `https://proyectodaswmagp.herokuapp.com/calendario?calendarId=${calendarId}`);
 			document.body.appendChild(aux);
 			aux.select();
 			document.execCommand("copy");

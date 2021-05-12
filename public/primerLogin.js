@@ -1,5 +1,5 @@
 'use strict'
-
+if(!sessionStorage.token || sessionStorage.token && sessionStorage.token == undefined)window.location.href = `.`;
 //IDs document
 const CS = document.getElementById('carreraSelect');
 const CI = document.getElementById('CarreraInfo');
